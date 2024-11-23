@@ -5,7 +5,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,25 +14,15 @@ import Menu from '@mui/material/Menu';
 import { APP_NAME } from '../../constants/app-info';
 import { navItems } from './constants.js';
 
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 function NavBar() {
   const [navMenuOpen, setNavMenuOpen] = React.useState(null);
-  const [profileMenuOpen, setProfileMenuOpen] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setNavMenuOpen(event.currentTarget);
   };
+
   const handleCloseNavMenu = () => {
     setNavMenuOpen(null);
-  };
-
-  const handleOpenUserMenu = (event) => {
-    setProfileMenuOpen(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setProfileMenuOpen(null);
   };
 
   function handleNavigation(url = '/') {
@@ -41,20 +30,18 @@ function NavBar() {
   }
 
   return (
-    <AppBar position="static" className="navbar"   sx={{ 
+    <AppBar position="static" className="navbar" sx={{ 
       background: 'linear-gradient(90deg, #1E88E5, #6A92FF)', 
-        color: 'white',
-        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)' 
+      color: 'white',
+      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)' 
     }}>
       <Container maxWidth="xl" sx={{
         paddingX: {
           lg: '10%',
           lg: '5%',
-
         },
         paddingY: { md: '4px' }
-      }
-      }>
+      }}>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
@@ -82,7 +69,7 @@ function NavBar() {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={() => { handleOpenNavMenu() }}
+              onClick={handleOpenNavMenu}
               color="inherit"
             >
               <MenuIcon />
@@ -100,17 +87,17 @@ function NavBar() {
                 horizontal: 'left',
               }}
               open={Boolean(navMenuOpen)}
-              onClose={() => { handleCloseNavMenu() }}
+              onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {navItems.map((navItem) => (
-                <MenuItem key={navItem.url} onClick={() => { handleNavigation(navItem.url) }} >
+                <MenuItem key={navItem.url} onClick={() => { handleNavigation(navItem.url) }}>
                   <Typography sx={{ textAlign: 'center' }}>{navItem.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -129,49 +116,31 @@ function NavBar() {
           >
             {APP_NAME}
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem' }}>
             {navItems.map((navItem) => (
               <Button
                 key={navItem.url}
                 onClick={() => { handleNavigation(navItem.url) }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2, 
+                  color: 'white', 
+                  display: 'block', 
+                  transition: 'transform 0.3s ease, color 0.3s ease',
+                  '&:hover': {
+                    transform: 'scale(1.1)', // Scale the button on hover
+                    color: '#FFEB3B', // Change color to a yellowish shade
+                  }
+                }}
               >
                 {navItem.title}
               </Button>
             ))}
           </Box>
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={profileMenuOpen}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(profileMenuOpen)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
 export default NavBar;
