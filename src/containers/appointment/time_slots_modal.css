@@ -1,0 +1,23 @@
+.time-slots-modal {
+	display: flex;
+	background: var(--gradient-black-bg);
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	width: auto;
+	height: auto;
+	
+}
+.time-slots-modal-close-icon {
+	margin: 10px;
+	align-self: flex-end;
+	cursor: pointer;
+}
+
+.time-slots-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	margin: 10px;
+	gap: 1rem;
+}

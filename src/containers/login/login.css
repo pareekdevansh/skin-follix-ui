@@ -1,0 +1,63 @@
+.login {
+	min-height: 80vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login-container {
+	max-width: 420px;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: blue;
+}
+
+.login-container h1,
+h5 {
+	padding: 2px;
+	text-align: center;
+}
+.input-box {
+	width: 100%;
+	height: 50px;
+	margin-top: 30px;
+	background-color: transparent;
+	position: relative;
+}
+.input-box input {
+	background: transparent;
+	outline: none;
+	border: 2px solid;
+	border-radius: 1rem;
+	width: 100%;
+	height: 50px;
+	padding: 1rem;
+	padding-right: 2.5rem;
+	font-size: 1rem;
+}
+.input-box::placeholder {
+	color: #fff;
+}
+.nav-link :hover {
+	text-decoration: underline;
+}
+.icon {
+	position: absolute;
+	right: 1rem;
+	top: 13px;
+	font-size: 24px;
+}
+.remember-forget {
+	display: flex;
+	width: 100%;
+	padding: 0.5rem;
+	font-size: 0.95rem;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.remember-forget label input {
+	margin-right: 4px;
+}

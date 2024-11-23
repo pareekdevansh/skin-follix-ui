@@ -1,0 +1,14 @@
+// export { default as Testimonials } from "./testimonials/Testimonials";
+// export { default as Blogs } from "./blogs/Blogs";
+// export { default as Team } from "./team/Team";
+// export { default as ContactUs } from "./contact-us/ContactUs";
+// export { default as Profile } from "./profile/Profile";
+// export { default as Register } from "./register/Register";
+// export { default as Home } from "./home/Home";
+// export { default as About } from "./about/About";
+// export { default as Services } from "./services";
+// export { default as Appointment } from "./appointment";
+// export { default as Login } from "./login/Login";
+// export { default as Footer } from "../components/footer/Footer";
+// export { default as ForgotPassword } from "./forgot-password/ForgotPassword";
+// export { default as ResetPassword } from "./reset-password/ResetPassword";

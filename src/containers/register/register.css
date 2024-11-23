@@ -1,0 +1,50 @@
+.register {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.register-container {
+	width: 420px;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.register-container h1,
+h5 {
+	padding: 2px;
+	text-align: center;
+}
+.register-input-box {
+	width: 100%;
+	height: 50px;
+	margin-top: 1rem;
+	background-color: transparent;
+	position: relative;
+}
+.register-input-box input {
+	background: transparent;
+	outline: none;
+	border: 2px solid;
+	border-radius: 1rem;
+	width: 100%;
+	height: 50px;
+	padding: 1rem;
+	padding-right: 2.5rem;
+	font-size: 1rem;
+}
+.register-input-box::placeholder {
+	color: #fff;
+}
+.nav-link:hover {
+	text-decoration: underline;
+}
+.register-icons {
+	position: absolute;
+	right: 1rem;
+	top: 13px;
+	font-size: 24px;
+}
