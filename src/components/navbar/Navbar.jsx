@@ -41,8 +41,20 @@ function NavBar() {
   }
 
   return (
-    <AppBar position="static" className="navbar">
-      <Container maxWidth="xl">
+    <AppBar position="static" className="navbar"   sx={{ 
+      background: 'linear-gradient(90deg, #1E88E5, #6A92FF)', 
+        color: 'white',
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)' 
+    }}>
+      <Container maxWidth="xl" sx={{
+        paddingX: {
+          lg: '10%',
+          lg: '5%',
+
+        },
+        paddingY: { md: '4px' }
+      }
+      }>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
