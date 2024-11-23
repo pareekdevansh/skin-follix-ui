@@ -1,15 +1,16 @@
 import React from "react";
 import "./button.css";
-
+import { Button as MuiButton } from '@mui/material';
 const Button = ({ text, onClick }) => {
-	
+
 	return (
-		<button
-			className="button"
+		<MuiButton
+			variant="contained"
+			color="primary"
 			onClick={onClick}
 		>
 			{text}
-		</button>
+		</MuiButton>
 	);
 };
 

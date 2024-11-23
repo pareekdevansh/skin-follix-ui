@@ -229,7 +229,7 @@ function Home() {
 					</p>
 				</div>
 				<div className="fab-button">
-					<Button
+					<button
 						text={"Book An Appointment"}
 						onClick={() => {
 							window.location.href = "/book-an-appointment";

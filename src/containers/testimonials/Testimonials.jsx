@@ -1,7 +1,7 @@
 import React from "react";
 import "./testimonials.css";
 import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
-import { Button } from "../../components/";
+import { Button } from "../../components";
 const testimonialsList = [
 	{
 		testimonialSampleUrls: [

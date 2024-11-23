@@ -2,7 +2,7 @@ import React from "react";
 import "./login.css";
 import { MdEmail } from "react-icons/md";
 import { IoMdLock } from "react-icons/io";
-import { Button } from "../../components/";
+import { Button } from "../../components";
 function Login() {
 	return (
 		<div className="login">

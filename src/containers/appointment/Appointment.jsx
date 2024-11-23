@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./appointment.css";
 import TimeSlotsModal from "./TimeSlotsModal";
+import { Button } from "../../components";
+
 
 const SelectList = ({ selectId, optionsList }) => {
 	return (
@@ -65,19 +67,19 @@ function Appointment() {
 					></input>
 				</div>
 				<div className="appointment-buttons">
-					<button
+					<Button
 						className="button"
 						onClick={() => setIsTimeSlotsModalOpen(true)}
 					>
 						Select Time-Slot
-					</button>
+					</Button>
 
-					<button
+					<Button
 						className="button"
 						type="submit"
 					>
 						Submit
-					</button>
+					</Button>
 				</div>
 			</div>
 			<span className="time-slots-modal">

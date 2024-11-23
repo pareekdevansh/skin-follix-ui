@@ -1,6 +1,6 @@
 import React from "react";
 import "./services.css";
-import Button from "../../components/button/Button";
+import { Button } from "../../components";
 const services = [
 	{
 		name: "Acne Treatment",
