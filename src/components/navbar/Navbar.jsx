@@ -1,148 +1,165 @@
-import React from "react";
-import "./navbar.css";
-import { useState } from "react";
-import { RiCloseLine, RiMenu3Line } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
-import { APP_NAME } from "../../constants/app-info";
-const Menu = () => {
-	return (
-		<>
-			<p>
-				<a href="/about">About</a>
-			</p>
-			<p>
-				<a href="/contact-us">Contact</a>
-			</p>
-			<p>
-				<a href="/services">Services</a>
-			</p>
-			<p>
-				<a href="/book-an-appointment">Book An Appointment</a>
-			</p>
-			<p>
-				<a href="/team">Team</a>
-			</p>
-			<p>
-				<a href="/testimonials">Testimonials</a>
-			</p>
-		</>
-	);
-};
-const UserProfileMenu = () => {
-	return (
-		<>
-			<p>
-				<a href="/profile/:userId">Profile</a>
-			</p>
-			<p>
-				<a href="/appointments/:userId">Recent Appointments</a>
-			</p>
-			<button type="button">Log Out</button>
-		</>
-	);
-};
-function Navbar() {
-	const [activeMenu, setActiveMenu] = useState(false);
-	const [activeUserProfileMenu, setActiveUserProfileMenu] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	return (
-		<div className="navbar navbar-gradient_bg">
-			<div className="navbar-links">
-				<div className="navbar-links-logo">
-					<p>
-						<a href="/">{APP_NAME}</a>
-					</p>
-				</div>
-				<div className="navbar-links-container">
-					<Menu />
-				</div>
-			</div>
-			{/* <div className="navbar-user">
-				{isLoggedIn ? (
-					<div className="navbar-user-profile-menu">
-						{activeUserProfileMenu ? (
-							<RiCloseLine
-								color="#fff"
-								size={27}
-								onClick={() => setActiveUserProfileMenu(false)}
-							/>
-						) : (
-							<CgProfile
-								color="#fff"
-								size={27}
-								onClick={() => setActiveUserProfileMenu(true)}
-							/>
-						)}
-						{activeUserProfileMenu ? (
-							<div className="navbar-user-profile-menu-container">
-								<UserProfileMenu />
-							</div>
-						) : null}
-					</div>
-				) : (
-					<div className="navbar-user-guest">
-						<p
-							onClick={() => {
-								window.location.replace("/login");
-							}}
-						>
-							Sign in
-						</p>
-						<button
-							type="button"
-							onClick={() => {
-								window.location.replace("/register");
-							}}
-						>
-							Sign up
-						</button>
-					</div>
-				)}
-			</div> */}
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import AdbIcon from '@mui/icons-material/Adb';
+import Menu from '@mui/material/Menu';
+import { APP_NAME } from '../../constants/app-info';
+import { navItems } from './constants.js';
 
-			<div className="navbar-menu">
-				{activeMenu ? (
-					<RiCloseLine
-						color="#fff"
-						size={27}
-						onClick={() => setActiveMenu(false)}
-					/>
-				) : (
-					<RiMenu3Line
-						color="#fff"
-						size={27}
-						onClick={() => setActiveMenu(true)}
-					/>
-				)}
-				{activeMenu && (
-					<div className="navbar-menu-container scale-up-center">
-						<div className="navbar-menu-container-links">
-							<Menu />
-							{/* {!isLoggedIn && (
-								<div className="navbar-menu-container-links-sign">
-									<p
-										onClick={() => {
-											window.location.replace("/login");
-										}}
-									>
-										Sign in
-									</p>
-									<button
-										type="button"
-										onClick={() => {
-											window.location.replace("/register");
-										}}
-									>
-										Sign up
-									</button>
-								</div>
-							)} */}
-						</div>
-					</div>
-				)}
-			</div>
-		</div>
-	);
+// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+function NavBar() {
+  const [navMenuOpen, setNavMenuOpen] = React.useState(null);
+  const [profileMenuOpen, setProfileMenuOpen] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setNavMenuOpen(event.currentTarget);
+  };
+  const handleCloseNavMenu = () => {
+    setNavMenuOpen(null);
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setProfileMenuOpen(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setProfileMenuOpen(null);
+  };
+
+  function handleNavigation(url = '/') {
+    window.location.href = url;
+  }
+
+  return (
+    <AppBar position="static" className="navbar">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/home"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'Arial',
+              fontWeight: 700,
+              letterSpacing: '.15rem',
+              color: 'inherit',
+              textDecoration: 'none',
+              marginRight: '2rem'
+            }}
+          >
+            {APP_NAME}
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={() => { handleOpenNavMenu() }}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={navMenuOpen}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(navMenuOpen)}
+              onClose={() => { handleCloseNavMenu() }}
+              sx={{ display: { xs: 'block', md: 'none' } }}
+            >
+              {navItems.map((navItem) => (
+                <MenuItem key={navItem.url} onClick={() => { handleNavigation(navItem.url) }} >
+                  <Typography sx={{ textAlign: 'center' }}>{navItem.title}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/home"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            {APP_NAME}
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem' }}>
+            {navItems.map((navItem) => (
+              <Button
+                key={navItem.url}
+                onClick={() => { handleNavigation(navItem.url) }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {navItem.title}
+              </Button>
+            ))}
+          </Box>
+          {/* <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={profileMenuOpen}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(profileMenuOpen)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box> */}
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
-
-export default Navbar;
+export default NavBar;

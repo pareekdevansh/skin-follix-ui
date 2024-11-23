@@ -1,7 +1,8 @@
 import React from "react";
 import "./home.css";
 import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
-import { Button } from "../../components";
+import Button from "../../components/button/Button";
+
 
 const heroUrls = [
 	"https://medicaldialogues.in/h-upload/2022/07/15/180854-hospital-3.jpg",

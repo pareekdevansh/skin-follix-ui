@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./appointment.css";
 import TimeSlotsModal from "./TimeSlotsModal";
-import { Button } from "../../components";
+import Button from "../../components/button/Button";
 
 
 const SelectList = ({ selectId, optionsList }) => {
