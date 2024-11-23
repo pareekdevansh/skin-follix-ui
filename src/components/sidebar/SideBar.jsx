@@ -56,13 +56,12 @@ const SideBar = () => {
                         cursor: "pointer",
                         transform: hoveredIcon === index ? "scale(1.15)" : "scale(1)", 
                         transition: "transform 0.3s ease", 
-                        border : hoveredIcon === index ? "1px solid white" : '',
                         margin : '2px',
-                        borderRadius : '8px',
                     }}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
                 >
+                    
                     <IconButton sx={{ color: "white" }}>
                         {item.icon}
                     </IconButton>
