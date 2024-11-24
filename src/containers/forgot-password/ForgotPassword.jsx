@@ -1,7 +1,7 @@
 import React from "react";
 import "./forgot-password.css";
 import { MdEmail } from "react-icons/md";
-import { Button } from "../../components/";
+import Button from "../../components/button/Button";
 function ForgotPassword() {
 	return (
 		<div className="forgot">

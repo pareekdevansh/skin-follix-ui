@@ -1,8 +1,11 @@
 import React from "react";
 import "./home.css";
 import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
-import { Button } from "../../components";
-
+import { Box, Button, Card, Typography } from "@mui/material";
+import TreatmentsList from "./treatments/TreatmentsSection";
+import TestimonialsSection from "./testimonials/TestimonialsSection";
+import AboutSection from "./about/AboutSection";
+import ContactUsSection from "./contact-us/ContactUsSection";
 const heroUrls = [
 	"https://medicaldialogues.in/h-upload/2022/07/15/180854-hospital-3.jpg",
 ];
@@ -152,94 +155,46 @@ const testimonialsList = [
 		patientName: "Arjun Patel",
 	},
 ];
-function Home() {
-	return (
-		<div className="home-container">
-			<div className="hero-section">
-				<SampleCarousel
-					urlsList={heroUrls}
-					timer={5}
-				/>
-			</div>
-			<div className="home-cards">
-				<div className="service-header">List of Services we offer :</div>
-				<div className="service-container card">
-					{services.map((service, index) => (
-						<div
-							key={index}
-							className="service-item  "
-						>
-							{/* <div className="service-item-image">
-								<img
-									src={service.image}
-									alt={`${service.name} image`}
-								/>
-							</div> */}
-							<div className="service-item-descreption">{service.name}</div>
-						</div>
-					))}
-				</div>
 
-				<div className="testimonials-container card">
-					<p>
-						Visit our{" "}
-						<span>
-							<button
-								className="button-link"
-								onClick={() => {
-									window.location.href = "/testimonials";
-								}}
-							>
-								Testimonials
-							</button>
-						</span>{" "}
-						Page to read what our patients are saying about Us.
-					</p>
-				</div>
-				<div className="about-container card">
-					<p>
-						Learn more about our company and mission on our{" "}
-						<span>
-							<button
-								className="button-link"
-								onClick={() => {
-									window.location.href = "/about";
-								}}
-							>
-								About
-							</button>
-						</span>{" "}
-						page.
-					</p>
-				</div>
-				<div className="contact-container card">
-					<p>
-						Contact us with any inquiries or feedback. Visit our{" "}
-						<span>
-							<button
-								className="button-link"
-								onClick={() => {
-									window.location.href = "/contact-us";
-								}}
-							>
-								Contact-Us
-							</button>
-						</span>{" "}
-						page for more information.
-					</p>
-				</div>
-				<div className="fab-button">
-					<Button
-						text={"Book An Appointment"}
-						onClick={() => {
-							window.location.href = "/book-an-appointment";
-						}}
-						style={{ padding: "10px" }}
-					/>
-				</div>
-			</div>
-		</div>
+
+const Home = () => {
+
+	return (
+		<Box>
+<Box sx={{ marginBottom: "32px" }}>
+				<SampleCarousel urlsList={heroUrls} timer={5} />
+			</Box>
+		<Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f4f4f4" }}>
+			
+
+			<TreatmentsList />
+
+			<TestimonialsSection />
+
+			<AboutSection />
+
+			<ContactUsSection />
+			
+
+			{/* Floating Action Button */}
+			<Box sx={{ textAlign: "center", marginTop: "32px" }}>
+				<Button
+					variant="contained"
+					color="primary"
+					sx={{
+						padding: "10px 20px",
+						fontSize: "16px",
+						borderRadius: "24px",
+					}}
+					onClick={() => (window.location.href = "/book-an-appointment")}
+				>
+					Book An Appointment
+				</Button>
+			</Box>
+		</Box>
+		</Box>
+
 	);
-}
+};
 
 export default Home;

@@ -1,13 +1,18 @@
 import "./App.css";
+import NavBar from "./components/navbar/NavBar";
 import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
 import AppRoutes from "./routes/AppRoutes";
+import SideBar from "./components/sidebar/SideBar";
+
 
 function App() {
 	return (
 		<div className="app">
-			<Navbar />
-			<AppRoutes/>
+			<div className="overlay">
+				<SideBar />
+			</div>
+			<NavBar />
+			<AppRoutes />
 			<Footer />
 		</div>
 	);

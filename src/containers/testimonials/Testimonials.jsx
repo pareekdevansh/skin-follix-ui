@@ -1,7 +1,8 @@
 import React from "react";
 import "./testimonials.css";
 import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
-import { Button } from "../../components/";
+import { Card, CardContent, Typography, Button, Box, Rating } from "@mui/material";
+
 const testimonialsList = [
 	{
 		testimonialSampleUrls: [
@@ -77,34 +78,68 @@ const testimonialsList = [
 	},
 ];
 
+
 function Testimonials() {
 	return (
-		<div className="testimonials">
-			<h2>What Out Customer Say About Us</h2>
-			<div className="testimonials-grid">
-				{testimonialsList.map((testimonial) => (
-					<div className="testimonial-item card">
-						<div className="testimonial-sample-carousel">
-							<SampleCarousel urlsList={testimonial.testimonialSampleUrls} />
-						</div>
-						<div className="testimonial-descreption">
-							<h4>{testimonial.treatmentName}</h4>
-							<p>{testimonial.patientFeedback}</p>
-							<i>-{testimonial.patientName}</i>
-							<div className="rating-container">
-								{Array.from({ length: testimonial.rating }, (_, index) => (
-									<span>⭐</span>
-								))}
-							</div>
-							<Button
-								text="Read More"
-								onClick={() => {}}
-							/>
-						</div>
-					</div>
+		<Box sx={{ padding: "2rem", backgroundColor: "#f5f5f5" }}>
+			<Typography variant="h4" gutterBottom align="left"> 
+				What Our Customers Say About Us
+			</Typography>
+
+			<Box
+				sx={{
+					display: "flex",
+					flexWrap: "wrap",
+					justifyContent: "center",
+					gap: 5
+				}}
+			>
+				{testimonialsList.map((testimonial, index) => (
+					<Box
+						key={index}
+						sx={{
+							width: { xs: "100%", sm: "48%", md: "30%" },
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+						}}
+					>
+						<Card elevation={3} sx={{ width: "100%" }}>
+							<CardContent>
+								<div style={{ marginBottom: "1rem" }}>
+									<SampleCarousel urlsList={testimonial.testimonialSampleUrls} />
+								</div>
+
+								<Typography variant="h6">{testimonial.treatmentName}</Typography>
+								<Typography variant="body2" color="textSecondary" paragraph>
+									{testimonial.patientFeedback}
+								</Typography>
+								<Typography variant="body2" color="textPrimary" gutterBottom>
+									- {testimonial.patientName}
+								</Typography>
+
+								<Rating
+									value={testimonial.rating}
+									precision={0.5}
+									readOnly
+									size="small"
+								/>
+
+								<Button
+									variant="outlined"
+									color="primary"
+									onClick={() => { }}
+									fullWidth
+									sx={{ marginTop: "1rem" }}
+								>
+									Read More
+								</Button>
+							</CardContent>
+						</Card>
+					</Box>
 				))}
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }
 
