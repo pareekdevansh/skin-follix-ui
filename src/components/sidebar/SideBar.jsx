@@ -25,7 +25,7 @@ const SideBar = () => {
     return (
         <Box
             sx={{
-                width: { lg: '80px', md: '40px' },
+                width: { lg: '100px', md: '80px',sm: '60px' , xs: '60px'},
                 height: 'fit-content',
                 backgroundColor: "#1E88E5",
                 color: "white",
