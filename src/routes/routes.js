@@ -26,7 +26,7 @@ export const routes = [
     { path: "/about-us", component: About, name: "About Us", visibleInNav: true },
     { path: "/services", component: Services, name: "Services", visibleInNav: true },
     { path: "/testimonials", component: Testimonials, name: "Testimonials", visibleInNav: true },
-    { path: "/team", component: Team, name: "Our Team", visibleInNav: false },
+    { path: "/team", component: Team, name: "Our Team", visibleInNav: true },
     { path: "/blogs", component: Blogs, name: "Blogs", visibleInNav: false },
     { path: "/contact-us", component: ContactUs, name: "Contact Us", visibleInNav: true },
     {path : "*", component : NotFound, name : "404: Page Not Found", visibleInNav : true},
