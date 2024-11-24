@@ -4,6 +4,7 @@ import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
 // import Button from "../../components/button/Button";
 import { Box, Button, Card, Typography } from "@mui/material";
 import TreatmentsList from "./treatments/TreatmentsSection";
+import TestimonialsSection from "./testimonials/TestimonialsSection";
 
 const heroUrls = [
 	"https://medicaldialogues.in/h-upload/2022/07/15/180854-hospital-3.jpg",
@@ -158,139 +159,76 @@ const testimonialsList = [
 
 const Home = () => {
 
-  return (
-    <Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f5f5f5" }}>
-      <Box sx={{ marginBottom: "32px" }}>
-        <SampleCarousel urlsList={heroUrls} timer={5} />
-      </Box>
+	return (
+		<Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f5f5f5" }}>
+			<Box sx={{ marginBottom: "32px" }}>
+				<SampleCarousel urlsList={heroUrls} timer={5} />
+			</Box>
 
-	<TreatmentsList />
-      {/* <Box sx={{ marginBottom: "32px" }}>
-        <Typography
-          variant="h5"
-          sx={{
-            fontWeight: "bold",
-            textAlign: "center",
-            marginBottom: "16px",
-          }}
-        >
-          Explore All Treatments:
-        </Typography>
-        <Card
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "16px",
-            padding: "16px",
-            backgroundColor: "#ffffff",
-            justifyContent: "center",
-          }}
-        >
-          {services.map((service, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "150px",
-                height: "100px",
-                backgroundColor: "#e0f7fa",
-                borderRadius: "12px",
-                boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-                textAlign: "center",
-                padding: "8px",
-                cursor: "pointer",
-              }}
-            >
-              <Typography variant="body1" sx={{ fontWeight: "500" }}>
-                {service.name}
-              </Typography>
-            </Box>
-          ))}
-        </Card>
-      </Box> */}
+			<TreatmentsList />
 
-      {/* Testimonials Section */}
-      <Card
-        sx={{
-          marginBottom: "32px",
-          padding: "16px",
-          backgroundColor: "#ffffff",
-        }}
-      >
-        <Typography variant="body1">
-          Visit our{" "}
-          <Button
-            variant="text"
-            color="primary"
-            onClick={() => (window.location.href = "/testimonials")}
-          >
-            Testimonials
-          </Button>{" "}
-          page to read what our patients are saying about us.
-        </Typography>
-      </Card>
+			<TestimonialsSection />
 
-      {/* About Section */}
-      <Card
-        sx={{
-          marginBottom: "32px",
-          padding: "16px",
-          backgroundColor: "#ffffff",
-        }}
-      >
-        <Typography variant="body1">
-          Learn more about our company and mission on our{" "}
-          <Button
-            variant="text"
-            color="primary"
-            onClick={() => (window.location.href = "/about")}
-          >
-            About
-          </Button>{" "}
-          page.
-        </Typography>
-      </Card>
 
-      {/* Contact Section */}
-      <Card
-        sx={{
-          marginBottom: "32px",
-          padding: "16px",
-          backgroundColor: "#ffffff",
-        }}
-      >
-        <Typography variant="body1">
-          Contact us with any inquiries or feedback. Visit our{" "}
-          <Button
-            variant="text"
-            color="primary"
-            onClick={() => (window.location.href = "/contact-us")}
-          >
-            Contact Us
-          </Button>{" "}
-          page for more information.
-        </Typography>
-      </Card>
+			{/* About Section */}
+			<Card
+				sx={{
+					marginBottom: "32px",
+					padding: "16px",
+					backgroundColor: "#ffffff",
+				}}
+			>
+				<Typography variant="body1">
+					Learn more about our company and mission on our{" "}
+					<Button
+						variant="text"
+						color="primary"
+						onClick={() => (window.location.href = "/about")}
+					>
+						About
+					</Button>{" "}
+					page.
+				</Typography>
+			</Card>
 
-      {/* Floating Action Button */}
-      <Box sx={{ textAlign: "center", marginTop: "32px" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            padding: "10px 20px",
-            fontSize: "16px",
-            borderRadius: "24px",
-          }}
-          onClick={() => (window.location.href = "/book-an-appointment")}
-        >
-          Book An Appointment
-        </Button>
-      </Box>
-    </Box>
-  );
+			{/* Contact Section */}
+			<Card
+				sx={{
+					marginBottom: "32px",
+					padding: "16px",
+					backgroundColor: "#ffffff",
+				}}
+			>
+				<Typography variant="body1">
+					Contact us with any inquiries or feedback. Visit our{" "}
+					<Button
+						variant="text"
+						color="primary"
+						onClick={() => (window.location.href = "/contact-us")}
+					>
+						Contact Us
+					</Button>{" "}
+					page for more information.
+				</Typography>
+			</Card>
+
+			{/* Floating Action Button */}
+			<Box sx={{ textAlign: "center", marginTop: "32px" }}>
+				<Button
+					variant="contained"
+					color="primary"
+					sx={{
+						padding: "10px 20px",
+						fontSize: "16px",
+						borderRadius: "24px",
+					}}
+					onClick={() => (window.location.href = "/book-an-appointment")}
+				>
+					Book An Appointment
+				</Button>
+			</Box>
+		</Box>
+	);
 };
 
 export default Home;
