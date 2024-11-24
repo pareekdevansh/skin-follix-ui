@@ -1,6 +1,6 @@
 import React from "react";
-import "./services.css";
-import Button from "../../components/button/Button";
+import { Card, CardContent, CardMedia, Typography, Button, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Assuming you're using react-router for navigation
 
 const services = [
 	{
@@ -74,32 +74,67 @@ const services = [
 			"Providing specialized care for children's skin conditions. We treat eczema, acne, birthmarks, and genetic skin disorders with gentle and effective methods.",
 	},
 ];
-const navigateToService = (serviceName) => {
-	// TODO: change nav address to `service/${serviceName}`
-};
-function Services() {
+
+const Services = () => {
+	const navigate = useNavigate(); // Hook to handle navigation
+
+	const navigateToService = (serviceName) => {
+		// Navigate to service page, this assumes a dynamic route
+		navigate(`/service/${serviceName}`);
+	};
+
 	return (
-		<div className="services">
-			{services.map((service) => (
-				<div className="service-card card">
-					<div className="service-image">
-						<img
-							src={service.image}
-							alt={service.name}
-						/>
-					</div>
-					<div className="service-content">
-						<h3>{service.name}</h3>
-						<p>{service.description}</p>
-						<Button
-							text="Show More"
-							onClick={navigateToService(service.name)}
-						/>
-					</div>
-				</div>
-			))}
-		</div>
+		<Box sx={{ padding: "32px", backgroundColor: "#f9f9f9" }}>
+			<Box
+				sx={{
+					display: "flex",
+					flexWrap: "wrap",
+					gap: "2rem", // Space between cards
+					justifyContent: "center", // Center items in the container
+				}}
+			>
+				{services.map((service) => (
+					<Card key={service.name} sx={{ width: { xs: "100%", sm: "50%", md: "30%" } }}>
+
+						<Box sx={{ paddingX: "8px", paddingY: "4px", display: 'flex', flexDirection: "column", justifyContent: "space-between", flexGrow: 1, height: '90%' }}>
+							<Box
+								component="img"
+								alt={service.name}
+								height="180"
+								src={service.image}
+								sx={{
+									objectFit: "cover",
+									borderTopLeftRadius: "8px",
+									borderTopRightRadius: "8px",
+								}}
+							/>
+							<Box sx={{ display: 'flex', flexDirection: 'column' }}>
+								<Typography variant="h6" component="h3" sx={{ fontWeight: "bold", color: "text.primary" }}>
+									{service.name}
+								</Typography>
+								<Typography variant="body2" sx={{ marginTop: "8px", marginBottom: "16px", color: "text.secondary" }}>
+									{service.description}
+								</Typography>
+							</Box>
+
+						</Box>
+						<Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+
+							<Button
+								variant="contained"
+								color="primary"
+								size="small"
+								sx={{ paddingX: "16px", marginLeft: 'auto', marginRight: "4px" }}
+								onClick={() => navigateToService(service.name)}
+							>
+								Show More
+							</Button>
+						</Box>
+					</Card>
+				))}
+			</Box>
+		</Box>
 	);
-}
+};
 
 export default Services;
