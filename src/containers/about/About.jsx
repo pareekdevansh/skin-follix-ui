@@ -26,13 +26,11 @@ export default function AboutUsPage() {
         </Typography>
       </Box>
 
-      {/* Key Promises Section */}
       <Stack
         direction={{ xs: "column", sm: "row" }}
         spacing={3}
         sx={{ marginBottom: "32px", transition: "all 0.3s" }}
       >
-        {/* Expert Dermatologists Card */}
         <Card
           sx={{
             maxWidth: 345,
@@ -55,7 +53,6 @@ export default function AboutUsPage() {
           </CardContent>
         </Card>
 
-        {/* State-of-the-Art Facilities Card */}
         <Card
           sx={{
             maxWidth: 345,
@@ -78,7 +75,6 @@ export default function AboutUsPage() {
           </CardContent>
         </Card>
 
-        {/* Patient-Centric Approach Card */}
         <Card
           sx={{
             maxWidth: 345,
@@ -102,7 +98,6 @@ export default function AboutUsPage() {
         </Card>
       </Stack>
 
-      {/* Detailed List of Promises */}
       <Box sx={{ marginTop: "32px", marginBottom: "32px" }}>
         <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "16px" }}>
           Our Promise to You:

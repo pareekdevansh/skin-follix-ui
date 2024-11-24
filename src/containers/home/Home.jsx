@@ -5,6 +5,7 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import TreatmentsList from "./treatments/TreatmentsSection";
 import TestimonialsSection from "./testimonials/TestimonialsSection";
 import AboutSection from "./about/AboutSection";
+import ContactUsSection from "./contact-us/ContactUsSection";
 const heroUrls = [
 	"https://medicaldialogues.in/h-upload/2022/07/15/180854-hospital-3.jpg",
 ];
@@ -170,26 +171,8 @@ const Home = () => {
 
 			<AboutSection />
 
+			<ContactUsSection />
 			
-			<Card
-				sx={{
-					marginBottom: "32px",
-					padding: "16px",
-					backgroundColor: "#ffffff",
-				}}
-			>
-				<Typography variant="body1">
-					Contact us with any inquiries or feedback. Visit our{" "}
-					<Button
-						variant="text"
-						color="primary"
-						onClick={() => (window.location.href = "/contact-us")}
-					>
-						Contact Us
-					</Button>{" "}
-					page for more information.
-				</Typography>
-			</Card>
 
 			{/* Floating Action Button */}
 			<Box sx={{ textAlign: "center", marginTop: "32px" }}>

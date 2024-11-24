@@ -1,37 +1,42 @@
 import React from "react";
-import { Card, Typography, Button, Box } from "@mui/material";
+import { Box, Card, Typography, Button, Link, CardContent } from "@mui/material";
+import { APP_NAME } from "../../../constants/app-info"; // Make sure APP_NAME is imported if used
 
 export default function AboutSection() {
     return (
-                
-        <Box sx={{ marginBottom: "32px",paddingX: "5%" }}>
-
-        <Card
-            sx={{
-                padding: "2rem",
-                backgroundColor: "#ffffff",
-                boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-                borderRadius: "12px",
-            }}
-        >
-            <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: "8px" }}>
-                About SkinFollix
-            </Typography>
-            <Typography variant="body1" sx={{ marginBottom: "16px" }}>
-                At SkinFollix, we are committed to providing personalized skincare treatments that help you achieve healthy, glowing skin. Our team of expert dermatologists and skincare professionals use advanced technology to deliver the best results for acne, hair loss, and other skin conditions.
-            </Typography>
-            <Typography variant="body1">
-                Learn more about our mission, values, and treatments on our{" "}
-                <Button
-                    variant="text"
-                    color="primary"
-                    onClick={() => (window.location.href = "/about")}
+        <Box sx={{ padding: "32px", backgroundColor: "#f9f9f9", paddingX: "5%" }}>
+            <Card
+                sx={{
+                    padding: "24px",
+                    backgroundColor: "#ffffff",
+                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                    borderRadius: "8px",
+                }}
+            >
+                <Link
+                    href="/about"
+                    underline="hover"
+                    sx={{
+                        display: "inline-block",
+                        cursor: "pointer",
+                        fontWeight: "bold",
+                        fontSize: "1.25rem",
+                        marginBottom: "16px",
+                        transition: "color 0.3s ease",
+                        "&:hover": {
+                            color: "#00796b",
+                            transform: "scale(1.05)",
+                        },
+                    }}
                 >
-                    About
-                </Button>
-                page.
-            </Typography>
-        </Card>
+                    About {APP_NAME}
+                </Link>
+                <CardContent sx={{ paddingX: "5%" }}>
+                    <Typography variant="body1" sx={{ marginBottom: "24px", lineHeight: 1.8 }}>
+                        At {APP_NAME}, we are committed to providing personalized skincare treatments that help you achieve healthy, glowing skin. Our team of expert dermatologists and skincare professionals use advanced technology to deliver the best results for acne, hair loss, and other skin conditions.
+                    </Typography>
+                </CardContent>
+            </Card>
         </Box>
-        )
+    );
 }

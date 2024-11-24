@@ -1,1 +1,1 @@
-export const APP_NAME = "Skin Follix";
+export const APP_NAME = "Skin Follics";
