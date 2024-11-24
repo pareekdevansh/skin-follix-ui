@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Tooltip, IconButton } from "@mui/material";
+import { Box, Divider, Typography, Tooltip, IconButton } from "@mui/material";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
@@ -25,7 +25,7 @@ const SideBar = () => {
     return (
         <Box
             sx={{
-                width: { lg: '90px', md: '50px' },
+                width: { lg: '80px', md: '40px' },
                 height: 'fit-content',
                 backgroundColor: "#1E88E5",
                 color: "white",
@@ -39,11 +39,15 @@ const SideBar = () => {
                 alignItems: "center",
                 justifyContent: "space-around",
                 transition: "width 0.3s ease",
+                borderRadius: '12px',
+                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)',
                 overflow: "hidden",
                 zIndex: 10,
+                gap: '1rem'
             }}
         >
             {sidebarItems.map((item, index) => (
+
                 <Box
                     key={index}
                     sx={{
@@ -52,23 +56,27 @@ const SideBar = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         width: "100%",
-                        paddingY: "2px",
                         cursor: "pointer",
-                        transform: hoveredIcon === index ? "scale(1.15)" : "scale(1)", 
-                        transition: "transform 0.3s ease", 
-                        margin : '2px',
+                        transform: hoveredIcon === index ? "scale(1.10)" : "scale(1)",
+                        transition: "transform 0.3s ease",
+                        backgroundColor: hoveredIcon === index ? "rgba(255, 255, 255, 0.2)" : "transparent",
+                        borderRadius: '12px',
+                        padding: '4px',
                     }}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
                 >
-                    
-                    <IconButton sx={{ color: "white" }}>
+
+                    <IconButton sx={{ color: "white" }} >
                         {item.icon}
                     </IconButton>
-                    <Typography variant="caption" sx={{ marginTop: "8px", fontSize: "12px", textAlign: "center", padding: "8px" }}>
+                    <Typography variant="caption" sx={{ fontSize: "14px", textAlign: "center" }}>
                         {item.label}
                     </Typography>
+                    <Divider />
+
                 </Box>
+
             ))}
         </Box>
     );
