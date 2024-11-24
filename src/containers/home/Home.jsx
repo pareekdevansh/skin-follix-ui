@@ -160,36 +160,40 @@ const testimonialsList = [
 const Home = () => {
 
 	return (
-		<Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f5f5f5" }}>
+		<Box>
 			<Box sx={{ marginBottom: "32px" }}>
 				<SampleCarousel urlsList={heroUrls} timer={5} />
 			</Box>
+			<Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f5f5f5" }}>
 
-			<TreatmentsList />
 
-			<TestimonialsSection />
+				<TreatmentsList />
 
-			<AboutSection />
+				<TestimonialsSection />
 
-			<ContactUsSection />
-			
+				<AboutSection />
 
-			{/* Floating Action Button */}
-			<Box sx={{ textAlign: "center", marginTop: "32px" }}>
-				<Button
-					variant="contained"
-					color="primary"
-					sx={{
-						padding: "10px 20px",
-						fontSize: "16px",
-						borderRadius: "24px",
-					}}
-					onClick={() => (window.location.href = "/book-an-appointment")}
-				>
-					Book An Appointment
-				</Button>
+				<ContactUsSection />
+
+
+				{/* Floating Action Button */}
+				<Box sx={{ textAlign: "center", marginTop: "32px" }}>
+					<Button
+						variant="contained"
+						color="primary"
+						sx={{
+							padding: "10px 20px",
+							fontSize: "16px",
+							borderRadius: "24px",
+						}}
+						onClick={() => (window.location.href = "/book-an-appointment")}
+					>
+						Book An Appointment
+					</Button>
+				</Box>
 			</Box>
 		</Box>
+
 	);
 };
 

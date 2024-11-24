@@ -91,7 +91,7 @@ function Testimonials() {
 					display: "flex",
 					flexWrap: "wrap",
 					justifyContent: "center",
-					gap: 4
+					gap: 5
 				}}
 			>
 				{testimonialsList.map((testimonial, index) => (
