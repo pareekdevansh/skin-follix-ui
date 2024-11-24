@@ -1,11 +1,10 @@
 import React from "react";
 import "./home.css";
 import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
-// import Button from "../../components/button/Button";
 import { Box, Button, Card, Typography } from "@mui/material";
 import TreatmentsList from "./treatments/TreatmentsSection";
 import TestimonialsSection from "./testimonials/TestimonialsSection";
-
+import AboutSection from "./about/AboutSection";
 const heroUrls = [
 	"https://medicaldialogues.in/h-upload/2022/07/15/180854-hospital-3.jpg",
 ];
@@ -169,29 +168,9 @@ const Home = () => {
 
 			<TestimonialsSection />
 
+			<AboutSection />
 
-			{/* About Section */}
-			<Card
-				sx={{
-					marginBottom: "32px",
-					padding: "16px",
-					backgroundColor: "#ffffff",
-				}}
-			>
-				<Typography variant="body1">
-					Learn more about our company and mission on our{" "}
-					<Button
-						variant="text"
-						color="primary"
-						onClick={() => (window.location.href = "/about")}
-					>
-						About
-					</Button>{" "}
-					page.
-				</Typography>
-			</Card>
-
-			{/* Contact Section */}
+			
 			<Card
 				sx={{
 					marginBottom: "32px",
