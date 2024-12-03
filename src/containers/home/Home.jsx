@@ -7,7 +7,7 @@ import TestimonialsSection from "./testimonials/TestimonialsSection";
 import AboutSection from "./about/AboutSection";
 import ContactUsSection from "./contact-us/ContactUsSection";
 const heroUrls = [
-	"https://medicaldialogues.in/h-upload/2022/07/15/180854-hospital-3.jpg",
+	"assets/bg_skin_follix.jpg"
 ];
 const services = [
 	{
@@ -161,23 +161,48 @@ const Home = () => {
 
 	return (
 		<Box>
-<Box sx={{ marginBottom: "32px" }}>
-				<SampleCarousel urlsList={heroUrls} timer={5} />
+			<Box
+				sx={{
+					diplay: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+					minWidth: "100%",
+					height: '100%',
+					overflow: "hidden", // Ensure content does not overflow
+				}}
+			>
+				<img
+					src={heroUrls[0]}
+					alt="Hero Image"
+					style={{
+						display: "flex",
+						maxWidth: "100%",
+						maxHeight: "100%",
+						width: "auto",
+						height: "auto",
+						objectFit: "cover", // Ensure the image covers the area without distortion
+						alignSelf: "center",
+						justifySelf: "center",
+					}}
+				/>
+
 			</Box>
-		<Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f4f4f4" }}>
-			
 
-			<TreatmentsList />
+			<Box sx={{ width: "100%", padding: "16px", backgroundColor: "#f4f4f4" }}>
 
-			<TestimonialsSection />
 
-			<AboutSection />
+				<TreatmentsList />
 
-			<ContactUsSection />
-			
+				{/* <TestimonialsSection /> */}
 
-			{/* Floating Action Button */}
-			<Box sx={{ textAlign: "center", marginTop: "32px" }}>
+				<AboutSection />
+
+				<ContactUsSection />
+
+
+				{/* Floating Action Button */}
+				{/* <Box sx={{ textAlign: "center", marginTop: "32px" }}>
 				<Button
 					variant="contained"
 					color="primary"
@@ -190,8 +215,8 @@ const Home = () => {
 				>
 					Book An Appointment
 				</Button>
+			</Box> */}
 			</Box>
-		</Box>
 		</Box>
 
 	);

@@ -1,6 +1,7 @@
 .scale-up-center {
 	transition: transform 0.3s ease-in-out;
 }
+
 * {
 	margin: 0;
 	padding: 0;
@@ -16,6 +17,15 @@
 	justify-content: space-between;
 	align-items: center;
 }
+
+.navbar-logo {
+  
+    width: auto; /* Ensure it scales proportionally */
+    height: auto; /* Ensure it scales proportionally */
+    object-fit: contain; /* Ensure the image fits well without distortion */
+    display: block; /* Avoid inline gaps */
+}
+
 
 .navbar-links {
 	flex: 1;
@@ -72,16 +82,19 @@ navbar-user-profile-menu-container button {
 	outline: none;
 	cursor: pointer;
 }
+
 .navbar-user-guest {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	flex-direction: row;
 }
+
 .navbar-user-profile {
 	margin-right: 0.5rem;
 	cursor: pointer;
 }
+
 .navbar-menu,
 .navbar-user-profile-menu {
 	/* display: none; */
@@ -101,11 +114,9 @@ navbar-user-profile-menu-container button {
 	justify-content: flex-end;
 	align-items: flex-end;
 	text-align: end;
-	background: linear-gradient(
-		45deg,
-		hsl(177deg 84% 31%) 85%,
-		hsl(275deg 51% 74%) 15%
-	);
+	background: linear-gradient(45deg,
+			hsl(177deg 84% 31%) 85%,
+			hsl(275deg 51% 74%) 15%);
 	padding: 2rem;
 	position: absolute;
 	z-index: 100;
@@ -129,6 +140,7 @@ navbar-user-profile-menu-container button {
 	.navbar-links-container {
 		display: none;
 	}
+
 	.navbar-menu {
 		display: flex;
 	}
@@ -139,16 +151,20 @@ navbar-user-profile-menu-container button {
 		padding: 1rem 2rem;
 	}
 }
+
 @media screen and (max-width: 550px) {
 	.navbar {
 		padding: 2rem;
 	}
+
 	.navbar-user-guest {
 		display: none;
 	}
+
 	.navbar-menu-container {
 		top: 20px;
 	}
+
 	.navbar-menu-container-links-sign {
 		display: block;
 	}

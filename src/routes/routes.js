@@ -24,7 +24,7 @@ export const routes = [
     { path: "/reset-password", component: ResetPassword, name: "Reset Password", visibleInNav: false },
     { path: "/book-an-appointment", component: Appointment, name: "Book Appointment", visibleInNav: true },
     { path: "/about-us", component: About, name: "About Us", visibleInNav: true },
-    { path: "/services", component: Services, name: "Services", visibleInNav: true },
+    { path: "/treatments", component: Services, name: "Services", visibleInNav: true },
     { path: "/testimonials", component: Testimonials, name: "Testimonials", visibleInNav: true },
     { path: "/team", component: Team, name: "Our Team", visibleInNav: true },
     { path: "/blogs", component: Blogs, name: "Blogs", visibleInNav: false },
