@@ -30,38 +30,29 @@ function NavBar() {
   }
 
   return (
-    <AppBar position="static" className="navbar" sx={{ 
-      background: 'linear-gradient(90deg, #1E88E5, #6A92FF)', 
-      color: 'white',
-      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)' 
+    <AppBar position="static" className="navbar" sx={{
+      background: 'linear-gradient(45deg, #fcfcfc 15%, #A3C8FF 85%)',
+      color: 'black',
+      boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)'
     }}>
       <Container maxWidth="xl" sx={{
         paddingX: {
-          lg: '10%',
-          lg: '5%',
+          lg: '7%',
+          md: '5%',
         },
         paddingY: { md: '4px' }
       }}>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
+          <Box className="navbar-logo"
             noWrap
-            component="a"
-            href="/home"
+            onClick={() => { handleNavigation('/home') }}
             sx={{
-              mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Arial',
-              fontWeight: 700,
-              letterSpacing: '.15rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              marginRight: '2rem'
+              marginRight: '4rem',
+              cursor: 'pointer'
             }}
-          >
-            {APP_NAME}
-          </Typography>
+          > <img src="/assets/app_logo.png" alt="App Logo" style={{ maxWidth: '120px', maxHeight: '60px' }} /> </Box>
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -92,30 +83,22 @@ function NavBar() {
             >
               {navItems.map((navItem) => (
                 <MenuItem key={navItem.url} onClick={() => { handleNavigation(navItem.url) }}>
-                  <Typography sx={{ textAlign: 'center' }}>{navItem.title}</Typography>
+                  <Typography sx={{ textAlign: 'center' }} color='black'>{navItem.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-
-          <Typography
-            variant="h5"
+          <Box className="navbar-logo"
             noWrap
-            component="a"
-            href="/home"
+            onClick={() => { handleNavigation('/home') }}
             sx={{
-              mr: 2,
               display: { xs: 'flex', md: 'none' },
+              marginRight: '4rem',
               flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              cursor: 'pointer'
             }}
-          >
-            {APP_NAME}
-          </Typography>
+          > <img src="/assets/app_logo.png" alt="App Logo" style={{ maxWidth: '120px', maxHeight: '60px' }} /> </Box>
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem' }}>
             {navItems.map((navItem) => (
@@ -123,13 +106,13 @@ function NavBar() {
                 key={navItem.url}
                 onClick={() => { handleNavigation(navItem.url) }}
                 sx={{
-                  my: 2, 
-                  color: 'white', 
-                  display: 'block', 
+                  my: 2,
+                  color: 'black',
+                  display: 'block',
                   transition: 'transform 0.3s ease, color 0.3s ease',
                   '&:hover': {
                     transform: 'scale(1.1)', // Scale the button on hover
-                    color: '#FFEB3B', // Change color to a yellowish shade
+                    color: '#0066CC', // Change color to a yellowish shade
                   }
                 }}
               >

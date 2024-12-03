@@ -4,36 +4,14 @@ import { Box, Typography, Card, CardContent, Grid, CardMedia } from "@mui/materi
 const doctorsList = [
   {
     id: 1,
-    name: "Dr. Ananya Sharma",
-    gender: "female",
-    specialty: "Cardiologist",
-    degrees: "MBBS, MD (Cardiology)",
-    experience: 12,
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlDpt8CWare1NXGcK3PORQXjQh0oGSeLP5PU6M6uA0fWywkg-b2woITDiTYIc3uBXcIVI&usqp=CAU",
-  },
-  {
-    id: 2,
-    name: "Dr. Rajesh Kapoor",
+    name: "Dr. Vipul Pareek",
     gender: "male",
-    specialty: "Orthopedic Surgeon",
-    degrees: "MBBS, MS (Ortho)",
-    experience: 15,
+    specialty: "Dermatologist",
+    degrees: "MBBS, MD (Cardiology)",
+    experience: 6,
     imageUrl:
-      "https://images.assetsdelivery.com/compings_v2/indomercy/indomercy1501/indomercy150100019.jpg",
-  },
-  {
-    id: 3,
-    name: "Dr. Priya Singh",
-    gender: "female",
-    specialty: "Pediatrician",
-    degrees: "MBBS, MD (Pediatrics)",
-    experience: 10,
-    imageUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlDpt8CWare1NXGcK3PORQXjQh0oGSeLP5PU6M6uA0fWywkg-b2woITDiTYIc3uBXcIVI&usqp=CAU",
-  },
-  // Other doctor entries...
-];
+      "/assets/dr_vipul.jpg",
+  }];
 
 function Team() {
   return (

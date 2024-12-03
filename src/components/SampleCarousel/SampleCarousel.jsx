@@ -1,7 +1,6 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css"; 
-
 function SampleCarousel({ urlsList, timer = 5 }) {
   const responsive = {
     superLargeDesktop: {
@@ -40,7 +39,7 @@ function SampleCarousel({ urlsList, timer = 5 }) {
       >
         {urlsList.map((url, index) => (
           <div key={index} className="carousel-item">
-            <img src={url} alt={`Image ${index + 1}`} />
+            <img src={url} alt={`Image ${index + 1}`} className="carousel-image" />
           </div>
         ))}
       </Carousel>
