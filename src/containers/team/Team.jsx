@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography, Card, CardContent, Grid, CardMedia } from "@mui/material";
+import DoctorDetailPage from "./DoctorDetailPage";
 
 const doctorsList = [
   {
@@ -7,7 +8,7 @@ const doctorsList = [
     name: "Dr. Vipul Pareek",
     gender: "male",
     specialty: "Dermatologist",
-    degrees: "MBBS, MD (Cardiology)",
+    degrees: "MBBS, MD (Dermatology)",
     experience: 6,
     imageUrl:
       "/assets/dr_vipul.jpg",
@@ -15,12 +16,13 @@ const doctorsList = [
 
 function Team() {
   return (
-    <Box sx={{ padding: "2rem", backgroundColor: "#f5f5f5" }}>
-      <Typography variant="h4" gutterBottom align="left">
+    <Box sx={{ paddingX: {xs: "2.5%", md: "10%"}, paddingY : "32px", backgroundColor: "#f5f5f5" }}>
+      {/* <Typography variant="h4" gutterBottom align="left">
         Meet Our Team
-      </Typography>
+      </Typography> */}
 
-      <Grid container spacing={4} justifyContent="center">
+
+      {/* <Grid container spacing={4} justifyContent="center">
         {doctorsList.map((doctor) => (
           <Grid item xs={12} sm={6} md={4} key={doctor.id}>
             <Card elevation={3}>
@@ -51,7 +53,8 @@ function Team() {
             </Card>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
+      <DoctorDetailPage />
     </Box>
   );
 }

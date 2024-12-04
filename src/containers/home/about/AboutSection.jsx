@@ -4,7 +4,7 @@ import { APP_NAME } from "../../../constants/app-info"; // Make sure APP_NAME is
 
 export default function AboutSection() {
     return (
-        <Box sx={{ padding: "32px", backgroundColor: "#f9f9f9", paddingX: "5%" }}>
+        <Box sx={{ padding: "32px",  paddingX: "5%" }}>
             <Card
                 sx={{
                     padding: "24px",
