@@ -16,6 +16,7 @@ export default function ContactUs() {
 					flexDirection: { xs: "column", md: "row" },
 					justifyContent: "space-between",
 					gap: 4,
+					height: "100%", // Responsive height
 					padding: { xs: "16px", md: "32px" },
 				}}
 			>
@@ -41,30 +42,40 @@ export default function ContactUs() {
 					</Typography>
 					<Box
 						sx={{
-							display: "flex", // Using flexbox to center the iframe vertically
-							justifyContent: "center", // Horizontally center the iframe
-							alignItems: "center", // Vertically center the iframe
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
 							width: "100%",
-							height: "100vh", // Full viewport height
+							maxWidth: "1200px", // Optional: Limit max width for better design
+							height: "50vh", // Responsive height
+							padding: "16px", // Add padding for smaller screens
 							borderRadius: "8px",
 							overflow: "hidden",
+							position: "relative",
+							borderRadius: "8px",
+							boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
 						}}
 					>
+
 						<iframe
 							title="Map Location"
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14020.648141307789!2d77.1994299470883!3d28.534848962754758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce21e7d306d03%3A0x94b8ccb323d7648!2sMalviya%20Nagar%2C%20New%20Delhi%2C%20Delhi%20110017!5e0!3m2!1sen!2sin!4v1732464868683!5m2!1sen!2sin"
-							width="100%"
-							height="100%"
-							style={{
-								borderRadius: "8px",
-								boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-							}}
 							frameBorder="0"
 							allowFullScreen=""
 							aria-hidden="false"
 							tabIndex="0"
+							style={{
+								position: "absolute", // To ensure the iframe covers its parent
+								top: 0,
+								left: 0,
+								width: "100%",
+								height: "100%",
+								borderRadius: "8px",
+							}}
 						></iframe>
+
 					</Box>
+
 
 				</Box>
 
@@ -126,9 +137,11 @@ export default function ContactUs() {
 								<Typography variant="body2" sx={{ color: "#555" }}>
 									<b>Hospital Timings:</b>
 									<br />
-									10:00 AM - 5:00 PM (Winters) <br />
-									9:00 AM - 4:00 PM (Summer)
+									Monday to Sunday: 11:00 AM - 7:00 PM
+									<br />
+									<i>Closed on Wednesdays</i>
 								</Typography>
+
 							</Stack>
 						</Stack>
 					</CardContent>

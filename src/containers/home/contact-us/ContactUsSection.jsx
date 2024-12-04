@@ -8,7 +8,7 @@ import { CONTACT_PHONE_NUMBER } from "../../../constants/contact-info";
 
 export default function ContactUsSection() {
     return (
-        <Box sx={{ padding: "32px", backgroundColor: "#f9f9f9", paddingX: '5%' }}>
+        <Box sx={{ padding: "32px", paddingX: '5%' }}>
             <Card
                 sx={{
                     padding: "24px",
@@ -52,9 +52,9 @@ export default function ContactUsSection() {
                                 <LocationOnIcon />
                             </IconButton>
                             <Typography variant="body2" sx={{ marginX: "8px" }}>
-                                    {ADDRESS_LINE1} <br />
-                                    {ADDRESS_LINE2} <br />
-                                    {ADDRESS_LINE3}
+                                {ADDRESS_LINE1} <br />
+                                {ADDRESS_LINE2} <br />
+                                {ADDRESS_LINE3}
                             </Typography>
 
                         </Box>

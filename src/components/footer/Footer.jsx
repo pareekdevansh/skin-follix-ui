@@ -44,7 +44,7 @@ function Footer() {
         <Grid item xs={12} sm={4} md={3}>
           <FooterHeading variant="h6">About Us</FooterHeading>
           <Typography variant="body2" lineHeight={1.6}>
-            At Skin Follics, we take immense pride in being a leading dermatology hospital dedicated to delivering exceptional healthcare services. 
+            At {APP_NAME}, we take immense pride in being a leading dermatology hospital dedicated to delivering exceptional healthcare services. 
             Our Motto is "We Cure because We Care".</Typography>
         </Grid>
 

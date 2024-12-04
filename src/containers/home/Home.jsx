@@ -177,11 +177,13 @@ const Home = () => {
 					alt="Hero Image"
 					style={{
 						display: "flex",
+						minWidth: "100%",
+						minHeight: "100%",
 						maxWidth: "100%",
 						maxHeight: "100%",
 						width: "auto",
 						height: "auto",
-						objectFit: "cover", // Ensure the image covers the area without distortion
+						objectFit: "stretch",
 						alignSelf: "center",
 						justifySelf: "center",
 					}}

@@ -6,12 +6,9 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
 import Menu from '@mui/material/Menu';
-import { APP_NAME } from '../../constants/app-info';
 import { navItems } from './constants.js';
 
 function NavBar() {
@@ -43,17 +40,33 @@ function NavBar() {
         paddingY: { md: '4px' }
       }}>
         <Toolbar disableGutters>
-          <Box className="navbar-logo"
-            noWrap
-            onClick={() => { handleNavigation('/home') }}
+          {/* Desktop Logo and Title */}
+          <Box
             sx={{
+              height: '100%',
               display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              cursor: 'pointer',
               marginRight: '4rem',
-              cursor: 'pointer'
             }}
-          > <img src="/assets/app_logo.png" alt="App Logo" style={{ maxWidth: '120px', maxHeight: '60px' }} /> </Box>
+            onClick={() => { handleNavigation('/home') }}
+          >
+            {/* Logo */}
+            <img
+              src="/assets/skinfollics_logo_transparent.png"
+              alt="SkinFollics Logo"
 
+              style={{ width: '48px', height: '48px', marginRight: '10px' }}
+            />
+            {/* Title Image */}
+            <img
+              src="/assets/app_logo.png"
+              alt="App Title"
+              style={{ maxWidth: '120px', maxHeight: '60px' }}
+            />
+          </Box>
 
+          {/* Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -83,23 +96,38 @@ function NavBar() {
             >
               {navItems.map((navItem) => (
                 <MenuItem key={navItem.url} onClick={() => { handleNavigation(navItem.url) }}>
-                  <Typography sx={{ textAlign: 'center' }} color='black'>{navItem.title}</Typography>
+                  <Typography sx={{ textAlign: 'center' }} color="black">{navItem.title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Box className="navbar-logo"
-            noWrap
-            onClick={() => { handleNavigation('/home') }}
+
+          {/* Mobile Logo and Title */}
+          <Box
             sx={{
               display: { xs: 'flex', md: 'none' },
-              marginRight: '4rem',
+              alignItems: 'center',
               flexGrow: 1,
-              cursor: 'pointer'
+              cursor: 'pointer',
+              marginRight: '4rem',
             }}
-          > <img src="/assets/app_logo.png" alt="App Logo" style={{ maxWidth: '120px', maxHeight: '60px' }} /> </Box>
+            onClick={() => { handleNavigation('/home') }}
+          >
+            {/* Logo */}
+            <img
+              src="/assets/skinfollics_logo_transparent.png"
+              alt="SkinFollics Logo"
+              style={{ maxWidth: '48px', maxHeight: '48px', marginRight: '8px' }}
+            />
+            {/* Title Image */}
+            <img
+              src="/assets/app_logo.png"
+              alt="App Title"
+              style={{ maxWidth: '100px', maxHeight: '50px' }}
+            />
+          </Box>
 
-
+          {/* Desktop Navigation */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem' }}>
             {navItems.map((navItem) => (
               <Button
