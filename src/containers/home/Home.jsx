@@ -144,23 +144,20 @@ const Home = () => {
 					alignItems: "center",
 					minWidth: "100%",
 					height: '100%',
-					overflow: "hidden", 
+					overflow: "hidden",
 				}}
 			>
 				<img
 					src={heroUrls[0]}
 					alt="Hero Image"
 					style={{
-						display: "flex",
-						minWidth: "100%",
-						minHeight: "100%",
-						maxWidth: "100%",
-						maxHeight: "100%",
-						width: "auto",
+						display: "block",
+						width: "100%",
 						height: "auto",
-						objectFit: "stretch",
-						alignSelf: "center",
-						justifySelf: "center",
+						objectFit: "cover",
+						margin: "0 auto",
+						padding: "0",
+						boxSizing: "border-box"
 					}}
 				/>
 

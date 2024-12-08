@@ -3,7 +3,7 @@ import { Box, Card, Typography, IconButton, Stack, Link, CardContent } from "@mu
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
-import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3 } from "../../constants/address";
+import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP } from "../../constants/address";
 import { CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
 
 export default function ContactUs() {
@@ -59,7 +59,7 @@ export default function ContactUs() {
 
 						<iframe
 							title="Map Location"
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14020.648141307789!2d77.1994299470883!3d28.534848962754758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce21e7d306d03%3A0x94b8ccb323d7648!2sMalviya%20Nagar%2C%20New%20Delhi%2C%20Delhi%20110017!5e0!3m2!1sen!2sin!4v1732464868683!5m2!1sen!2sin"
+							src={LOCATION_COORDINATES_GOOGLE_MAP}
 							frameBorder="0"
 							allowFullScreen=""
 							aria-hidden="false"
