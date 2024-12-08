@@ -1,6 +1,5 @@
 import React from "react";
 import "./home.css";
-import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
 import { Box, Button, Card, Typography } from "@mui/material";
 import TreatmentsList from "./treatments/TreatmentsSection";
 import TestimonialsSection from "./testimonials/TestimonialsSection";
@@ -129,31 +128,7 @@ const testimonialsList = [
 			"I appreciate the personalized approach to eczema management. The treatment plan has made a significant improvement in my skin condition.",
 		rating: 5,
 		patientName: "Rajesh Gupta",
-	},
-	{
-		testimonialSampleUrls: [
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-		],
-		treatmentName: "Hair Loss Treatment",
-		patientFeedback:
-			"Addressing various causes of hair loss with their effective treatments, including medications and procedures like PRP therapy.",
-		rating: 4,
-		patientName: "Sonia Kapoor",
-	},
-	{
-		testimonialSampleUrls: [
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-		],
-		treatmentName: "Dermatologic Surgery",
-		patientFeedback:
-			"I underwent dermatologic surgery, and the process was smooth. The surgeon was skilled, and the post-operative care was excellent.",
-		rating: 4,
-		patientName: "Arjun Patel",
-	},
+	}
 ];
 
 
@@ -169,23 +144,20 @@ const Home = () => {
 					alignItems: "center",
 					minWidth: "100%",
 					height: '100%',
-					overflow: "hidden", // Ensure content does not overflow
+					overflow: "hidden",
 				}}
 			>
 				<img
 					src={heroUrls[0]}
 					alt="Hero Image"
 					style={{
-						display: "flex",
-						minWidth: "100%",
-						minHeight: "100%",
-						maxWidth: "100%",
-						maxHeight: "100%",
-						width: "auto",
+						display: "block",
+						width: "100%",
 						height: "auto",
-						objectFit: "stretch",
-						alignSelf: "center",
-						justifySelf: "center",
+						objectFit: "cover",
+						margin: "0 auto",
+						padding: "0",
+						boxSizing: "border-box"
 					}}
 				/>
 

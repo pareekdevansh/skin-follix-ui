@@ -68,18 +68,14 @@ function Appointment() {
 				</div>
 				<div className="appointment-buttons">
 					<Button
-						className="button"
 						onClick={() => setIsTimeSlotsModalOpen(true)}
-					>
-						Select Time-Slot
-					</Button>
+						text={"Select Time-Slot"}
+					/>
 
 					<Button
-						className="button"
-						type="submit"
-					>
-						Submit
-					</Button>
+						onClick={() => { }}
+						text={"Submit"}
+					/>
 				</div>
 			</div>
 			<span className="time-slots-modal">

@@ -3,7 +3,7 @@ import { Box, Card, Typography, Button, IconButton, Stack, Link, CardContent } f
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { APP_NAME } from "../../../constants/app-info";
-import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3 } from "../../../constants/address";
+import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP, LOCATION_LINK } from "../../../constants/address";
 import { CONTACT_PHONE_NUMBER } from "../../../constants/contact-info";
 
 export default function ContactUsSection() {
@@ -48,7 +48,7 @@ export default function ContactUsSection() {
                     <Stack direction="column" spacing={2}>
                         {/* Location Address */}
                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <IconButton sx={{ color: "#00796b" }}>
+                            <IconButton sx={{ color: "#00796b" }} href={LOCATION_LINK}>
                                 <LocationOnIcon />
                             </IconButton>
                             <Typography variant="body2" sx={{ marginX: "8px" }}>
@@ -60,7 +60,7 @@ export default function ContactUsSection() {
                         </Box>
 
                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <IconButton sx={{ color: "#00796b" }}>
+                            <IconButton sx={{ color: "#00796b" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`} >
                                 <PhoneIcon />
                             </IconButton>
                             <Typography variant="body2" sx={{ marginX: "8px" }}>

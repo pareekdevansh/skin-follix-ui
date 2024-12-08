@@ -12,22 +12,23 @@ const ForgotPassword = lazy(() => import("../containers/forgot-password"));
 const ResetPassword = lazy(() => import("../containers/reset-password"));
 const Team = lazy(() => import("../containers/team"));
 const Blogs = lazy(() => import("../containers/blogs"));
-const NotFound = lazy(()=> import("../containers/not-found"));
-
-
+const NotFound = lazy(() => import("../containers/not-found"));
+const PrivacyPolicy = lazy(() => import("../containers/privacy-policy"));
+// for now, visible in Nav, routerVisibility flag is used to hide the route from Router
 export const routes = [
-    { path: "/", component: Home, name: "Home", visibleInNav: true },
-    { path: "/home", component: Home, name: "Home", visibleInNav: true },
-    { path: "/login", component: Login, name: "Login", visibleInNav: false },
-    { path: "/register", component: Register, name: "Register", visibleInNav: false },
-    { path: "/forgot-password", component: ForgotPassword, name: "Forgot Password", visibleInNav: false },
-    { path: "/reset-password", component: ResetPassword, name: "Reset Password", visibleInNav: false },
-    { path: "/book-an-appointment", component: Appointment, name: "Book Appointment", visibleInNav: true },
-    { path: "/about-us", component: About, name: "About Us", visibleInNav: true },
-    { path: "/treatments", component: Services, name: "Services", visibleInNav: true },
-    { path: "/testimonials", component: Testimonials, name: "Testimonials", visibleInNav: true },
-    { path: "/doctors", component: Team, name: "Doctors", visibleInNav: true },
-    { path: "/blogs", component: Blogs, name: "Blogs", visibleInNav: false },
-    { path: "/contact-us", component: ContactUs, name: "Contact Us", visibleInNav: true },
-    {path : "*", component : NotFound, name : "404: Page Not Found", visibleInNav : true},
+    { path: "/", component: Home, name: "Home", visibleToRouter: true },
+    { path: "/home", component: Home, name: "Home", visibleToRouter: true },
+    { path: "/login", component: Login, name: "Login", visibleToRouter: false },
+    { path: "/register", component: Register, name: "Register", visibleToRouter: false },
+    { path: "/forgot-password", component: ForgotPassword, name: "Forgot Password", visibleToRouter: false },
+    { path: "/reset-password", component: ResetPassword, name: "Reset Password", visibleToRouter: false },
+    { path: "/book-an-appointment", component: Appointment, name: "Book Appointment", visibleToRouter: true },
+    { path: "/about-us", component: About, name: "About Us", visibleToRouter: true },
+    { path: "/treatments", component: Services, name: "Services", visibleToRouter: true },
+    { path: "/testimonials", component: Testimonials, name: "Testimonials", visibleToRouter: true },
+    { path: "/doctors", component: Team, name: "Doctors", visibleToRouter: true },
+    { path: "/blogs", component: Blogs, name: "Blogs", visibleToRouter: false },
+    { path: "/contact-us", component: ContactUs, name: "Contact Us", visibleToRouter: true },
+    { path: "/privacy-policy", component: PrivacyPolicy, name: "Privacy Policy", visibleToRouter: true },
+    { path: "*", component: NotFound, name: "404: Page Not Found", visibleToRouter: true },
 ];

@@ -7,7 +7,7 @@ const AppRoutes = () => {
         <BrowserRouter>
             <Suspense fallback={<div>Loading...</div>}>
                 <Routes>
-                    {routes.map(({ path, component: Component, visibleInNav }, index) => {   return visibleInNav ? <Route key={index} path={path} element={<Component />} />
+                    {routes.map(({ path, component: Component, visibleToRouter }, index) => {   return visibleToRouter ? <Route key={index} path={path} element={<Component />} />
                     : ''})}
                 </Routes>
             </Suspense>

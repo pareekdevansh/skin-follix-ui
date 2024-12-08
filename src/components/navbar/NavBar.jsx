@@ -28,7 +28,7 @@ function NavBar() {
 
   return (
     <AppBar position="static" className="navbar" sx={{
-      background: 'linear-gradient(45deg, #fcfcfc 15%, #A3C8FF 85%)',
+      background: 'var(--navbar-color)',
       color: 'black',
       boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.25)'
     }}>
