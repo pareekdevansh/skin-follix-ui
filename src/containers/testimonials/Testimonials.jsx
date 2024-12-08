@@ -1,6 +1,5 @@
 import React from "react";
 import "./testimonials.css";
-import SampleCarousel from "../../components/SampleCarousel/SampleCarousel";
 import { Card, CardContent, Typography, Button, Box, Rating } from "@mui/material";
 
 const testimonialsList = [
@@ -107,7 +106,7 @@ function Testimonials() {
 						<Card elevation={3} sx={{ width: "100%" }}>
 							<CardContent>
 								<div style={{ marginBottom: "1rem" }}>
-									<SampleCarousel urlsList={testimonial.testimonialSampleUrls} />
+									<img src={testimonial.testimonialSampleUrls[0]} alt="Sample Image" />
 								</div>
 
 								<Typography variant="h6">{testimonial.treatmentName}</Typography>

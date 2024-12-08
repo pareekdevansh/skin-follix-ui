@@ -34,7 +34,7 @@ const DoctorDetailPage = () => {
             <Container>
                 {/* Page Title */}
                 <Typography variant="h4" align="center" sx={{ fontWeight: "bold", mb: 2 }}>
-                    Meet Our Expert
+                    Meet Our Founder
                 </Typography>
                 <Divider sx={{ mb: 4 }} />
 
@@ -46,7 +46,7 @@ const DoctorDetailPage = () => {
                                 <img
                                     src="assets/dr_vipul.jpg"
                                     alt="Dr. Vipul Pareek"
-                                    style={{ maxWidth: "100%", maxHeight: 400, objectFit: "cover" }}
+                                    style={{ maxWidth: "100%", maxHeight: 400, objectFit: "cover", alignSelf: "center", justifySelf: "center" }}
                                 />
                             </Box>
                             <CardContent>
