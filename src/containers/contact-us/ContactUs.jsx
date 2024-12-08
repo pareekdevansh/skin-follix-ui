@@ -3,8 +3,8 @@ import { Box, Card, Typography, IconButton, Stack, Link, CardContent } from "@mu
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
-import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP } from "../../constants/address";
-import { CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
+import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP, LOCATION_LINK } from "../../constants/address";
+import { CONTACT_EMAIL, CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
 
 export default function ContactUs() {
 	return (
@@ -107,7 +107,7 @@ export default function ContactUs() {
 
 						<Stack direction="column" spacing={3}>
 							<Stack direction="row" spacing={2} alignItems="center">
-								<IconButton sx={{ color: "#00796b" }}>
+								<IconButton sx={{ color: "#00796b" }} href={LOCATION_LINK}>
 									<LocationOnIcon />
 								</IconButton>
 								<Typography variant="body2" sx={{ color: "#555" }}>
@@ -118,19 +118,19 @@ export default function ContactUs() {
 								</Typography>
 							</Stack>
 							<Stack direction="row" spacing={2} alignItems="center">
-								<IconButton sx={{ color: "#00796b" }}>
+								<IconButton sx={{ color: "#00796b" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`}>
 									<PhoneIcon />
 								</IconButton>
-								<Typography variant="body2" sx={{ color: "#555" }}>
-									<b>Call Us:</b> {CONTACT_PHONE_NUMBER}
+								<Typography variant="body2" sx={{ color: "#555" }} >
+									<b>Call Us:</b> +91-{CONTACT_PHONE_NUMBER}
 								</Typography>
 							</Stack>
 							<Stack direction="row" spacing={2} alignItems="center">
-								<IconButton sx={{ color: "#00796b" }}>
+								<IconButton sx={{ color: "#00796b" }} href={`mailto:${CONTACT_EMAIL}`}>
 									<EmailIcon />
 								</IconButton>
 								<Typography variant="body2" sx={{ color: "#555" }}>
-									<b>Email:</b> <Link href="mailto:loremepsum@gmail.com">loremepsum@gmail.com</Link>
+									<b>Email:</b> <Link href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</Link>
 								</Typography>
 							</Stack>
 							<Stack direction="row" spacing={2} alignItems="center">

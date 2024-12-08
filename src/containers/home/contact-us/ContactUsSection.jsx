@@ -60,7 +60,7 @@ export default function ContactUsSection() {
                         </Box>
 
                         <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <IconButton sx={{ color: "#00796b" }} href="tel: +91{CONTACT_PHONE_NUMBER}">
+                            <IconButton sx={{ color: "#00796b" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`} >
                                 <PhoneIcon />
                             </IconButton>
                             <Typography variant="body2" sx={{ marginX: "8px" }}>
