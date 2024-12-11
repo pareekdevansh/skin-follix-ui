@@ -3,6 +3,7 @@ import NavBar from "./components/navbar/NavBar";
 import Footer from "./components/footer/Footer";
 import AppRoutes from "./routes/AppRoutes";
 import SideBar from "./components/sidebar/SideBar";
+import ChatBot from "./components/chatbot/ChatBot";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
 			<div className="overlay">
 				{/* <SideBar /> */}
 			</div>
+			<ChatBot />
 			<NavBar />
 			<AppRoutes />
 			<Footer />
