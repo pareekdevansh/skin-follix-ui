@@ -28,7 +28,7 @@ const ChatBot: React.FC = () => {
     ]);
     const [userInput, setUserInput] = useState("");
     const [isBotTyping, setIsBotTyping] = useState(false);
-    const [isMinimized, setIsMinimized] = useState(false);
+    const [isMinimized, setIsMinimized] = useState(true);
     const [isExpanded, setIsExpanded] = useState(false);
     const [isAtBottom, setIsAtBottom] = useState(true);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
