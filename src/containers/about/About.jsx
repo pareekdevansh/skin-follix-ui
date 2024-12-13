@@ -64,7 +64,7 @@ export default function AboutUsPage() {
       </Card>
 
       <Card sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, alignItems: "center", padding: "24px", backgroundColor: "#ffffff", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", marginBottom: "24px", gap: "16px" }}>
-        <Box component="img" src="assets/dr_vipul.jpg" alt="Founder" sx={{ width: { xs: "100%", md: "200px" }, height: "auto", borderRadius: "8px", objectFit: "cover" }} />
+        <Box component="img" src="assets/profiles/profile_dr_vipul.jpg" alt="Founder" sx={{ width: { xs: "100%", md: "200px" }, height: "auto", borderRadius: "8px", objectFit: "cover" }} />
         <CardContent sx={{ textAlign: { xs: "center", md: "left" }, flex: 1 }}>
           <Typography variant="h5" sx={{ fontWeight: "bold", marginBottom: "16px", textAlign: { xs: "center", md: "left" } }}>
             Founder’s Message

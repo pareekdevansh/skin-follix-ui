@@ -68,7 +68,7 @@ function Footer() {
             <strong>Address:</strong> {FULL_ADDRESS}
           </Typography>
           <Typography variant="body2" lineHeight={1.6}>
-            <strong>Contact:</strong> <FooterLink style={{display: "inline"}} href={`tel:+91${CONTACT_PHONE_NUMBER}`}>+91-{CONTACT_PHONE_NUMBER}</FooterLink>
+            <strong>Contact:</strong> <FooterLink style={{ display: "inline" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`}>+91-{CONTACT_PHONE_NUMBER}</FooterLink>
           </Typography>
           <FooterLink href={LOCATION_LINK}>
             Find us on Google Maps

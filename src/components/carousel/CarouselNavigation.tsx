@@ -19,7 +19,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
                 sx={{
                     position: "absolute",
                     top: "50%",
-                    right: 16,
+                    right: "0",
                     transform: "translateY(-50%)",
                     zIndex: 1,
                 }}
@@ -32,7 +32,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
                 sx={{
                     position: "absolute",
                     top: "50%",
-                    left: 16,
+                    left: "0",
                     transform: "translateY(-50%)",
                     zIndex: 1,
                 }}
