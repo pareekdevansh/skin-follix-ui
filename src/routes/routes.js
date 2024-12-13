@@ -14,6 +14,7 @@ const Team = lazy(() => import("../containers/team"));
 const Blogs = lazy(() => import("../containers/blogs"));
 const NotFound = lazy(() => import("../containers/not-found"));
 const PrivacyPolicy = lazy(() => import("../containers/privacy-policy"));
+const Gallery = lazy(() => import("../containers/gallery"));
 // for now, visible in Nav, routerVisibility flag is used to hide the route from Router
 export const routes = [
     { path: "/", component: Home, name: "Home", visibleToRouter: true },
@@ -27,6 +28,7 @@ export const routes = [
     { path: "/treatments", component: Services, name: "Services", visibleToRouter: true },
     { path: "/testimonials", component: Testimonials, name: "Testimonials", visibleToRouter: true },
     { path: "/doctors", component: Team, name: "Doctors", visibleToRouter: true },
+    { path: "/gallery", component: Gallery, name: "Gallery", visibleToRouter: true },
     { path: "/blogs", component: Blogs, name: "Blogs", visibleToRouter: false },
     { path: "/contact-us", component: ContactUs, name: "Contact Us", visibleToRouter: true },
     { path: "/privacy-policy", component: PrivacyPolicy, name: "Privacy Policy", visibleToRouter: true },

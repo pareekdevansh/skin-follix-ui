@@ -49,15 +49,15 @@ function NavBar() {
               cursor: 'pointer',
               marginRight: '4rem',
             }}
-            onClick={() => { handleNavigation('/home') }}
+            onClick={() => { handleNavigation('/') }}
           >
             {/* Logo */}
-            <img
-              src="/assets/skinfollics_logo_transparent.png"
+            {/* <img
+              src="/assets/icons/ic_skinfollics.jpg"
               alt="SkinFollics Logo"
 
               style={{ width: '48px', height: '48px', marginRight: '10px' }}
-            />
+            /> */}
             {/* Title Image */}
             <img
               src="/assets/app_logo.png"
@@ -111,14 +111,14 @@ function NavBar() {
               cursor: 'pointer',
               marginRight: '4rem',
             }}
-            onClick={() => { handleNavigation('/home') }}
+            onClick={() => { handleNavigation('/') }}
           >
             {/* Logo */}
-            <img
+            {/* <img
               src="/assets/skinfollics_logo_transparent.png"
               alt="SkinFollics Logo"
               style={{ maxWidth: '48px', maxHeight: '48px', marginRight: '8px' }}
-            />
+            /> */}
             {/* Title Image */}
             <img
               src="/assets/app_logo.png"
