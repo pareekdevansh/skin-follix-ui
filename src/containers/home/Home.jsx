@@ -10,8 +10,8 @@ import GallerySection from "./gallery/GallerySection";
 const heroUrls =
 	[
 		{ type: "image", src: "assets/images/bg_skin_follix.jpg", alt: "Image at bg_skin_follix.jpg" },
-		{ type: "image", src: "assets/images/dr_vipul.jpeg", alt: "Image at dr_vipul.jpeg" },
-		{ type: "image", src: "assets/images/awards_wall.jpeg", alt: "Image at awards_wall.jpeg" }
+		{ type: "image", src: "assets/images/dr_vipul.jpg", alt: "Image at dr_vipul.jpg" },
+		{ type: "image", src: "assets/images/awards_wall.jpg", alt: "Image at awards_wall.jpg" }
 	]
 
 
