@@ -4,65 +4,86 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="/assets/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#4CAF50" />
+  <meta name="theme-color" content="#FFFFFF" />
+
+  <!-- SEO Meta Tags -->
   <meta name="description"
-    content="Skin Follics offers cutting-edge dermatology services with a patient-centric approach. We provide expert skin care treatments to improve your health and beauty." />
+    content="Skin Follics offers expert acne treatments, skin rejuvenation, laser services, and hair transplant solutions in Malviya Nagar, Delhi. Book your consultation today!">
   <meta name="keywords"
-    content="dermatology, skin care, acne treatment, dermatologists, Skin Follics, skincare clinic, Delhi Skin Clinic, Malviya Nagar, Vipul Pareek" />
+    content="dermatology, skin care, acne treatment, skincare clinic, Delhi, Malviya Nagar, Vipul Pareek, Skin Follics, hair transplant, skin rejuvenation">
   <meta name="author" content="Skin Follics Team" />
 
-  <meta property="og:title" content="Skin Follics - Emerging Dermatology Care" />
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Skin Follics - Expert Dermatology Care" />
   <meta property="og:description"
-    content="Skin Follics offers expert dermatology care with a focus on patient satisfaction. From acne treatments to advanced skincare, trust us for your dermatology needs." />
-  <meta property="og:image" content="%PUBLIC_URL%/path/to/your/og-image.jpg" />
+    content="Skin Follics offers expert dermatology care with a focus on patient satisfaction. Book an appointment for personalized skin care solutions." />
+  <meta property="og:image" content="https://www.skinfollics.com/assets/icons/ic_skinfollics.jpg" />
   <meta property="og:url" content="https://www.skinfollics.com" />
   <meta property="og:type" content="website" />
 
+  <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Skin Follics - Emerging Dermatology Care" />
+  <meta name="twitter:title" content="Skin Follics - Expert Dermatology Care" />
   <meta name="twitter:description"
-    content="Skin Follics offers expert dermatology care with a focus on patient satisfaction. From acne treatments to advanced skincare, trust us for your dermatology needs." />
-  <meta name="twitter:image" content="%PUBLIC_URL%/path/to/your/twitter-image.jpg" />
+    content="Skin Follics offers expert dermatology care. From acne treatments to advanced skincare solutions, trust us for your dermatology needs." />
+  <meta name="twitter:image" content="https://www.skinfollics.com/assets/icons/ic_skinfollics.jpg" />
 
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-  <title>Skin Follics</title>
-</head>
+  <title>Skin Follics - Expert Dermatology Care</title>
 
-<body>
-  <noscript>
-    <p>Your browser does not support JavaScript or it is disabled. To experience the full functionality of Skin Follics,
-      please enable JavaScript. Skin Follics provides expert dermatology care and skin treatments.</p>
-  </noscript>
-
-  <div id="root"></div>
-
+  <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "MedicalBusiness",
       "name": "Skin Follics",
       "url": "https://www.skinfollics.com",
-      "logo": "https://www.skinfollics.com/path/to/logo.png",
+      "logo": "https://www.skinfollics.com/assets/icons/ic_skinfollics.jpg",
       "description": "Skin Follics offers promising dermatology care, including acne treatment, skincare solutions, and expert consultations for healthy skin.",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-234-567-8901",
+        "telephone": "+91-9667788362",
         "contactType": "customer service",
-        "areaServed": "US",
-        "availableLanguage": "English"
+        "areaServed": "IN",
+        "availableLanguage": "[English, Hindi]"
       },
       "sameAs": [
         "https://www.facebook.com/SkinFollics",
-        "https://twitter.com/SkinFollics"
-      ]
+        "https://twitter.com/SkinFollics",
+        "https://www.instagram.com/SkinFollics"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Basement, C - 78, Below Kotak Mahindra Bank, Block C",
+        "addressLocality": "Malviya Nagar",
+        "addressRegion": "Delhi",
+        "postalCode": "110017",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.59623129723165,
+        "longitude": 77.14386648906245
+      },
+      "openingHours": "Mo,Tu,Th,Fr,Sa,Su 11:00-19:00",
+      "closed": "We"
     }
   </script>
+</head>
+
+<body>
+  <noscript>
+    <p>Your browser does not support JavaScript or it is disabled. To experience the full functionality of Skin Follics,
+      please enable JavaScript.</p>
+  </noscript>
+
+  <div id="root"></div>
 </body>
 
 </html>

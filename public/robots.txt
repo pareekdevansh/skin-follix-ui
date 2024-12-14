@@ -1,3 +1,28 @@
-# https://www.robotstxt.org/robotstxt.html
+# Block all bots from accessing unnecessary or sensitive sections
 User-agent: *
-Disallow:
+Disallow: /login/
+Disallow: /register/
+Disallow: /forgot-password/
+Disallow: /reset-password/
+Disallow: /blogs/       
+Disallow: /book-an-appointment
+Disallow: /testimonials/
+
+Allow: /
+Allow: /home/
+Allow: /about-us/
+Allow: /treatments/
+Allow: /doctors/
+Allow: /contact-us/
+Allow: /privacy-policy/
+
+Sitemap: https://skinfollics.com/sitemap.xml
+
+User-agent: Bingbot
+Crawl-delay: 10
+
+User-agent: Yandex
+Crawl-delay: 10
+
+User-agent: BadBot
+Disallow: /

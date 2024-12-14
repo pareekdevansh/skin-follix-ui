@@ -14,7 +14,7 @@ export default function AboutSection() {
                 }}
             >
                 <Link
-                    href="/about"
+                    href="/about-us"
                     underline="hover"
                     sx={{
                         display: "inline-block",
