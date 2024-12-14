@@ -5,28 +5,28 @@ import { keyframes } from "@emotion/react";
 
 const galleryPics = [
     {
-        imgSrc: "assets/gallery/clinic_front.jpeg",
+        imgSrc: "/assets/gallery/clinic_front.jpg",
         imgAlt: "Clinic Front View with Parking",
         title: "Convenient Parking and Easy Access",
         description:
             "The clinic entrance is complemented by ample parking space, ensuring easy access for all patients. Designed to accommodate a variety of vehicles, the parking area provides a hassle-free experience, allowing you to focus on your visit. From the moment you arrive, convenience is prioritized to make your journey smooth and stress-free.",
     },
     {
-        imgSrc: "assets/gallery/skin_follics_clinic.jpeg",
+        imgSrc: "/assets/gallery/skin_follics_clinic.jpg",
         imgAlt: "Clinic Entrance and Waiting Area",
         title: "Comfortable Waiting Area with Caring Staff",
         description:
             "Our waiting area is thoughtfully arranged to provide a calming environment for patients. With modern seating and a welcoming ambiance, it offers a space to relax before your appointment. Our courteous staff ensures that every visit is pleasant, reflecting our commitment to professional and attentive care.",
     },
     {
-        imgSrc: "assets/gallery/opd1.jpeg",
+        imgSrc: "/assets/gallery/opd1.jpg",
         imgAlt: "OPD Consultation Room",
         title: "Modern OPD for Comprehensive Skin Care",
         description:
             "The OPD is equipped with advanced tools to facilitate accurate diagnosis and effective treatment plans. Designed with patient comfort and functionality in mind, the space ensures a seamless consultation experience. Every detail supports our aim to deliver high-quality dermatological care in a professional setting.",
     },
     {
-        imgSrc: "assets/gallery/doctor_treatment_light.jpeg",
+        imgSrc: "/assets/gallery/doctor_treatment_light.jpg",
         imgAlt: "Doctor Treating Patient with Light Therapy",
         title: "Advanced Treatment Delivered with Expertise",
         description:
