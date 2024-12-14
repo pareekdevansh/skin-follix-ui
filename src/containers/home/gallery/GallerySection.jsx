@@ -6,22 +6,22 @@ import Carousel from "../../../components/carousel/Carousel";
 const galleryPics = [
     {
         type: "image",
-        src: "assets/gallery/clinic_front.jpeg",
+        src: "/assets/gallery/clinic_front.jpg",
         alt: "Clinic Front View with Parking",
     },
     {
         type: "image",
-        src: "assets/gallery/skin_follics_clinic.jpeg",
+        src: "/assets/gallery/skin_follics_clinic.jpg",
         alt: "Clinic Entrance and Waiting Area",
     },
     {
         type: "image",
-        src: "assets/gallery/opd1.jpeg",
+        src: "/assets/gallery/opd1.jpg",
         alt: "OPD Consultation Room",
     },
     {
         type: "image",
-        src: "assets/gallery/doctor_treatment_light.jpeg",
+        src: "/assets/gallery/doctor_treatment_light.jpg",
         alt: "Doctor Treating Patient with Light Therapy",
     },
 ];
