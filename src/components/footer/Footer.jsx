@@ -5,6 +5,7 @@ import { APP_NAME } from "../../constants/app-info";
 import { FULL_ADDRESS, LOCATION_LINK } from "../../constants/address";
 import { CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
 import { footerLinkItems } from "./constants";
+import { useNavigate } from "react-router-dom";
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   background: `linear-gradient(180deg, ${theme?.palette?.grey?.[800] || "#333333"} 0%, ${theme?.palette?.grey?.[900] || "#1a1a1a"
@@ -38,19 +39,20 @@ function getCurrentYear() {
 }
 
 function Footer() {
+  // const navigation = useNavigate();
+
   return (
     <FooterContainer>
-      <Grid container spacing={3} justifyContent="space-between">
-        {/* About Us Section */}
-        <Grid item xs={12} sm={4} md={3}>
+      <Grid key={"footer-grid"} container spacing={3} justifyContent="space-between">
+
+        <Grid key={"footer-about-us"} item xs={12} sm={4} md={3}>
           <FooterHeading variant="h6">About Us</FooterHeading>
           <Typography variant="body2" lineHeight={1.6}>
             At {APP_NAME}, we take immense pride in being a leading dermatology hospital dedicated to delivering exceptional healthcare services.
             Our Motto is "We Cure because We Care".</Typography>
         </Grid>
 
-        {/* Quick Links Section */}
-        <Grid item xs={12} sm={4} md={3}>
+        <Grid key={"footer-quick-links"} item xs={12} sm={4} md={3}>
           <FooterHeading variant="h6">Quick Links</FooterHeading>
           <Typography component="nav">
             {footerLinkItems.map((item) => (
@@ -61,8 +63,7 @@ function Footer() {
           </Typography>
         </Grid>
 
-        {/* Contact Us Section */}
-        <Grid item xs={12} sm={4} md={3}>
+        <Grid key={"footer-contact-us"} item xs={12} sm={4} md={3}>
           <FooterHeading variant="h6">Contact Us</FooterHeading>
           <Typography variant="body2" lineHeight={1.6}>
             <strong>Address:</strong> {FULL_ADDRESS}
@@ -78,8 +79,7 @@ function Footer() {
 
       <Divider sx={{ my: 3, backgroundColor: "var(--divider-color)" }} />
 
-      {/* Copyright Section */}
-      <Box textAlign="center">
+      <Box key={"footer-copyright"} textAlign="center">
         <Typography variant="body2">
           Copyright © {getCurrentYear()}. {APP_NAME}. All Rights Reserved.
         </Typography>
