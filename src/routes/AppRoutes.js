@@ -1,14 +1,28 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
+import Loading from "../components/loading/Loading";
+import SEO from "../components/seo/Seo";
 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loading />}>
                 <Routes>
-                    {routes.map(({ path, component: Component, visibleToRouter }, index) => {   return visibleToRouter ? <Route key={index} path={path} element={<Component />} />
-                    : ''})}
+                    {routes.map(({ path, component: Component, visibleToRouter, seo }, index) => {
+                        return visibleToRouter ? (
+                            <Route
+                                key={index}
+                                path={path}
+                                element={
+                                    <>
+                                        {seo && <SEO title={seo.title} description={seo.description} keywords={seo.keywords} />}
+                                        <Component />
+                                    </>
+                                }
+                            />
+                        ) : null;
+                    })}
                 </Routes>
             </Suspense>
         </BrowserRouter>

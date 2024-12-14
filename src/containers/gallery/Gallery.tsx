@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Grid, Card, CardContent, Divider, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { keyframes } from "@emotion/react";
+import CustomCard from "../../components/card/CustomCard";
 
 const galleryPics = [
     {
@@ -27,7 +28,7 @@ const galleryPics = [
     },
     {
         imgSrc: "/assets/gallery/doctor_treatment_light.jpg",
-        imgAlt: "Doctor Treating Patient with Light Therapy",
+        imgAlt: "Doctor Treating Patient at SkinFollics",
         title: "Advanced Treatment Delivered with Expertise",
         description:
             "Our clinic specializes in treatments related to skin and hair transplant, performed by experienced dermatologists. These advanced procedure are tailored to each patient’s needs, addressing concerns such as acne and pigmentation. With precision and care, we aim to provide effective outcomes in a professional and comfortable environment.",
@@ -52,7 +53,6 @@ const slideInRight = keyframes`
   to { opacity: 1; transform: translateX(0); }
 `;
 
-// Component
 const Gallery = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -86,58 +86,13 @@ const Gallery = () => {
             <Grid container spacing={4} sx={{ marginBottom: "32px" }}>
                 {galleryPics.map((pic, index) => (
                     <Grid item xs={12} key={index}>
-                        <Card
-                            sx={{
-                                display: "flex",
-                                flexDirection: isMobile
-                                    ? "column"
-                                    : index % 2 === 0
-                                        ? "row"
-                                        : "row-reverse",
-                                alignItems: "center",
-                                boxShadow: 3,
-                                width: "100%",
-                                animation: `${index % 2 === 0 ? slideInLeft : slideInRight} 1s ease-in-out`,
-                            }}
-                        >
-                            <Box
-                                component="img"
-                                src={pic.imgSrc}
-                                alt={pic.imgAlt}
-                                sx={{
-                                    width: isMobile ? "100%" : "45%",
-                                    maxHeight: "500px",
-                                    borderRadius: isMobile ? "8px 8px 0 0" : "8px 0 0 8px",
-                                    objectFit: "cover",
-                                    objectPosition: "top center",
-                                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                                }}
-                            />
-                            <CardContent
-                                sx={{
-                                    width: isMobile ? "100%" : "55%",
-                                    textAlign: "left",
-                                    padding: "24px",
-                                }}
-                            >
-                                <Typography
-                                    variant="h6"
-                                    sx={{
-                                        fontWeight: "bold",
-                                        marginBottom: "16px",
-                                        fontSize: "1.25rem",
-                                    }}
-                                >
-                                    {pic.title}
-                                </Typography>
-                                <Typography
-                                    variant="body1"
-                                    sx={{ lineHeight: 1.8, fontSize: "1rem" }}
-                                >
-                                    {pic.description}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                        <CustomCard
+                            title={pic.title}
+                            content={pic.description}
+                            imageUrl={pic.imgSrc}
+                            imageAlt={pic.imgAlt}
+                            flexDirection={index % 2 === 0 ? "row" : "row-reverse"} 
+                        />
                     </Grid>
                 ))}
             </Grid>

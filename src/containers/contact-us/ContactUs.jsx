@@ -5,10 +5,13 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP, LOCATION_LINK } from "../../constants/address";
 import { CONTACT_EMAIL, CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
+import SEO from "../../components/seo/Seo";
 
 export default function ContactUs() {
 	return (
-		<Box sx={{ padding: "32px", backgroundColor: "#f4f4f4" }}>
+
+
+		<Box sx={{ padding: "32px", backgroundColor: "#f4f4f4", paddingX: "5%" }}>
 
 			<Box
 				sx={{
@@ -17,7 +20,6 @@ export default function ContactUs() {
 					justifyContent: "space-between",
 					gap: 4,
 					height: "100%", // Responsive height
-					padding: { xs: "16px", md: "32px" },
 				}}
 			>
 
