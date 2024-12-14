@@ -4,10 +4,6 @@ import {
     Typography,
     Container,
     Grid,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
     List,
     ListItem,
     ListItemText,
@@ -44,7 +40,7 @@ const DoctorDetailPage = () => {
                         <Card elevation={3} sx={{ borderRadius: 2, overflow: "hidden" }}>
                             <Box sx={{ textAlign: "center" }}>
                                 <img
-                                    src="assets/dr_vipul.jpg"
+                                    src="/assets/profiles/profile_dr_vipul.jpg"
                                     alt="Dr. Vipul Pareek"
                                     style={{ maxWidth: "100%", maxHeight: 400, objectFit: "cover", alignSelf: "center", justifySelf: "center" }}
                                 />
