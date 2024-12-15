@@ -64,10 +64,10 @@ const FooterBottom = styled(Box)(({ theme }) => ({
 
 const SocialMediaIcons = () => {
   const socialLinks = [
-    { icon: <FaFacebook size={24} />, url: "https://facebook.com", name: "Facebook" },
+    { icon: <FaFacebook size={24} />, url: "https://facebook.com/skinfollics", name: "Facebook" },
     { icon: <FaInstagram size={24} />, url: "https://instagram.com/skinfollics", name: "Instagram" },
-    { icon: <FaTwitter size={24} />, url: "https://twitter.com", name: "Twitter" },
-    { icon: <FaLinkedin size={24} />, url: "https://linkedin.com", name: "LinkedIn" },
+    { icon: <FaTwitter size={24} />, url: "https://twitter.com/skinfollics", name: "Twitter" },
+    { icon: <FaLinkedin size={24} />, url: "https://linkedin.com/skinfollics", name: "LinkedIn" },
     { icon: <FaYoutube size={24} />, url: "https://www.youtube.com/@dr.vipul.", name: "YouTube" },
   ];
 
