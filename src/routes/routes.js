@@ -25,7 +25,7 @@ export const routes = [
         seo: {
             title: "Skin Follics - Expert Dermatology Care",
             description: "Skin Follics offers expert acne treatments, skin rejuvenation, laser services, and hair transplant solutions in Malviya Nagar, Delhi. Book your consultation today!",
-            keywords: "dermatology, skin care, acne treatment, skincare clinic, Delhi, Malviya Nagar, Vipul Pareek, Skin Follics, hair transplant, skin rejuvenation",
+            keywords: "skin care,skin clinic in Delhi, best skin clinic in Delhi, best dermatologist in Delhi, skin care clinic in Delhi, dermat near me, skin clinic near me, acne treatment, skin specialist near me,skin doctor near me, skin clinic in Malviya Nagar, skincare clinic, Delhi, Malviya Nagar, Dr.Vipul Pareek, Skin Follics, hair transplant, skin rejuvenation",
         }
     },
     {
