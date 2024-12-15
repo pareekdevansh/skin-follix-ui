@@ -1,12 +1,9 @@
 import React from "react";
-import { Box, Card, Typography, Button, IconButton, Stack, Link, CardContent } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import PhoneIcon from "@mui/icons-material/Phone";
-import { APP_NAME } from "../../../constants/app-info";
-import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP, LOCATION_LINK } from "../../../constants/address";
-import { CONTACT_PHONE_NUMBER } from "../../../constants/contact-info";
+import { Box, Card, Typography, IconButton, Stack, Link, CardContent } from "@mui/material";
+import ContactItems from "../../contact-us/ContactItems";
 
-export default function ContactUsSection() {
+
+const ContactUsSection = () => {
     return (
         <Box sx={{ padding: "32px", paddingX: '5%' }}>
             <Card
@@ -17,7 +14,7 @@ export default function ContactUsSection() {
                     borderRadius: "8px",
                 }}
             >
-                {/* Contact Us Link */}
+
                 <Link
                     href="/contact-us"
                     underline="hover"
@@ -37,39 +34,18 @@ export default function ContactUsSection() {
                     Contact Us
                 </Link>
 
-                {/* Card Content */}
                 <CardContent sx={{ paddingX: "5%" }}>
                     <Typography variant="body1" sx={{ marginBottom: "24px", lineHeight: 1.8 }}>
                         We are here to assist you with any inquiries, feedback, or requests you may have.
                         Please feel free to reach out to us using the contact details below.
                     </Typography>
 
-                    {/* Contact Details */}
                     <Stack direction="column" spacing={2}>
-                        {/* Location Address */}
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <IconButton sx={{ color: "#00796b" }} href={LOCATION_LINK}>
-                                <LocationOnIcon />
-                            </IconButton>
-                            <Typography variant="body2" sx={{ marginX: "8px" }}>
-                                {ADDRESS_LINE1} <br />
-                                {ADDRESS_LINE2} <br />
-                                {ADDRESS_LINE3}
-                            </Typography>
-
-                        </Box>
-
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <IconButton sx={{ color: "#00796b" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`} >
-                                <PhoneIcon />
-                            </IconButton>
-                            <Typography variant="body2" sx={{ marginX: "8px" }}>
-                                Call Us: {CONTACT_PHONE_NUMBER}
-                            </Typography>
-                        </Box>
+                        <ContactItems />
                     </Stack>
                 </CardContent>
             </Card>
         </Box>
     );
 }
+export default ContactUsSection

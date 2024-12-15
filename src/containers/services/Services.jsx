@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Box, TextField, Chip, Button, Card, Typography, IconButton } from '@mui/material';
 import { Clear as ClearIcon } from '@mui/icons-material';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { useNavigate } from 'react-router-dom';
+import { trackFilterEvent, trackSearchEvent } from "../../analytics";
 const services = [
 	{ name: "Acne (Pimples) Treatment", category: "Skin", description: "Personalized acne treatments, including topical therapies, oral medications, chemical peels, and advanced laser procedures to manage and prevent breakouts effectively." },
 	{ name: "Acne Scar Treatment", category: "Skin", description: "Microneedling, laser resurfacing, dermal fillers, and subcision to improve skin texture and minimize the appearance of scars." },
@@ -37,20 +39,26 @@ const Services = () => {
 	};
 
 	const handleFilterChange = (category) => {
-		setSelectedCategory(category === selectedCategory ? "" : category); 
+		if (category.length > 0) {
+			trackFilterEvent(category.toLowerCase().trim());
+		}
+		setSelectedCategory(category === selectedCategory ? "" : category);
 	};
 
 	const handleClearFilter = () => {
-		setSelectedCategory(""); 
+		setSelectedCategory("");
 	};
 
 	const handleSearchChange = (event) => {
 		const query = event.target.value;
-		setSearchQuery(query); 
+		if (query.length > 0) {
+			trackSearchEvent(query.toLowerCase().trim());
+		}
+		setSearchQuery(query);
 	};
 
 	const handleClearSearch = () => {
-		setSearchQuery(""); 
+		setSearchQuery("");
 	};
 
 	useEffect(() => {
@@ -68,14 +76,14 @@ const Services = () => {
 					return matchesCategory && matchesSearch;
 				})
 			);
-		}, 500); 
+		}, 500);
 
 		return () => {
 			if (searchTimeout.current) {
 				clearTimeout(searchTimeout.current);
 			}
 		};
-	}, [searchQuery, selectedCategory]); 
+	}, [searchQuery, selectedCategory]);
 
 	return (
 		<Box sx={{ padding: "32px", backgroundColor: "#f9f9f9", minHeight: "80vh", overflow: "auto" }}>
@@ -122,20 +130,15 @@ const Services = () => {
 					color={selectedCategory === "Anti-Aging" ? "primary" : "default"}
 					onClick={() => handleFilterChange("Anti-Aging")}
 				/>
-				<Button
+				<IconButton
+
 					variant="contained"
 					onClick={handleClearFilter}
-					sx={{
-						alignSelf: "center",
-						backgroundColor: "#1976d2",
-						"&:hover": { backgroundColor: "#1565c0" },
-					}}
 				>
-					Clear Filters
-				</Button>
+					<ClearAllIcon />
+				</IconButton>
 			</Box>
 
-			{/* Services Cards */}
 			<Box sx={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "center" }}>
 				{filteredServices.length > 0 ? (
 					filteredServices.map((service) => (

@@ -5,13 +5,15 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import { ADDRESS_LINE1, ADDRESS_LINE2, ADDRESS_LINE3, LOCATION_COORDINATES_GOOGLE_MAP, LOCATION_LINK } from "../../constants/address";
 import { CONTACT_EMAIL, CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
-import SEO from "../../components/seo/Seo";
+import { trackLocationClick } from "../../analytics";
+import ContactItems from "./ContactItems";
 
 export default function ContactUs() {
 	return (
-
-
-		<Box sx={{ padding: "32px", backgroundColor: "#f4f4f4", paddingX: "5%" }}>
+		<Box sx={{
+			padding: "32px", backgroundColor: "#f4f4f4", paddingX: "5%",
+			minHeight: "80vh",
+		}}>
 
 			<Box
 				sx={{
@@ -19,7 +21,7 @@ export default function ContactUs() {
 					flexDirection: { xs: "column", md: "row" },
 					justifyContent: "space-between",
 					gap: 4,
-					height: "100%", // Responsive height
+					height: "100%",
 				}}
 			>
 
@@ -108,33 +110,7 @@ export default function ContactUs() {
 						</Typography>
 
 						<Stack direction="column" spacing={3}>
-							<Stack direction="row" spacing={2} alignItems="center">
-								<IconButton sx={{ color: "#00796b" }} href={LOCATION_LINK}>
-									<LocationOnIcon />
-								</IconButton>
-								<Typography variant="body2" sx={{ color: "#555" }}>
-									<b>Address:</b> <br />
-									{ADDRESS_LINE1} <br />
-									{ADDRESS_LINE2} <br />
-									{ADDRESS_LINE3}
-								</Typography>
-							</Stack>
-							<Stack direction="row" spacing={2} alignItems="center">
-								<IconButton sx={{ color: "#00796b" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`}>
-									<PhoneIcon />
-								</IconButton>
-								<Typography variant="body2" sx={{ color: "#555" }} >
-									<b>Call Us:</b> +91-{CONTACT_PHONE_NUMBER}
-								</Typography>
-							</Stack>
-							<Stack direction="row" spacing={2} alignItems="center">
-								<IconButton sx={{ color: "#00796b" }} href={`mailto:${CONTACT_EMAIL}`}>
-									<EmailIcon />
-								</IconButton>
-								<Typography variant="body2" sx={{ color: "#555" }}>
-									<b>Email:</b> <Link href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</Link>
-								</Typography>
-							</Stack>
+							<ContactItems />
 							<Stack direction="row" spacing={2} alignItems="center">
 								<Typography variant="body2" sx={{ color: "#555" }}>
 									<b>Hospital Timings:</b>

@@ -5,7 +5,7 @@ import { APP_NAME } from "../../constants/app-info";
 import { FULL_ADDRESS, LOCATION_LINK } from "../../constants/address";
 import { CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
 import { footerLinkItems } from "./constants";
-import { useNavigate } from "react-router-dom";
+import { trackCallEvent, trackLocationClick } from "../../analytics";
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   background: `linear-gradient(180deg, ${theme?.palette?.grey?.[800] || "#333333"} 0%, ${theme?.palette?.grey?.[900] || "#1a1a1a"
@@ -69,9 +69,9 @@ function Footer() {
             <strong>Address:</strong> {FULL_ADDRESS}
           </Typography>
           <Typography variant="body2" lineHeight={1.6}>
-            <strong>Contact:</strong> <FooterLink style={{ display: "inline" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`}>+91-{CONTACT_PHONE_NUMBER}</FooterLink>
+            <strong>Contact:</strong> <FooterLink style={{ display: "inline" }} href={`tel:+91${CONTACT_PHONE_NUMBER}`} onClick={trackCallEvent}>+91-{CONTACT_PHONE_NUMBER}</FooterLink>
           </Typography>
-          <FooterLink href={LOCATION_LINK}>
+          <FooterLink href={LOCATION_LINK} onClick={trackLocationClick}>
             Find us on Google Maps
           </FooterLink>
         </Grid>
