@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import CustomStepper from "./CustomStepper";
 import CarouselContent from "./CarouselContent";
 import NavigationButtons from "./CarouselNavigation";
-
+import { useSwipeable } from 'react-swipeable';
 interface CarouselItem {
     type: "image" | "video";
     src: string;
@@ -46,11 +46,17 @@ const Carousel: React.FC<CarouselProps> = ({ carouselItems, autoplay = true, aut
                 }
             };
         }
-        return () => { };
     }, [autoplay, autoplayInterval]);
 
+    const swipeHandlers = useSwipeable({
+        onSwipedLeft: () => handleNext(),
+        onSwipedRight: () => handlePrev(),
+        preventScrollOnSwipe: true,
+    });
+    const isNonMobile = useMediaQuery("(min-width: 700px)");
     return (
         <Box
+            {...swipeHandlers}
             sx={{
                 position: "relative",
                 width: "100%",
@@ -68,7 +74,9 @@ const Carousel: React.FC<CarouselProps> = ({ carouselItems, autoplay = true, aut
             <CarouselContent item={carouselItems[activeStep]} />
 
             {/* Navigation Buttons */}
-            {carouselItems.length > 1 && <NavigationButtons handleNext={handleNext} handlePrev={handlePrev} />}
+            {carouselItems.length > 1 &&
+                isNonMobile
+                && <NavigationButtons handleNext={handleNext} handlePrev={handlePrev} />}
 
             {/* Stepper Dots */}
             {
