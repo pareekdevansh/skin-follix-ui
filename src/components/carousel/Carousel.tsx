@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { Box } from "@mui/material";
 import CustomStepper from "./CustomStepper";
 import CarouselContent from "./CarouselContent";
@@ -13,11 +13,13 @@ interface CarouselItem {
 interface CarouselProps {
     carouselItems: CarouselItem[];
     autoplay?: boolean;
-    autoplayInterval?: number; 
+    autoplayInterval?: number;
 }
 
 const Carousel: React.FC<CarouselProps> = ({ carouselItems, autoplay = true, autoplayInterval = 5000 }) => {
     const [activeStep, setActiveStep] = useState(0);
+
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const handleNext = useCallback(() => {
         setActiveStep((prevStep) => (prevStep + 1) % carouselItems.length);
@@ -27,16 +29,25 @@ const Carousel: React.FC<CarouselProps> = ({ carouselItems, autoplay = true, aut
         setActiveStep((prevStep) => (prevStep - 1 + carouselItems.length) % carouselItems.length);
     }, [carouselItems.length]);
 
-    const handleDotClick = (step: number) => {
-        setActiveStep(step);
-    };
+    useEffect(() => {
+        intervalRef.current && clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(handleNext, autoplayInterval);
+    }, [activeStep])
 
     useEffect(() => {
-        if (autoplay) {
-            const interval = setInterval(handleNext, autoplayInterval);
-            return () => clearInterval(interval);
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
         }
-    }, [handleNext, autoplay, autoplayInterval]);
+        if (autoplay) {
+            intervalRef.current = setInterval(handleNext, autoplayInterval);
+            return () => {
+                if (intervalRef.current) {
+                    clearInterval(intervalRef.current);
+                }
+            };
+        }
+        return () => { };
+    }, [autoplay, autoplayInterval]);
 
     return (
         <Box
