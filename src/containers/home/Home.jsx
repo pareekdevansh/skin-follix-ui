@@ -9,31 +9,28 @@ import GallerySection from "./gallery/GallerySection";
 
 const heroUrls =
 	[
-		{ type: "image", src: "assets/images/bg_skin_follix.jpg", alt: "Image at bg_skin_follix.jpg" },
-		{ type: "image", src: "assets/images/dr_vipul.jpg", alt: "Image at dr_vipul.jpg" },
-		{ type: "image", src: "assets/images/awards_wall.jpg", alt: "Image at awards_wall.jpg" }
+		{ type: "image", src: "assets/images/bg_skin_follix.webp", alt: "Image at bg_skin_follix.webp" },
+		{ type: "image", src: "assets/images/dr_vipul.webp", alt: "Image at dr_vipul.webp" },
+		{ type: "image", src: "assets/images/awards_wall.webp", alt: "Image at awards_wall.webp" }
 	]
 
 
-const testimonialsList = [
-	{
-		testimonialSampleUrls: [
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
-		],
-		treatmentName: "Acne Treatment",
-		patientFeedback:
-			"I had a great experience with this dermatology hospital. The staff is knowledgeable and caring, and the treatments are effective.",
-		rating: 4,
-		patientName: "Arya Sharma",
-	}
-];
+// const testimonialsList = [
+// 	{
+// 		testimonialSampleUrls: [
+// 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
+// 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbNoLb-0P6lZXYZVXt0rEWoeC-WrRzuxpFbnslzsE7Xj7yXqhXm7kX-vDB-VyeAx6eO4&usqp=CAU",
+// 		],
+// 		treatmentName: "Acne Treatment",
+// 		patientFeedback:
+// 			"I had a great experience with this dermatology hospital. The staff is knowledgeable and caring, and the treatments are effective.",
+// 		rating: 4,
+// 		patientName: "Arya Sharma",
+// 	}
+// ];
 
 
 const Home = () => {
-	const handleSlideChange = (currentSlide) => {
-		console.log(`Current Slide: ${currentSlide}`);
-	};
 
 	return (
 		<Box>

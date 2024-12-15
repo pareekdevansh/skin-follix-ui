@@ -1,11 +1,11 @@
 import React from "react";
-import { Box, Card, CardContent, CardMedia, Typography, Button, IconButton } from "@mui/material";
+import { Box, Card, CardContent, Typography, IconButton } from "@mui/material";
 import { ArrowForward as ArrowForwardIcon } from "@mui/icons-material"; // Import the icon
 
 const treatments = [
   {
     name: "Acne (Pimples) Treatment",
-    image: "https://example.com/acne-treatment.jpg",
+    image: "https://example.com/acne-treatment.webp",
     shortDescription: "Effective solutions for acne and pimple control.",
     description:
       "We provide personalized acne treatments, including topical therapies, oral medications, chemical peels, and advanced laser procedures to manage and prevent breakouts effectively.",
@@ -13,7 +13,7 @@ const treatments = [
   },
   {
     name: "Acne Scar Treatment",
-    image: "https://example.com/acne-scar-treatment.jpg",
+    image: "https://example.com/acne-scar-treatment.webp",
     shortDescription: "Improve skin texture and reduce acne scars.",
     description:
       "Our acne scar treatments include microneedling, laser resurfacing, dermal fillers, and subcision to improve skin texture and minimize the appearance of scars.",
@@ -21,7 +21,7 @@ const treatments = [
   },
   {
     name: "Hair Loss Treatment",
-    image: "https://example.com/hair-loss-treatment.jpg",
+    image: "https://example.com/hair-loss-treatment.webp",
     shortDescription: "Regain your hair and confidence with our treatments.",
     description:
       "Comprehensive solutions for hair loss, including medications like minoxidil and finasteride, PRP therapy, and hair revitalization procedures tailored to individual needs.",
@@ -29,7 +29,7 @@ const treatments = [
   },
   {
     name: "Hair Transplant",
-    image: "https://example.com/hair-transplant.jpg",
+    image: "https://example.com/hair-transplant.webp",
     shortDescription: "Natural hair restoration through advanced techniques.",
     description:
       "We specialize in advanced hair transplant techniques like FUE (Follicular Unit Extraction) and FUT (Follicular Unit Transplantation) to restore natural hair growth.",
@@ -37,7 +37,7 @@ const treatments = [
   },
   {
     name: "PRP Treatment",
-    image: "https://example.com/prp-treatment.jpg",
+    image: "https://example.com/prp-treatment.webp",
     shortDescription: "Stimulate growth with platelet-rich plasma therapy.",
     description:
       "Platelet-rich plasma (PRP) therapy is a regenerative treatment that uses your body's natural growth factors to stimulate hair growth and skin rejuvenation.",
@@ -45,7 +45,7 @@ const treatments = [
   },
   {
     name: "Lasers",
-    image: "https://example.com/laser-treatment.jpg",
+    image: "https://example.com/laser-treatment.webp",
     shortDescription: "Advanced laser solutions for skin and hair care.",
     description:
       "State-of-the-art laser treatments for skin resurfacing, pigmentation, hair removal, and scar reduction, ensuring safe and effective results.",
@@ -53,7 +53,7 @@ const treatments = [
   },
   {
     name: "Leucoderma and Vitiligo Treatment",
-    image: "https://example.com/vitiligo-treatment.jpg",
+    image: "https://example.com/vitiligo-treatment.webp",
     shortDescription: "Expert care to restore skin pigmentation.",
     description:
       "Comprehensive care for leucoderma and vitiligo, including phototherapy, medications, and camouflage solutions to improve pigmentation.",
@@ -61,7 +61,7 @@ const treatments = [
   },
   {
     name: "Vitiligo Surgery",
-    image: "https://example.com/vitiligo-surgery.jpg",
+    image: "https://example.com/vitiligo-surgery.webp",
     shortDescription: "Surgical options to address vitiligo.",
     description:
       "Surgical options like skin grafting and melanocyte transplantation to restore pigmentation in vitiligo-affected areas.",
@@ -69,7 +69,7 @@ const treatments = [
   },
   {
     name: "Wart Treatment",
-    image: "https://example.com/wart-treatment.jpg",
+    image: "https://example.com/wart-treatment.webp",
     shortDescription: "Safe and effective wart removal solutions.",
     description:
       "Effective wart removal procedures using cryotherapy, laser therapy, or topical solutions, providing quick and safe relief.",
@@ -77,7 +77,7 @@ const treatments = [
   },
   {
     name: "Eczema Treatment",
-    image: "https://example.com/eczema-treatment.jpg",
+    image: "https://example.com/eczema-treatment.webp",
     shortDescription: "Manage eczema with targeted care.",
     description:
       "Personalized treatment plans for eczema, including emollients, topical steroids, and lifestyle guidance to manage flare-ups and prevent recurrence.",
@@ -85,7 +85,7 @@ const treatments = [
   },
   {
     name: "Atopic Dermatitis Treatment",
-    image: "https://example.com/atopic-dermatitis.jpg",
+    image: "https://example.com/atopic-dermatitis.webp",
     shortDescription: "Comprehensive care for atopic dermatitis.",
     description:
       "Comprehensive care for atopic dermatitis with anti-inflammatory therapies, moisturizers, and immune-modulating treatments.",
@@ -93,7 +93,7 @@ const treatments = [
   },
   {
     name: "Psoriasis Treatment",
-    image: "https://example.com/psoriasis-treatment.jpg",
+    image: "https://example.com/psoriasis-treatment.webp",
     shortDescription: "Advanced therapies to manage psoriasis.",
     description:
       "Advanced treatments for psoriasis, including topical therapies, systemic medications, and biologics to manage symptoms effectively.",
@@ -101,7 +101,7 @@ const treatments = [
   },
   {
     name: "Skin Allergy Treatment",
-    image: "https://example.com/skin-allergy.jpg",
+    image: "https://example.com/skin-allergy.webp",
     shortDescription: "Relieve skin allergies with expert care.",
     description:
       "Allergy management includes antihistamines, topical treatments, and diagnostic tests to identify triggers and provide relief.",
@@ -109,7 +109,7 @@ const treatments = [
   },
   {
     name: "Urticaria Treatment",
-    image: "https://example.com/urticaria.jpg",
+    image: "https://example.com/urticaria.webp",
     shortDescription: "Effective relief for chronic hives.",
     description:
       "Comprehensive care for hives, including antihistamines and advanced immunotherapy for chronic urticaria.",
@@ -117,7 +117,7 @@ const treatments = [
   },
   {
     name: "Keloid Treatment",
-    image: "https://example.com/keloid-treatment.jpg",
+    image: "https://example.com/keloid-treatment.webp",
     shortDescription: "Reduce keloid size and discomfort.",
     description:
       "Specialized treatments for keloids, such as steroid injections, laser therapy, and surgical removal to reduce size and discomfort.",
@@ -125,7 +125,7 @@ const treatments = [
   },
   {
     name: "Hypertrophic Scar Treatment",
-    image: "https://example.com/hypertrophic-scar.jpg",
+    image: "https://example.com/hypertrophic-scar.webp",
     shortDescription: "Improve the appearance of hypertrophic scars.",
     description:
       "Treatment options include silicone gels, steroid injections, and laser therapy to improve the appearance of hypertrophic scars.",
@@ -133,7 +133,7 @@ const treatments = [
   },
   {
     name: "Burn Scar Treatment",
-    image: "https://example.com/burn-scar-treatment.jpg",
+    image: "https://example.com/burn-scar-treatment.webp",
     shortDescription: "Restore skin after burn scars.",
     description:
       "Comprehensive care for burn scars using laser therapy, skin grafting, and rehabilitation to improve skin texture and functionality.",
@@ -141,7 +141,7 @@ const treatments = [
   },
   {
     name: "Nail Disease Treatment",
-    image: "https://example.com/nail-disease.jpg",
+    image: "https://example.com/nail-disease.webp",
     shortDescription: "Expert solutions for nail health.",
     description:
       "Expert care for fungal infections, ingrown nails, and other nail disorders, offering medical and procedural solutions.",
@@ -149,7 +149,7 @@ const treatments = [
   },
   {
     name: "Unwanted Hair Treatment",
-    image: "https://example.com/unwanted-hair.jpg",
+    image: "https://example.com/unwanted-hair.webp",
     shortDescription: "Achieve smooth skin with hair removal solutions.",
     description:
       "Advanced laser hair removal techniques for permanent reduction of unwanted hair, ensuring smooth and hair-free skin.",
@@ -157,7 +157,7 @@ const treatments = [
   },
   {
     name: "STD Treatment",
-    image: "https://example.com/std-treatment.jpg",
+    image: "https://example.com/std-treatment.webp",
     shortDescription: "Confidential and comprehensive STD care.",
     description:
       "Confidential and comprehensive care for sexually transmitted diseases, including diagnosis, treatment, and counseling.",

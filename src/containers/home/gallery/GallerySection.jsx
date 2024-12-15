@@ -1,27 +1,27 @@
 import React from "react";
-import { Box, Typography, IconButton, Card, CardContent, CardMedia } from "@mui/material";
+import { Box, Typography, IconButton, Card, CardContent } from "@mui/material";
 import { ArrowForward as ArrowForwardIcon } from "@mui/icons-material"; // Import the icon
 import Carousel from "../../../components/carousel/Carousel";
 
 const galleryPics = [
     {
         type: "image",
-        src: "/assets/gallery/clinic_front.jpg",
+        src: "/assets/gallery/clinic_front.webp",
         alt: "Clinic Front View with Parking",
     },
     {
         type: "image",
-        src: "/assets/gallery/skin_follics_clinic.jpg",
+        src: "/assets/gallery/skin_follics_clinic.webp",
         alt: "Clinic Entrance and Waiting Area",
     },
     {
         type: "image",
-        src: "/assets/gallery/opd1.jpg",
+        src: "/assets/gallery/opd1.webp",
         alt: "OPD Consultation Room",
     },
     {
         type: "image",
-        src: "/assets/gallery/doctor_treatment_light.jpg",
+        src: "/assets/gallery/doctor_treatment_light.webp",
         alt: "Doctor Treating Patient with Light Therapy",
     },
 ];
