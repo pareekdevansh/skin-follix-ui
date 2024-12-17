@@ -22,7 +22,7 @@ function NavBar() {
         setNavMenuOpen(null);
     };
 
-    const handleNavigation = (url: string = '/') => {
+    const handleNavigation = (url: string = '/home') => {
         window.location.href = url;
         setNavMenuOpen(null); // Close menu after navigation
     };
@@ -49,13 +49,24 @@ function NavBar() {
                             alignItems: 'center',
                             cursor: 'pointer',
                             marginRight: '4rem',
+                            transition: 'transform 0.3s ease, opacity 0.3s ease',
+                            '&:hover': {
+                                transform: 'scale(1.1)',
+                                opacity: 0.8,
+                            },
+                            '&:active': {
+                                transform: 'scale(1.05)',
+                            },
                         }}
-                        onClick={() => handleNavigation('/')}
+                        onClick={() => handleNavigation('/home')}
                     >
                         <img
                             src="/assets/app_logo.png"
                             alt="App Title"
-                            style={{ maxWidth: '120px', maxHeight: '60px' }}
+                            style={{
+                                maxWidth: '120px', maxHeight: '60px'
+                                , transition: 'transform 0.3s ease',
+                            }}
                         />
                     </Box>
 
@@ -108,13 +119,24 @@ function NavBar() {
                             flexGrow: 1,
                             cursor: 'pointer',
                             marginRight: '4rem',
+                            transition: 'transform 0.3s ease, opacity 0.3s ease',
+                            '&:hover': {
+                                transform: 'scale(1.1)',
+                                opacity: 0.8,
+                            },
+                            '&:active': {
+                                transform: 'scale(1.05)',
+                            },
                         }}
-                        onClick={() => handleNavigation('/')}
+                        onClick={() => handleNavigation('/home')}
                     >
                         <img
                             src="/assets/app_logo.png"
                             alt="App Title"
-                            style={{ maxWidth: '100px', maxHeight: '50px' }}
+                            style={{
+                                maxWidth: '100px', maxHeight: '50px',
+                                transition: 'transform 0.3s ease', // Ensur
+                            }}
                         />
                     </Box>
 

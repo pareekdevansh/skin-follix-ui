@@ -4,28 +4,7 @@ import { Clear as ClearIcon } from '@mui/icons-material';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { useNavigate } from 'react-router-dom';
 import { trackFilterEvent, trackSearchEvent } from "../../analytics";
-const services = [
-	{ name: "Acne (Pimples) Treatment", category: "Skin", description: "Personalized acne treatments, including topical therapies, oral medications, chemical peels, and advanced laser procedures to manage and prevent breakouts effectively." },
-	{ name: "Acne Scar Treatment", category: "Skin", description: "Microneedling, laser resurfacing, dermal fillers, and subcision to improve skin texture and minimize the appearance of scars." },
-	{ name: "Hair Loss Treatment", category: "Hair", description: "Comprehensive solutions for hair loss, including medications like minoxidil and finasteride, PRP therapy, and hair revitalization procedures tailored to individual needs." },
-	{ name: "Hair Transplant", category: "Hair", description: "We specialize in advanced hair transplant techniques like FUE (Follicular Unit Extraction) and FUT (Follicular Unit Transplantation) to restore natural hair growth." },
-	{ name: "PRP Treatment", category: "Anti-Aging", description: "Platelet-rich plasma (PRP) therapy is a regenerative treatment that uses your body's natural growth factors to stimulate hair growth and skin rejuvenation." },
-	{ name: "Lasers", category: "Anti-Aging", description: "State-of-the-art laser treatments for skin resurfacing, pigmentation, hair removal, and scar reduction, ensuring safe and effective results." },
-	{ name: "Leucoderma and Vitiligo Treatment", category: "Skin", description: "Comprehensive care for leucoderma and vitiligo, including phototherapy, medications, and camouflage solutions to improve pigmentation." },
-	{ name: "Vitiligo Surgery", category: "Skin", description: "Surgical options like skin grafting and melanocyte transplantation to restore pigmentation in vitiligo-affected areas." },
-	{ name: "Wart Treatment", category: "Skin", description: "Effective wart removal procedures using cryotherapy, laser therapy, or topical solutions, providing quick and safe relief." },
-	{ name: "Eczema Treatment", category: "Anti-Aging", description: "Personalized treatment plans for eczema, including emollients, topical steroids, and lifestyle guidance to manage flare-ups and improve skin texture." },
-	{ name: "Atopic Dermatitis Treatment", category: "Skin", description: "Comprehensive care for atopic dermatitis with anti-inflammatory therapies, moisturizers, and immune-modulating treatments." },
-	{ name: "Psoriasis Treatment", category: "Anti-Aging", description: "Advanced treatments for psoriasis, including topical therapies, systemic medications, and biologics to manage symptoms and improve skin appearance." },
-	{ name: "Skin Allergy Treatment", category: "Anti-Aging", description: "Allergy management includes antihistamines, topical treatments, and diagnostic tests to identify triggers and provide relief while maintaining healthy skin." },
-	{ name: "Urticaria Treatment", category: "Anti-Aging", description: "Comprehensive care for hives, including antihistamines and advanced immunotherapy for chronic urticaria." },
-	{ name: "Keloid Treatment", category: "Skin", description: "Specialized treatments for keloids, such as steroid injections, laser therapy, and surgical removal to reduce size and discomfort." },
-	{ name: "Hypertrophic Scar Treatment", category: "Skin", description: "Treatment options include silicone gels, steroid injections, and laser therapy to improve the appearance of hypertrophic scars." },
-	{ name: "Burn Scar Treatment", category: "Skin", description: "Comprehensive care for burn scars using laser therapy, skin grafting, and rehabilitation to improve skin texture and functionality." },
-	{ name: "Nail Disease Treatment", category: "Skin", description: "Expert care for fungal infections, ingrown nails, and other nail disorders, offering medical and procedural solutions." },
-	{ name: "Unwanted Hair Treatment", category: "Hair", description: "Advanced laser hair removal techniques for permanent reduction of unwanted hair, ensuring smooth and hair-free skin." },
-	{ name: "STD Treatment", category: "Skin", description: "Confidential and comprehensive care for sexually transmitted diseases, including diagnosis, treatment, and counseling." }
-];
+import { services } from "./constants";
 
 const Services = () => {
 	const [selectedCategory, setSelectedCategory] = useState("");

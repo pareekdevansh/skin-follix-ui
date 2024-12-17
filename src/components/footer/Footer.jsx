@@ -2,15 +2,12 @@ import React from "react";
 import { Box, Typography, Grid, Link, Divider, IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/system";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
-
-// Constants
 import { APP_NAME } from "../../constants/app-info";
 import { FULL_ADDRESS, LOCATION_LINK } from "../../constants/address";
 import { CONTACT_PHONE_NUMBER } from "../../constants/contact-info";
 import { footerLinkItems } from "./constants";
 import { trackCallEvent, trackLocationClick } from "../../analytics";
 
-// Styled Components
 const FooterContainer = styled(Box)(({ theme }) => ({
   background: `linear-gradient(180deg, ${theme?.palette?.grey?.[800] || "#333333"} 0%, ${theme?.palette?.grey?.[900] || "#1a1a1a"
     } 100%)`,
