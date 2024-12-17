@@ -1,40 +1,42 @@
 import React from "react";
-import { Box, Card, CardContent, Typography, IconButton } from "@mui/material";
-import { ArrowForward as ArrowForwardIcon } from "@mui/icons-material"; // Import the icon
+import { Box, Card, CardContent, Typography, IconButton, Button } from "@mui/material";
+import { ArrowForward as ArrowForwardIcon, ArrowForwardIosOutlined } from "@mui/icons-material"; // Import the icon
 import { services as treatments } from "../../services/constants";
+import { useNavigate } from "react-router-dom";
 
 
 export default function TreatmentsList() {
+  const navigate = useNavigate();
+  const navigateToTreatments = () => {
+    navigate("/treatments");
+}
   return (
     <Box sx={{ marginBottom: "32px", paddingX: '5%' }}>
       {/* Flex container for Title and Button */}
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "16px" }}>
         <Typography
           variant="h5"
           sx={{
             fontWeight: "bold",
             textAlign: "start",
+            marginRight: ".5rem",
           }}
         >
-          Explore All Treatments:
+          Explore All Treatments
         </Typography>
         <IconButton
-          onClick={() => {
-            window.location.href = "/treatments"; // Redirect to full treatments page
-          }}
+          onClick={navigateToTreatments}
           sx={{
+            variant: "text",
             display: "flex",
             alignItems: "center",
             padding: "8px",
-            fontWeight: "bold",
             color: "primary.main",
           }}
         >
-          <Typography variant="body2" sx={{ marginRight: "8px" }}>
-            Visit Page
-          </Typography>
-          <ArrowForwardIcon />
+          <ArrowForwardIosOutlined />
         </IconButton>
+          
       </Box>
 
       {/* Treatments Cards */}

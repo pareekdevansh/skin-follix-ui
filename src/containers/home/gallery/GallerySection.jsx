@@ -1,8 +1,8 @@
 import React from "react";
-import { Box, Typography, IconButton, Card, CardContent } from "@mui/material";
-import { ArrowForward as ArrowForwardIcon } from "@mui/icons-material"; // Import the icon
+import { Box, Typography, IconButton, Card, CardContent, Button } from "@mui/material";
 import Carousel from "../../../components/carousel/Carousel";
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useNavigate } from "react-router-dom";
 const galleryPics = [
     {
         type: "image",
@@ -34,39 +34,39 @@ Discover how we combine luxury and technology to provide the best care for your 
 `;
 
 export default function GallerySection() {
+    const navigate = useNavigate();
+    const navigateToGallery = () => {
+        navigate("/gallery");
+    }
     return (
         <Box sx={{ marginBottom: "32px", paddingX: '5%', }}>
 
             <Card sx={{ boxShadow: 3, borderRadius: 2, overflow: "hidden" }}>
                 <CardContent>
                     {/* Flex container for Title and Button */}
-                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+                    <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "16px" }}>
                         <Typography
                             variant="h5"
                             sx={{
+                                alignSelf: "center",
                                 fontWeight: "bold",
                                 textAlign: "start",
-                                paddingBottom: "16px",
+                                marginRight: ".5rem",
                             }}
                         >
-                            Explore Our Clinic Gallery:
+                            Explore Our Clinic Gallery
                         </Typography>
                         <IconButton
-                            onClick={() => {
-                                window.location.href = "/gallery"; // Redirect to full gallery page
-                            }}
+                            onClick={navigateToGallery}
+                            variant="outlined"
                             sx={{
                                 display: "flex",
                                 alignItems: "center",
                                 padding: "8px",
-                                fontWeight: "bold",
                                 color: "primary.main",
                             }}
                         >
-                            <Typography variant="body2" sx={{ marginRight: "8px" }}>
-                                Visit Gallery
-                            </Typography>
-                            <ArrowForwardIcon />
+                            <ArrowForwardIosIcon />
                         </IconButton>
                     </Box>
 
