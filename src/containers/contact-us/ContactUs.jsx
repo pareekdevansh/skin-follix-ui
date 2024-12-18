@@ -7,7 +7,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react
 const SocialMediaIcons = () => {
 	const theme = useTheme();
 	const socialLinks = [
-		{ icon: <FaFacebook size={32} />, url: "https://facebook.com/skinfollics", name: "Facebook", callToAction: "Follow us on Facebook" },
+		{ icon: <FaFacebook size={32} />, url: "https://www.facebook.com/profile.php?id=61570257015162", name: "Facebook", callToAction: "Follow us on Facebook" },
 		{ icon: <FaInstagram size={32} />, url: "https://instagram.com/skinfollics", name: "Instagram", callToAction: "Follow us on Instagram" },
 		{ icon: <FaTwitter size={32} />, url: "https://twitter.com/skinfollics", name: "Twitter", callToAction: "Follow us on Twitter" },
 		{ icon: <FaLinkedin size={32} />, url: "https://linkedin.com/skinfollics", name: "LinkedIn", callToAction: "Follow us on LinkedIn" },

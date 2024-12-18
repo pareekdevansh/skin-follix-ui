@@ -61,7 +61,7 @@ const FooterBottom = styled(Box)(({ theme }) => ({
 
 const SocialMediaIcons = () => {
   const socialLinks = [
-    { icon: <FaFacebook size={24} />, url: "https://facebook.com/skinfollics", name: "Facebook" },
+    { icon: <FaFacebook size={24} />, url: "https://www.facebook.com/profile.php?id=61570257015162", name: "Facebook" },
     { icon: <FaInstagram size={24} />, url: "https://instagram.com/skinfollics", name: "Instagram" },
     { icon: <FaTwitter size={24} />, url: "https://twitter.com/skinfollics", name: "Twitter" },
     { icon: <FaLinkedin size={24} />, url: "https://linkedin.com/skinfollics", name: "LinkedIn" },
