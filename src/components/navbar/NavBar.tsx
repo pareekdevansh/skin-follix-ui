@@ -10,8 +10,9 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import { navItems } from './constants.js';
-
+import { useSelector } from 'react-redux';
 function NavBar() {
+    const { user, isAuthenticated } = useSelector((state : any) => state.auth);
     const [navMenuOpen, setNavMenuOpen] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {

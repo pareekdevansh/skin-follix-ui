@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
 	Container, Typography, TextField, Button, MenuItem, Select, InputLabel, FormControl, Card, CardContent, CircularProgress,
-	Dialog, DialogActions, DialogContent, DialogTitle, Grid, Box
+	Dialog, DialogActions, DialogContent, DialogTitle, Grid, Box, Divider
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -71,15 +71,34 @@ const AppointmentBookingForm = () => {
 	}, [setValue]);
 
 	return (
-		<Container maxWidth="sm" sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-start", marginTop: "2rem" }}>
-			<Typography variant="h4" align="center" gutterBottom>
+		<Container maxWidth="sm" sx={{
+			minHeight: "100%",
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center",
+			alignItems: "center",
+			marginTop: "1rem",
+			padding: "2rem",
+			background: "linear-gradient(135deg, #f3f3f3, #f6f6f6)"
+		}}>
+			<Typography variant="h4" align="center" gutterBottom sx={{
+				fontWeight: "bold",
+				color: "#333"
+			}}>
 				Book Your Appointment
 			</Typography>
 
-			<Card>
+			<Card sx={{
+				width: "100%",
+				backgroundColor: "#fff",
+				boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+				borderRadius: "8px",
+				padding: "2rem"
+			}}>
 				<CardContent>
 					<form onSubmit={handleSubmit(handleSubmitForm)}>
 						<Grid container spacing={2}>
+							{/* Full Name */}
 							<Grid item xs={12}>
 								<TextField
 									label="Full Name"
@@ -88,9 +107,15 @@ const AppointmentBookingForm = () => {
 									{...control.register('fullName')}
 									error={!!errors.fullName}
 									helperText={errors.fullName?.message}
+									sx={{
+										backgroundColor: "#f9f9f9",
+										borderRadius: "5px",
+										padding: "0.5rem"
+									}}
 								/>
 							</Grid>
 
+							{/* Email */}
 							<Grid item xs={12}>
 								<TextField
 									label="Email"
@@ -100,9 +125,15 @@ const AppointmentBookingForm = () => {
 									{...control.register('email')}
 									error={!!errors.email}
 									helperText={errors.email?.message}
+									sx={{
+										backgroundColor: "#f9f9f9",
+										borderRadius: "5px",
+										padding: "0.5rem"
+									}}
 								/>
 							</Grid>
 
+							{/* Phone Number */}
 							<Grid item xs={12}>
 								<TextField
 									label="Phone Number"
@@ -112,13 +143,22 @@ const AppointmentBookingForm = () => {
 									{...control.register('phone')}
 									error={!!errors.phone}
 									helperText={errors.phone?.message}
+									sx={{
+										backgroundColor: "#f9f9f9",
+										borderRadius: "5px",
+										padding: "0.5rem"
+									}}
 								/>
 							</Grid>
 
+							{/* Treatment */}
 							<Grid item xs={12}>
 								<FormControl fullWidth margin="normal" error={!!errors.treatment}>
 									<InputLabel>Choose Treatment</InputLabel>
-									<Select {...control.register('treatment')} required>
+									<Select {...control.register('treatment')} required sx={{
+										backgroundColor: "#f9f9f9",
+										borderRadius: "5px",
+									}}>
 										{treatments.map((treatment, index) => (
 											<MenuItem key={index} value={treatment}>{treatment}</MenuItem>
 										))}
@@ -127,6 +167,7 @@ const AppointmentBookingForm = () => {
 								</FormControl>
 							</Grid>
 
+							{/* Appointment Date */}
 							<Grid item xs={12}>
 								<LocalizationProvider dateAdapter={AdapterDateFns}>
 									<Controller
@@ -136,13 +177,18 @@ const AppointmentBookingForm = () => {
 											<DatePicker
 												label="Preferred Appointment Date"
 												{...field}
-												renderInput={(params) => <TextField {...params} fullWidth />}
+												renderInput={(params) => <TextField {...params} fullWidth sx={{
+													backgroundColor: "#f9f9f9",
+													borderRadius: "5px",
+													padding: "0.5rem"
+												}} />}
 											/>
 										)}
 									/>
 								</LocalizationProvider>
 							</Grid>
 
+							{/* Appointment Time */}
 							<Grid item xs={12}>
 								<FormControl fullWidth margin="normal">
 									<TextField
@@ -150,17 +196,23 @@ const AppointmentBookingForm = () => {
 										value={selectedTimeSlot || watch('appointmentTime')}
 										onClick={openTimeSlotModal}
 										readOnly
+										sx={{
+											backgroundColor: "#f9f9f9",
+											borderRadius: "5px",
+											padding: "0.5rem"
+										}}
 									/>
 								</FormControl>
 							</Grid>
 
+							{/* Submit Button */}
 							<Grid item xs={12}>
 								<Button
 									type="submit"
 									fullWidth
 									variant="contained"
 									color="primary"
-									sx={{ mt: 2 }}
+									sx={{ mt: 2, borderRadius: "5px" }}
 									disabled={loading}
 								>
 									{loading ? <CircularProgress size={24} /> : 'Book Appointment'}

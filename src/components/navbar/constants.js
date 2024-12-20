@@ -6,4 +6,6 @@ export const navItems = [
     { title: 'Gallery', url: '/gallery' },
     { title: 'Contact Us', url: '/contact-us' },
     { title: 'About', url: '/about-us' },
+    { title: 'Login', url: '/login' },
+    { title: 'Register', url: '/register' }
 ]

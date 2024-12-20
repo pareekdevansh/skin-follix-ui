@@ -17,14 +17,14 @@ const PrivacyPolicy = lazy(() => import("../containers/privacy-policy"));
 const Gallery = lazy(() => import("../containers/gallery"));
 const TermsOfUse = lazy(() => import("../containers/terms-of-use"));
 const ManageAppointmentsAdmin = lazy(() => import("../containers/admin/appointments"));
-
+const TestContainer = lazy(() => import("../containers/test/Test"));
 const generalKeywords = 'skin clinic near me, skin clinic in Delhi, best skin clinic in Delhi, best dermatologist in Delhi, skin care clinic in Delhi, dermat near me, skin clinic near me, acne treatment, skin specialist near me, skin doctor near me, skin clinic in Malviya Nagar, skincare clinic, Delhi, Malviya Nagar, Dr. Vipul Pareek, ${APP_NAME}, hair transplant, laser treatments, best dermatology clinic in Malviya Nagar, best dermatology clinic near me, Skin Follics';
 export const routes = [
     // {
     //     path: "/",
     //     component: Home,
     //     name: "Home",
-    //     visibleToRouter: true,
+    //     
     //     seo: {
     //         title: `${APP_NAME} - Expert Dermatology Care`,
     //         description: `${APP_NAME} offers expert acne treatments, skin rejuvenation, laser services, and hair transplant solutions in Malviya Nagar, Delhi. Book your consultation today!`,
@@ -35,7 +35,7 @@ export const routes = [
         path: "/home",
         component: Home,
         name: "Home",
-        visibleToRouter: true,
+
         seo: {
             title: `${APP_NAME} - Expert Dermatology Care`,
             description: `Welcome to ${APP_NAME}, your trusted dermatology clinic in Malviya Nagar, Delhi.`,
@@ -90,7 +90,7 @@ export const routes = [
         path: "/book-an-appointment",
         component: Appointment,
         name: "Book Appointment",
-        visibleToRouter: true,
+
         seo: {
             title: `Book Appointment - ${APP_NAME}`,
             description: `Schedule an appointment at ${APP_NAME} for expert acne treatments, hair transplants, and more.`,
@@ -101,7 +101,7 @@ export const routes = [
         path: "/about-us",
         component: About,
         name: "About Us",
-        visibleToRouter: true,
+
         seo: {
             title: `About Us - ${APP_NAME}`,
             description: `Learn more about ${APP_NAME}, our team of expert dermatologists, and our commitment to providing personalized skin care solutions.`,
@@ -112,7 +112,7 @@ export const routes = [
         path: "/treatments",
         component: Services,
         name: "Services",
-        visibleToRouter: true,
+
         seo: {
             title: `Our Treatments - ${APP_NAME}`,
             description: `Explore the range of treatments available at ${APP_NAME}, including acne care, skin rejuvenation, and hair transplant services.`,
@@ -124,7 +124,7 @@ export const routes = [
         path: "/testimonials",
         component: Testimonials,
         name: "Testimonials",
-        visibleToRouter: true,
+
         seo: {
             title: `Testimonials - ${APP_NAME}`,
             description: `Read real-life experiences and testimonials from our satisfied patients who trusted ${APP_NAME} for their dermatology needs.`,
@@ -135,7 +135,7 @@ export const routes = [
         path: "/doctors",
         component: Team,
         name: "Doctors",
-        visibleToRouter: true,
+
         seo: {
             title: `Our Doctors - ${APP_NAME}`,
             description: `Meet our team of experienced dermatologists at ${APP_NAME}, dedicated to providing high-quality skin care.`,
@@ -146,7 +146,7 @@ export const routes = [
         path: "/gallery",
         component: Gallery,
         name: "Gallery",
-        visibleToRouter: true,
+
         seo: {
             title: `Gallery - ${APP_NAME}`,
             description: `Explore the ${APP_NAME} gallery and see the results of our advanced skin care treatments and services.`,
@@ -168,7 +168,7 @@ export const routes = [
         path: "/contact-us",
         component: ContactUs,
         name: "Contact Us",
-        visibleToRouter: true,
+
         seo: {
             title: `Contact Us - ${APP_NAME}`,
             description: `Get in touch with ${APP_NAME} for consultations, appointments, or to learn more about our dermatology services.`,
@@ -179,7 +179,7 @@ export const routes = [
         path: "/privacy-policy",
         component: PrivacyPolicy,
         name: "Privacy Policy",
-        visibleToRouter: true,
+
         seo: {
             title: `Privacy Policy - ${APP_NAME}`,
             description: `Read the privacy policy of ${APP_NAME}, outlining how we protect your personal information and ensure your privacy.`,
@@ -190,7 +190,7 @@ export const routes = [
         path: "/terms-of-use",
         component: TermsOfUse,
         name: "Terms of Use",
-        visibleToRouter: true,
+
         seo: {
             title: `Terms of Use - ${APP_NAME}`,
             description: `Discover the terms of use for ${APP_NAME}, the best dermatology clinic in Malviya Nagar. Learn the guidelines for accessing our expert dermatology services and treatments.`,
@@ -201,12 +201,18 @@ export const routes = [
         path: "/admin/appointments",
         component: ManageAppointmentsAdmin,
         name: "Manage Appointments",
-        visibleToRouter: true,
+
+    },
+    {
+        path: "test",
+        component: TestContainer,
+        name: "Test",
+        visibleToRouter: true
     },
     {
         path: "*",
         component: NotFound,
         name: "404: Page Not Found",
-        visibleToRouter: true,
+
     },
 ];

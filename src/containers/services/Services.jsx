@@ -65,7 +65,7 @@ const Services = () => {
 	}, [searchQuery, selectedCategory]);
 
 	return (
-		<Box sx={{ padding: "32px", backgroundColor: "#f9f9f9", minHeight: "80vh", overflow: "auto" }}>
+		<Box sx={{ padding: { xs: "16px", sm: "32px" }, backgroundColor: "#fafafa", minHeight: "100vh", overflow: "auto" }}>
 			{/* Search Bar */}
 			<Box sx={{ marginBottom: "24px", display: "flex", justifyContent: "center" }}>
 				<TextField
@@ -98,64 +98,72 @@ const Services = () => {
 					label="Hair"
 					color={selectedCategory === "Hair" ? "primary" : "default"}
 					onClick={() => handleFilterChange("Hair")}
+					sx={{ cursor: "pointer" }}
 				/>
 				<Chip
 					label="Skin"
 					color={selectedCategory === "Skin" ? "primary" : "default"}
 					onClick={() => handleFilterChange("Skin")}
+					sx={{ cursor: "pointer" }}
 				/>
 				<Chip
 					label="Anti-Aging"
 					color={selectedCategory === "Anti-Aging" ? "primary" : "default"}
 					onClick={() => handleFilterChange("Anti-Aging")}
+					sx={{ cursor: "pointer" }}
 				/>
 				<IconButton
-
 					variant="contained"
 					onClick={handleClearFilter}
+					sx={{ alignSelf: "center", cursor: "pointer" }}
 				>
 					<ClearAllIcon />
 				</IconButton>
 			</Box>
 
+			{/* Service Cards */}
 			<Box sx={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "center" }}>
 				{filteredServices.length > 0 ? (
 					filteredServices.map((service) => (
 						<Card
 							key={service.name}
+							onClick={() => navigateToService(service.name)}
 							sx={{
-								width: { xs: "100%", sm: "50%", md: "30%" },
-								paddingX: "1rem",
+								width: { xs: "100%", sm: "45%", md: "30%" },
+								padding: "16px",
 								display: "flex",
 								flexDirection: "column",
 								boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
 								borderRadius: "8px",
-								transition: "transform 0.3s",
+								transition: "transform 0.3s, box-shadow 0.3s",
+								cursor: "pointer",
 								"&:hover": {
 									transform: "scale(1.05)",
 									boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
 								},
 							}}
 						>
-							<Box sx={{ paddingX: "8px", paddingY: "4px", display: 'flex', flexDirection: "column", justifyContent: "space-between", flexGrow: 1, height: '90%' }}>
-								{/* Service Image */}
-								<Box
-									height="180"
-									sx={{
-										objectFit: "cover",
-										borderTopLeftRadius: "8px",
-										borderTopRightRadius: "8px",
-									}}
-								/>
-								{/* Service Title and Description */}
-								<Box sx={{ display: 'flex', flexDirection: 'column' }}>
-									<Typography variant="h6" component="h3" sx={{ fontWeight: "bold", color: "text.primary" }}>
-										{service.name}
-									</Typography>
-									<Typography variant="body2" sx={{ marginTop: "8px", marginBottom: "16px", color: "text.secondary" }}>
-										{service.description}
-									</Typography>
-								</Box>
+							{/* Service Image */}
+							{/* <Box
+								component="img"
+								src={service.image}
+								alt={service.name}
+								sx={{
+									width: "100%",
+									height: "200px",
+									objectFit: "cover",
+									borderTopLeftRadius: "8px",
+									borderTopRightRadius: "8px",
+								}}
+							/> */}
+							{/* Service Content */}
+							<Box sx={{ padding: "16px" }}>
+								<Typography variant="h6" sx={{ fontWeight: "bold", color: "text.primary", marginBottom: "8px" }}>
+									{service.name}
+								</Typography>
+								<Typography variant="body2" sx={{ color: "text.secondary" }}>
+									{service.description}
+								</Typography>
 							</Box>
 						</Card>
 					))

@@ -12,9 +12,8 @@ const AppRoutes = () => {
                 <Routes>
                     <Route path="/" element={<Navigate to={'/home'} replace />} />
 
-                    {routes.map(({ path, component: Component, visibleToRouter, seo }, index) => {
-                        return visibleToRouter ? (
-
+                    {routes.map(({ path, component: Component, seo }, index) => {
+                        return (
                             <Route
                                 key={index}
                                 path={path}
@@ -24,8 +23,7 @@ const AppRoutes = () => {
                                         <Component />
                                     </>
                                 }
-                            />
-                        ) : null;
+                            />)
                     })}
                 </Routes>
             </Suspense>
