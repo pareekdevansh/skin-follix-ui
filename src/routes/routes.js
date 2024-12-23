@@ -90,7 +90,7 @@ export const routes = [
         path: "/book-an-appointment",
         component: Appointment,
         name: "Book Appointment",
-        visibleToRouter: true,
+        visibleToRouter: false,
         seo: {
             title: `Book Appointment - ${APP_NAME}`,
             description: `Schedule an appointment at ${APP_NAME} for expert acne treatments, hair transplants, and more.`,
@@ -201,7 +201,7 @@ export const routes = [
         path: "/admin/appointments",
         component: ManageAppointmentsAdmin,
         name: "Manage Appointments",
-        visibleToRouter: true,
+        visibleToRouter: false,
     },
     {
         path: "*",

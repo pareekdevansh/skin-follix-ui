@@ -27,6 +27,7 @@
 		"has-flag": "^4.0.0",
 		"jquery": "^3.7.1",
 		"react": "^18.3.1",
+		"react-before-after-slider-component": "^1.1.8",
 		"react-dom": "^18.3.1",
 		"react-ga4": "^2.1.0",
 		"react-helmet": "^6.1.0",
