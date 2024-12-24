@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,12 +8,20 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
+import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import { Menu } from '@mui/material';
 import { navItems } from './constants.js';
-import { useSelector } from 'react-redux';
+
 function NavBar() {
-    const { user, isAuthenticated } = useSelector((state : any) => state.auth);
-    const [navMenuOpen, setNavMenuOpen] = React.useState<null | HTMLElement>(null);
+    const [navMenuOpen, setNavMenuOpen] = useState<null | HTMLElement>(null);
+    const [profileMenuOpen, setProfileMenuOpen] = useState<null | HTMLElement>(null);
+
+    const user = {
+        isAuthenticated: true,
+        name: 'John Doe',
+        avatarUrl: '/assets/user_avatar.png',
+    };
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setNavMenuOpen(event.currentTarget);
@@ -23,9 +31,27 @@ function NavBar() {
         setNavMenuOpen(null);
     };
 
+    const handleOpenProfileMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setProfileMenuOpen(event.currentTarget);
+    };
+
+    const handleCloseProfileMenu = () => {
+        setProfileMenuOpen(null);
+    };
+
     const handleNavigation = (url: string = '/home') => {
         window.location.href = url;
         setNavMenuOpen(null); // Close menu after navigation
+    };
+
+    const handleProfileAction = (action: string) => {
+        if (action === 'logout') {
+            // Add logout logic here
+            console.log('User logged out');
+        } else if (action === 'profile') {
+            handleNavigation('/profile');
+        }
+        setProfileMenuOpen(null); // Close profile menu
     };
 
     return (
@@ -42,7 +68,7 @@ function NavBar() {
         >
             <Container maxWidth="xl" sx={{ padding: 0 }}>
                 <Toolbar disableGutters>
-                    {/* Desktop Logo and Title */}
+                    {/* Desktop Logo */}
                     <Box
                         sx={{
                             height: '100%',
@@ -55,18 +81,16 @@ function NavBar() {
                                 transform: 'scale(1.1)',
                                 opacity: 0.8,
                             },
-                            '&:active': {
-                                transform: 'scale(1.05)',
-                            },
                         }}
                         onClick={() => handleNavigation('/home')}
                     >
                         <img
                             src="/assets/app_logo.png"
-                            alt="App Title"
+                            alt="App Logo"
                             style={{
-                                maxWidth: '120px', maxHeight: '60px'
-                                , transition: 'transform 0.3s ease',
+                                maxWidth: '120px',
+                                maxHeight: '60px',
+                                transition: 'transform 0.3s ease',
                             }}
                         />
                     </Box>
@@ -112,35 +136,6 @@ function NavBar() {
                         </Menu>
                     </Box>
 
-                    {/* Mobile Logo and Title */}
-                    <Box
-                        sx={{
-                            display: { xs: 'flex', md: 'none' },
-                            alignItems: 'center',
-                            flexGrow: 1,
-                            cursor: 'pointer',
-                            marginRight: '4rem',
-                            transition: 'transform 0.3s ease, opacity 0.3s ease',
-                            '&:hover': {
-                                transform: 'scale(1.1)',
-                                opacity: 0.8,
-                            },
-                            '&:active': {
-                                transform: 'scale(1.05)',
-                            },
-                        }}
-                        onClick={() => handleNavigation('/home')}
-                    >
-                        <img
-                            src="/assets/app_logo.png"
-                            alt="App Title"
-                            style={{
-                                maxWidth: '100px', maxHeight: '50px',
-                                transition: 'transform 0.3s ease', // Ensur
-                            }}
-                        />
-                    </Box>
-
                     {/* Desktop Navigation */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: '2rem' }}>
                         {navItems.map((navItem) => (
@@ -162,6 +157,39 @@ function NavBar() {
                             </Button>
                         ))}
                     </Box>
+
+                    {/* User Profile Avatar */}
+                    {user.isAuthenticated && (
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenProfileMenu} sx={{ p: 0 }}>
+                                    <Avatar alt={user.name} src={user.avatarUrl} />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                id="menu-appbar-profile"
+                                anchorEl={profileMenuOpen}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(profileMenuOpen)}
+                                onClose={handleCloseProfileMenu}
+                            >
+                                <MenuItem onClick={() => handleProfileAction('profile')}>
+                                    Profile
+                                </MenuItem>
+                                <MenuItem onClick={() => handleProfileAction('logout')}>
+                                    Logout
+                                </MenuItem>
+                            </Menu>
+                        </Box>
+                    )}
                 </Toolbar>
             </Container>
         </AppBar>

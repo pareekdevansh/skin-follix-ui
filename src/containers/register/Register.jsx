@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Container, Typography, TextField, Button, Grid, Box, CircularProgress, MenuItem, Select, FormControl, InputLabel, Link } from "@mui/material";
-import { MdEmail } from "react-icons/md";
-import { IoMdLock } from "react-icons/io";
-import { FaUserAlt, FaPhoneAlt, FaRegCalendarAlt } from "react-icons/fa";
+import { Container, Typography, Box, CircularProgress } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CognitoUserPool, CognitoUser } from "amazon-cognito-identity-js";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import CustomRegistrationForm from "./CustomRegistrationForm";
+import OAuth2Service from "../../api/oauth2Service";
 
 const validationSchema = yup.object().shape({
 	firstName: yup.string().min(3, "First name must be at least 2 characters long").required("First name is required"),
@@ -17,73 +15,72 @@ const validationSchema = yup.object().shape({
 	dob: yup.date().required("Date of birth is required"),
 	gender: yup.string().required("Gender is required"),
 	password: yup.string().required("Password is required"),
-	confirmPassword: yup.string().oneOf([yup.ref('password'), null], "Passwords must match").required("Confirm password is required"),
+	confirmPassword: yup
+		.string()
+		.oneOf([yup.ref("password"), null], "Passwords must match")
+		.required("Confirm password is required"),
 });
 
-const poolData = {
-	UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID || "YOUR_USER_POOL_ID",
-	ClientId: process.env.AWS_COGNITO_CLIENT_ID || "YOUR_CLIENT_ID"
-};
-
-const userPool = new CognitoUserPool(poolData);
-
 const Register = () => {
-	const { control, handleSubmit, formState: { errors }, setValue, watch } = useForm({
+	const { control, handleSubmit, formState: { errors } } = useForm({
 		resolver: yupResolver(validationSchema),
 	});
 
 	const [loading, setLoading] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+	const clientId = process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_ID;
+	const clientSecret = process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_SECRET;
+	const oauth2Service = new OAuth2Service(
+		clientId,
+		clientSecret, // Replace with your client secret
+		"https://accounts.google.com/o/oauth2/v2/auth", // Google auth base URL
+		"https://oauth2.googleapis.com/token", // Google token endpoint
+		"http://localhost:3000/auth/callback" // Your redirect URI
+	);
 
 	const handleSubmitForm = (data) => {
 		setLoading(true);
-		setErrorMessage(""); 
+		setErrorMessage("");
 
-		// Create CognitoUser attributes
-		const { firstName, lastName, email, phoneNumber, dob, gender, password } = data;
+		console.log("Form data submitted:", data);
 
-		const attributes = [
-			{ Name: "given_name", Value: firstName },
-			{ Name: "family_name", Value: lastName },
-			{ Name: "email", Value: email },
-			{ Name: "phone_number", Value: phoneNumber },
-			{ Name: "birthdate", Value: dob },
-			{ Name: "gender", Value: gender },
-		];
-
-		const signUpAsync = () => {
-			userPool.signUp(email, password, attributes, null, (err, result) => {
-				setLoading(false);
-				if (err) {
-					setErrorMessage(err.message || JSON.stringify(err));
-					return;
-				}
-				console.log("User successfully signed up:", result);
-				// Here you can add logic to redirect to verify email, etc.
-			});
-		};
-
-		signUpAsync();
+		setTimeout(() => {
+			setLoading(false);
+		}, 2000);
 	};
 
-	const responseGoogle = (response) => {
-		console.log(response); // Handle Google login response (if integrating with Cognito's social logins)
+	const handleGoogleSuccess = async (credentialResponse) => {
+		try {
+			console.log("Google login response:", credentialResponse);
 
-		// After successful Google login, send the token to AWS Cognito or your backend for further processing
-		const { credential } = response;
-		// Call your backend or directly integrate with Cognito if you are handling social logins
+			// Send the credential to the backend via OAuth2Service
+			// const tokenResponse = await oauth2Service.exchangeAuthCodeForToken(credentialResponse.credential);
+
+			// console.log("Token response from OAuth2Service:", tokenResponse);
+
+			// Handle the backend response as needed
+			alert("Google login successful!");
+		} catch (error) {
+			console.error("OAuth2Service error:", error);
+			setErrorMessage("Failed to authenticate with Google.");
+		}
+	};
+
+	const handleGoogleError = (error) => {
+		console.error("Google Login Error:", error);
+		setErrorMessage("Google login failed. Please try again.");
 	};
 
 	return (
 		<Box
 			sx={{
-				minHeight: "100vh", // Ensure full viewport height
+				minHeight: "100vh",
 				background: "linear-gradient(135deg, #f3f3f3, #f6f6f6)",
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				paddingY: "2rem", // Add some padding for responsiveness
-				paddingX: "5%"
+				paddingY: "2rem",
+				paddingX: "5%",
 			}}
 		>
 			<Container
@@ -93,8 +90,8 @@ const Register = () => {
 					padding: "2rem",
 					borderRadius: "8px",
 					boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
-					width: "100%", // Ensure the container takes up full width
-					boxSizing: "border-box", // Ensure padding doesn't overflow
+					width: "100%",
+					boxSizing: "border-box",
 				}}
 			>
 				<Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: "bold", color: "#333" }}>
@@ -110,183 +107,12 @@ const Register = () => {
 					</Box>
 				)}
 
-				<form onSubmit={handleSubmit(handleSubmitForm)}>
-					<Grid container spacing={2}>
-						{/* First Name */}
-						<Grid item xs={12}>
-							<TextField
-								label="First Name"
-								fullWidth
-								margin="normal"
-								{...control.register("firstName")}
-								error={!!errors.firstName}
-								helperText={errors.firstName?.message}
-								InputProps={{
-									startAdornment: <FaUserAlt style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
+				{CustomRegistrationForm(handleSubmit, handleSubmitForm, control, errors, loading)}
 
-						{/* Last Name */}
-						<Grid item xs={12}>
-							<TextField
-								label="Last Name"
-								fullWidth
-								margin="normal"
-								{...control.register("lastName")}
-								error={!!errors.lastName}
-								helperText={errors.lastName?.message}
-								InputProps={{
-									startAdornment: <FaUserAlt style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
-
-						{/* Email Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="Email"
-								fullWidth
-								margin="normal"
-								type="email"
-								{...control.register("email")}
-								error={!!errors.email}
-								helperText={errors.email?.message}
-								InputProps={{
-									startAdornment: <MdEmail style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
-
-						{/* Phone Number */}
-						<Grid item xs={12}>
-							<TextField
-								label="Phone Number"
-								fullWidth
-								margin="normal"
-								{...control.register("phoneNumber")}
-								error={!!errors.phoneNumber}
-								helperText={errors.phoneNumber?.message}
-								InputProps={{
-									startAdornment: <FaPhoneAlt style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
-
-						{/* Date of Birth */}
-						<Grid item xs={12}>
-							<TextField
-								label="Date of Birth"
-								fullWidth
-								margin="normal"
-								type="date"
-								{...control.register("dob")}
-								error={!!errors.dob}
-								helperText={errors.dob?.message}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-								InputLabelProps={{
-									shrink: true,
-								}}
-							/>
-						</Grid>
-
-						{/* Gender */}
-						<Grid item xs={12}>
-							<FormControl fullWidth margin="normal" error={!!errors.gender}>
-								<InputLabel>Gender</InputLabel>
-								<Select
-									{...control.register("gender")}
-									label="Gender"
-									variant="outlined"
-									sx={{ backgroundColor: "#f9f9f9" }}
-								>
-									<MenuItem value="male">Male</MenuItem>
-									<MenuItem value="female">Female</MenuItem>
-									<MenuItem value="other">Other</MenuItem>
-								</Select>
-								{errors.gender && <Typography variant="body2" color="error">{errors.gender?.message}</Typography>}
-							</FormControl>
-						</Grid>
-
-						{/* Password Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="Password"
-								fullWidth
-								margin="normal"
-								type="password"
-								{...control.register("password")}
-								error={!!errors.password}
-								helperText={errors.password?.message}
-								InputProps={{
-									startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
-
-						{/* Confirm Password Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="Confirm Password"
-								fullWidth
-								margin="normal"
-								type="password"
-								{...control.register("confirmPassword")}
-								error={!!errors.confirmPassword}
-								helperText={errors.confirmPassword?.message}
-								InputProps={{
-									startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
-
-						{/* Submit Button */}
-						<Grid item xs={12}>
-							<Button
-								fullWidth
-								type="submit"
-								variant="contained"
-								sx={{
-									backgroundColor: "#0066cc",
-									color: "#fff",
-									padding: "12px",
-									borderRadius: "4px",
-									textTransform: "none",
-								}}
-								disabled={loading}
-							>
-								{loading ? <CircularProgress size={24} /> : "Sign Up"}
-							</Button>
-						</Grid>
-
-						{/* Login Link */}
-						<Grid item xs={12} textAlign="center" sx={{ marginTop: "1rem" }}>
-							<Typography variant="body2">
-								Already have an account?{" "}
-								<Link href="/login" variant="body2" sx={{ color: "#0066cc", textDecoration: "none" }}>
-									Login
-								</Link>
-							</Typography>
-						</Grid>
-					</Grid>
-				</form>
-
-				{/* Google OAuth */}
 				<Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-					<GoogleLogin onSuccess={responseGoogle} onError={(error) => console.error("Google Login Error", error)} />
+					<GoogleOAuthProvider clientId={clientId}>
+						<GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
+					</GoogleOAuthProvider>
 				</Box>
 			</Container>
 		</Box>

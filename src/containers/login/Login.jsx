@@ -5,11 +5,11 @@ import { IoMdLock } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { GoogleLogin } from "@react-oauth/google"; // Google OAuth component
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"; // Google OAuth component
 import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import CustomLoginForm from "./CustomLoginForm";
 const validationSchema = yup.object().shape({
 	email: yup
 		.string()
@@ -84,26 +84,26 @@ const Login = () => {
 		});
 	};
 
-	const handleGoogleLogin = (response) => {
-		const { credential } = response;
-		if (credential) {
-			// Exchange the Google token for a Cognito authentication token
-			const user = new CognitoUser({ Username: credential, Pool: userPool });
-			const authenticationDetails = new AuthenticationDetails({
-				Username: credential,
-				Password: "", // Use an empty password as we're logging in via Google
-			});
+	const handleGoogleSuccess = async (credentialResponse) => {
+		try {
+			console.log("Google login response:", credentialResponse);
 
-			user.authenticateUser(authenticationDetails, {
-				onSuccess: (result) => {
-					console.log("Google login successful:", result);
-					// Handle successful Google login (store session, redirect, etc.)
-				},
-				onFailure: (err) => {
-					console.error("Google login failed:", err);
-				},
-			});
+			// Send the credential to the backend via OAuth2Service
+			// const tokenResponse = await oauth2Service.exchangeAuthCodeForToken(credentialResponse.credential);
+
+			// console.log("Token response from OAuth2Service:", tokenResponse);
+
+			// Handle the backend response as needed
+			alert("Google login successful!");
+		} catch (error) {
+			console.error("OAuth2Service error:", error);
+			setErrorMessage("Failed to authenticate with Google.");
 		}
+	};
+
+	const handleGoogleError = (error) => {
+		console.error("Google Login Error:", error);
+		setErrorMessage("Google login failed. Please try again.");
 	};
 
 	return (
@@ -119,7 +119,7 @@ const Login = () => {
 				paddingX: "5%"
 			}}
 		>
-			<Container maxWidth="xs" sx={{display: "flex", flexDirection: "column", backgroundColor: "white", padding: "2rem", borderRadius: "8px", boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)" }}>
+			<Container maxWidth="xs" sx={{ display: "flex", flexDirection: "column", backgroundColor: "white", padding: "2rem", borderRadius: "8px", boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)" }}>
 				<Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: "bold", color: "#333" }}>
 					Welcome Back!
 				</Typography>
@@ -133,83 +133,16 @@ const Login = () => {
 					</Box>
 				)}
 
-				<form onSubmit={handleSubmit(handleSubmitForm)}>
-					<Grid container spacing={2}>
-						{/* Email Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="Email"
-								fullWidth
-								margin="normal"
-								type="email"
-								{...control.register("email")}
-								error={!!errors.email}
-								helperText={errors.email?.message}
-								InputProps={{
-									startAdornment: <MdEmail className="icon" style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f5f5f5" }}
-							/>
-						</Grid>
-
-						{/* Password Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="Password"
-								fullWidth
-								margin="normal"
-								type="password"
-								{...control.register("password")}
-								error={!!errors.password}
-								helperText={errors.password?.message}
-								InputProps={{
-									startAdornment: <IoMdLock className="icon" style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f5f5f5" }}
-							/>
-						</Grid>
-
-						{/* Remember Me Checkbox */}
-						<Grid item xs={12} >
-							<FormControlLabel
-								control={<Checkbox {...control.register("rememberMe")} />}
-								label="Remember me"
-								sx={{ color: "#555" }}
-							/>
-						</Grid>
-
-						{/* Submit Button */}
-						<Grid item xs={12}>
-							<Button
-								type="submit"
-								fullWidth
-								variant="contained"
-								color="primary"
-								sx={{
-									mt: 2,
-									padding: "10px",
-									fontSize: "16px",
-									borderRadius: "8px",
-									textTransform: "none",
-								}}
-								disabled={loading}
-							>
-								{loading ? <CircularProgress size={24} sx={{ color: "#fff" }} /> : "Sign In"}
-							</Button>
-						</Grid>
-					</Grid>
-				</form>
+				{CustomLoginForm(handleSubmit, handleSubmitForm, control, errors, loading)}
 
 				{/* Google Login Button */}
 				<Box sx={{ mt: 2 }}>
-					<GoogleLogin
-						onSuccess={handleGoogleLogin}
-						onError={(error) => {
-							console.error("Google login error:", error);
-						}}
-					/>
+					<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_ID}>
+						<GoogleLogin
+							onSuccess={handleGoogleSuccess}
+							onError={handleGoogleError}
+						/>
+					</GoogleOAuthProvider>
 				</Box>
 
 				{/* Register Link */}

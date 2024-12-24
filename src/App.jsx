@@ -8,11 +8,11 @@ import { useEffect } from "react";
 
 
 function App() {
-	useEffect(() => {
-		initializeAnalytics();
-	}, []);
+	// useEffect(() => {
+	// 	initializeAnalytics();
+	// }, []);
 
-	useAnalytics();
+	// useAnalytics();
 	// trackEvent('button', 'click', 'Subscribe Button');
 
 	return (

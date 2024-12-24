@@ -9,19 +9,16 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import { Amplify } from 'aws-amplify'; // Correct import statement
-import awsExports from './aws-exports';
 
-Amplify.configure(awsExports);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <Authenticator>
 
-      <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
-        <App />
-      </GoogleOAuthProvider>
-    </Authenticator>
+
+  <Provider store={store}>
+    {/* <Authenticator> */}
+    <App />
+    {/* </Authenticator> */}
   </Provider>
 );
 
