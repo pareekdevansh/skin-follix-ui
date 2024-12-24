@@ -47,7 +47,7 @@ const DesktopMenuContainer = styled.nav`
     flex: 1;
     flex-grow: 1;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     width: 100%;    
     margin: 0 auto; /* Center the menu within the available space */
     @media (min-width: 960px) {
