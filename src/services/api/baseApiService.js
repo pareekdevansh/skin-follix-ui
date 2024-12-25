@@ -1,9 +1,13 @@
 import axiosInstance from "./axiosInstance";
+import { handleError as handleApiError } from "../../utils/errorHandler";
 
-const apiService = {
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api";
+
+const baseApiService = {
+
     get: async (url, params = {}, headers = {}) => {
         try {
-            const response = await axiosInstance.get(url, {
+            const response = await axiosInstance.get(`${BASE_URL}${url}`, {
                 params,
                 headers
             });
@@ -15,7 +19,7 @@ const apiService = {
 
     post: async (url, data = {}, headers = {}) => {
         try {
-            const response = await axiosInstance.post(url, data, { headers });
+            const response = await axiosInstance.post(`${BASE_URL}${url}`, data, { headers });
             return response.data;
         } catch (error) {
             handleApiError(error);
@@ -24,7 +28,7 @@ const apiService = {
 
     put: async (url, data = {}, headers = {}) => {
         try {
-            const response = await axiosInstance.put(url, data, { headers });
+            const response = await axiosInstance.put(`${BASE_URL}${url}`, data, { headers });
             return response.data;
         } catch (error) {
             handleApiError(error);
@@ -33,7 +37,7 @@ const apiService = {
 
     patch: async (url, data = {}, headers = {}) => {
         try {
-            const response = await axiosInstance.patch(url, data, { headers });
+            const response = await axiosInstance.patch(`${BASE_URL}${url}`, data, { headers });
             return response.data;
         } catch (error) {
             handleApiError(error);
@@ -42,7 +46,7 @@ const apiService = {
 
     delete: async (url, params = {}, headers = {}) => {
         try {
-            const response = await axiosInstance.delete(url, {
+            const response = await axiosInstance.delete(`${BASE_URL}${url}`, {
                 params,
                 headers
             });
@@ -53,9 +57,4 @@ const apiService = {
     },
 };
 
-const handleApiError = (error) => {
-    console.error("API Error:", error.response?.data?.message || error.message);
-    throw new Error(error.response?.data?.message || "An error occurred");
-};
-
-export default apiService;
+export default baseApiService;

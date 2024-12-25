@@ -45,15 +45,20 @@ const MobileMenuButton = styled.div`
 const DesktopMenuContainer = styled.nav`
     display: none;
     flex: 1;
-    flex-grow: 1;
     justify-content: center;
-    gap: 2rem;
-    width: 100%;    
-    margin: 0 auto; /* Center the menu within the available space */
+    gap: 2rem; /* Standard gap for larger screens */
+    width: 100%;
+    margin: 0 auto;
+    white-space: nowrap; /* Prevent wrapping */
+
     @media (min-width: 960px) {
         display: flex;
         flex-grow: 1;
         order: 2;
+    }
+
+    @media (max-width: 1200px) {
+        gap: 1rem; /* Reduce gap for screens between 960px and 1200px */
     }
 `;
 
@@ -69,7 +74,7 @@ const NavButton = styled.button`
     color: black;
     cursor: pointer;
     font-size: 1rem;
-    padding: 8px 16px;
+    padding: 16px 4px;
     text-transform: capitalize;
     transition: transform 0.3s ease, color 0.3s ease;
 

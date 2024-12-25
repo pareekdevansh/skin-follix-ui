@@ -11,14 +11,15 @@ import { Provider } from 'react-redux';
 import { Amplify } from 'aws-amplify'; // Correct import statement
 
 
+const clientId = process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_ID;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
 
   <Provider store={store}>
-    {/* <Authenticator> */}
-    <App />
-    {/* </Authenticator> */}
+    <GoogleOAuthProvider clientId={clientId}>
+      <App />
+    </GoogleOAuthProvider>
   </Provider>
 );
 

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Container, Typography, Box, CircularProgress } from "@mui/material";
+import { Container, Typography, Box, CircularProgress, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider, useGoogleLogin, useGoogleOAuth } from "@react-oauth/google";
 import CustomRegistrationForm from "./CustomRegistrationForm";
-import OAuth2Service from "../../api/oauth2Service";
+import OAuth2Service from "../../services/api/oauth2Service";
+import Cookies from "js-cookie";
 
 const validationSchema = yup.object().shape({
 	firstName: yup.string().min(3, "First name must be at least 2 characters long").required("First name is required"),
@@ -32,10 +33,7 @@ const Register = () => {
 	const clientSecret = process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_SECRET;
 	const oauth2Service = new OAuth2Service(
 		clientId,
-		clientSecret, // Replace with your client secret
-		"https://accounts.google.com/o/oauth2/v2/auth", // Google auth base URL
-		"https://oauth2.googleapis.com/token", // Google token endpoint
-		"http://localhost:3000/auth/callback" // Your redirect URI
+		clientSecret
 	);
 
 	const handleSubmitForm = (data) => {
@@ -48,23 +46,38 @@ const Register = () => {
 			setLoading(false);
 		}, 2000);
 	};
+	const login = useGoogleLogin({
+		onSuccess: async (oAuthToken) => {
+			try {
+				const googleApiAccessToken = oAuthToken.access_token;
+				const requestBody = {
+					access_token : googleApiAccessToken,
+					request_type : 'REGISTER'
+				}
+				const tokenResponse = await oauth2Service.exchangeAuthCodeForToken("/auth/oauth2/google", requestBody);
+				const {accessToken, refreshToken} = tokenResponse;
+				Cookies.set('accessToken', accessToken, {
+					secure: true,         
+					sameSite: 'Strict',   
+					expires: 1 / 24       
+				});
+				Cookies.set('refreshToken', refreshToken, {
+					secure: true,         
+					sameSite: 'Strict',   
+					expires: 1            
+				});
+				alert("Google login successful!");
+			} catch (error) {
+				console.error('Login Failed:', error);
+				setErrorMessage('Google login failed. Please try again.');
+			}
+		},
+		onError: (error) => {
+			console.error('Login Failed:', error);
+		},
+		scope: 'openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/user.gender.read https://www.googleapis.com/auth/user.phonenumbers.read',
+	});
 
-	const handleGoogleSuccess = async (credentialResponse) => {
-		try {
-			console.log("Google login response:", credentialResponse);
-
-			// Send the credential to the backend via OAuth2Service
-			// const tokenResponse = await oauth2Service.exchangeAuthCodeForToken(credentialResponse.credential);
-
-			// console.log("Token response from OAuth2Service:", tokenResponse);
-
-			// Handle the backend response as needed
-			alert("Google login successful!");
-		} catch (error) {
-			console.error("OAuth2Service error:", error);
-			setErrorMessage("Failed to authenticate with Google.");
-		}
-	};
 
 	const handleGoogleError = (error) => {
 		console.error("Google Login Error:", error);
@@ -110,9 +123,7 @@ const Register = () => {
 				{CustomRegistrationForm(handleSubmit, handleSubmitForm, control, errors, loading)}
 
 				<Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
-					<GoogleOAuthProvider clientId={clientId}>
-						<GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
-					</GoogleOAuthProvider>
+					<Button onClick={login}>Google</Button>
 				</Box>
 			</Container>
 		</Box>
