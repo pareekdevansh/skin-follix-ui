@@ -1,7 +1,10 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+
+const baseURL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:8080/api",
+  baseURL,
   withCredentials: true,
   timeout: 15000, 
   headers: {
@@ -19,7 +22,7 @@ axiosInstance.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-apiClient.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => response, 
   async (error) => {
       if (error.response.status === 401) {

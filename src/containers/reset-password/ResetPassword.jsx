@@ -4,7 +4,6 @@ import { IoMdLock } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CognitoUserPool } from "amazon-cognito-identity-js";
 
 // Validation schema using Yup
 const validationSchema = yup.object().shape({
@@ -13,13 +12,6 @@ const validationSchema = yup.object().shape({
 	confirmPassword: yup.string().oneOf([yup.ref('newPassword'), null], "Passwords must match").required("Confirm password is required"),
 });
 
-// AWS Cognito User Pool Configuration
-const poolData = {
-	UserPoolId: "YOUR_USER_POOL_ID", // Your User Pool ID
-	ClientId: "YOUR_CLIENT_ID", // Your Client ID
-};
-
-const userPool = new CognitoUserPool(poolData);
 
 const ResetPassword = () => {
 	const { control, handleSubmit, formState: { errors } } = useForm({
@@ -37,20 +29,7 @@ const ResetPassword = () => {
 
 		// Assuming you already have a verification code sent to the user
 		const resetPasswordAsync = () => {
-			const cognitoUser = userPool.getCurrentUser();
-			if (cognitoUser) {
-				cognitoUser.confirmPassword(email, newPassword, {
-					onSuccess: () => {
-						setLoading(false);
-						console.log("Password reset successful!");
-						// Redirect or show success message
-					},
-					onFailure: (err) => {
-						setLoading(false);
-						setErrorMessage(err.message || JSON.stringify(err));
-					}
-				});
-			}
+			
 		};
 
 		resetPasswordAsync();

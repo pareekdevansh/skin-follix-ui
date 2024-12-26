@@ -5,8 +5,7 @@ import { IoMdLock } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google"; // Google OAuth component
-import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomLoginForm from "./CustomLoginForm";
@@ -45,12 +44,6 @@ const Login = () => {
 	const [loading, setLoading] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 
-	// AWS Cognito User Pool Configuration
-	const poolData = {
-		UserPoolId: process.env.AWS_COGNITO_USER_POOL_ID || "YOUR_USER_POOL_ID",
-		ClientId: process.env.AWS_COGNITO_CLIENT_ID || "YOUR_CLIENT_ID",
-	};
-	const userPool = new CognitoUserPool(poolData);
 
 	const handleSubmitForm = (data) => {
 		setLoading(true);
@@ -58,30 +51,6 @@ const Login = () => {
 
 		const { email, password } = data;
 
-		// Set up CognitoUser and AuthenticationDetails
-		const user = new CognitoUser({ Username: email, Pool: userPool });
-		const authenticationDetails = new AuthenticationDetails({
-			Username: email,
-			Password: password,
-		});
-
-		// Authenticate the user with AWS Cognito
-		user.authenticateUser(authenticationDetails, {
-			onSuccess: (result) => {
-				setLoading(false);
-				console.log("Login successful:", result);
-				// Handle successful login (store session, redirect, etc.)
-				// dispatch({ type: "SET_USER", payload: result });
-				// navigate("/home");
-
-			},
-			onFailure: (err) => {
-				setLoading(false);
-				setErrorMessage(err.message || JSON.stringify(err));
-				console.error("Login failed:", err);
-
-			},
-		});
 	};
 
 	const handleGoogleSuccess = async (credentialResponse) => {
