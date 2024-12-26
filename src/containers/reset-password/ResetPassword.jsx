@@ -1,161 +1,181 @@
-import React, { useState } from "react";
-import { Container, Typography, TextField, Button, Grid, Box, CircularProgress, Link } from "@mui/material";
-import { IoMdLock } from "react-icons/io";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState, useEffect } from "react";
+import {
+	Box,
+	TextField,
+	Button,
+	CircularProgress,
+	Typography,
+	Container,
+} from "@mui/material";
+import PhoneIcon from "@mui/icons-material/Phone";
 
-// Validation schema using Yup
-const validationSchema = yup.object().shape({
-	email: yup.string().email("Invalid email format").required("Email is required"),
-	newPassword: yup.string().required("New password is required"),
-	confirmPassword: yup.string().oneOf([yup.ref('newPassword'), null], "Passwords must match").required("Confirm password is required"),
-});
-
-
-const ResetPassword = () => {
-	const { control, handleSubmit, formState: { errors } } = useForm({
-		resolver: yupResolver(validationSchema),
-	});
-
+const ResetPasswordPage = () => {
+	const DEFAULT_OTP_TIMER = 60; // OTP countdown duration (in seconds)
+	const [phone, setPhone] = useState("");
+	const [otp, setOtp] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [otpSent, setOtpSent] = useState(false);
+	const [otpTimer, setOtpTimer] = useState(DEFAULT_OTP_TIMER);
+	const [otpVerified, setOtpVerified] = useState(false);
+	const [errors, setErrors] = useState({});
 	const [loading, setLoading] = useState(false);
-	const [errorMessage, setErrorMessage] = useState("");
 
-	const handleSubmitForm = (data) => {
-		setLoading(true);
-		setErrorMessage(""); // Reset error message on form submit
+	// Handle OTP countdown
+	useEffect(() => {
+		let countdown;
+		if (otpSent && otpTimer > 0) {
+			countdown = setInterval(() => {
+				setOtpTimer((prev) => prev - 1);
+			}, 1000);
+		} else if (otpTimer === 0) {
+			clearInterval(countdown);
+		}
+		return () => clearInterval(countdown);
+	}, [otpSent, otpTimer]);
 
-		const { email, newPassword } = data;
+	const validateForm = (forOtpSend = false) => {
+		const newErrors = {};
+		const phoneRegex = /^[0-9]{10}$/;
 
-		// Assuming you already have a verification code sent to the user
-		const resetPasswordAsync = () => {
-			
-		};
+		if (!phoneRegex.test(phone)) newErrors.phone = "Enter a valid 10-digit phone number";
+		if (newPassword.length < 6) newErrors.newPassword = "Password must be at least 6 characters long";
+		if (newPassword !== confirmPassword) newErrors.confirmPassword = "Passwords do not match";
 
-		resetPasswordAsync();
+		if (!forOtpSend && otp.length !== 4) newErrors.otp = "OTP must be 4 digits";
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
+
+
+	// Simulate OTP sending
+	const handleSendOtp = () => {
+		if (validateForm(true)) {
+			setOtpSent(true);
+			setOtpTimer(DEFAULT_OTP_TIMER);
+			setOtp("");
+			setOtpVerified(false);
+			// Add API call to send OTP here
+		}
+	};
+
+	// Simulate OTP verification
+	const handleVerifyOtp = () => {
+		if (otp === "1234") {
+			setOtpVerified(true);
+		} else {
+			setErrors({ otp: "Invalid OTP" });
+		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (validateForm()) {
+			setLoading(true);
+			// Add API call to reset password here
+			setTimeout(() => {
+				setLoading(false);
+				alert("Password reset successful");
+			}, 2000);
+		}
 	};
 
 	return (
-		<Box
-			sx={{
-				minHeight: "100vh", // Ensure full viewport height
-				background: "linear-gradient(135deg, #f3f3f3, #f6f6f6)",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-				padding: "1rem", // Add some padding for responsiveness
-			}}
-		>
-			<Container
-				maxWidth="xs"
+		<Container maxWidth="sm" sx={{ minHeight: "50vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+			<Box
 				sx={{
-					backgroundColor: "white",
-					padding: "2rem",
+					width: "100%",
+					padding: "2rem 10%",
+					backgroundColor: "#fff",
 					borderRadius: "8px",
-					boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
-					width: "100%", // Ensure the container takes up full width
-					boxSizing: "border-box", // Ensure padding doesn't overflow
+					boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+					marginTop: "2rem",
 				}}
 			>
-				<Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: "bold", color: "#333" }}>
-					Reset Your Password
+				<Typography variant="h5" align="center" sx={{ fontWeight: "bold", marginBottom: "1rem" }}>
+					Reset Password
 				</Typography>
-				<Typography variant="body2" align="center" paragraph sx={{ color: "#555", fontSize: "14px" }}>
-					Enter your email and new password to reset your password.
-				</Typography>
+				<form onSubmit={handleSubmit}>
+					<TextField
+						label="Phone Number"
+						fullWidth
+						margin="normal"
+						value={phone}
+						onChange={(e) => setPhone(e.target.value)}
+						error={!!errors.phone}
+						helperText={errors.phone}
+						InputProps={{
+							startAdornment: <PhoneIcon sx={{ marginRight: 1 }} />,
+						}}
+						inputProps={{ maxLength: 10 }}
+						sx={{ backgroundColor: "#f9f9f9" }}
+					/>
 
-				{errorMessage && (
-					<Box sx={{ backgroundColor: "red", padding: "10px", borderRadius: "4px", color: "white", marginBottom: "1rem" }}>
-						<Typography variant="body2">{errorMessage}</Typography>
-					</Box>
-				)}
+					{phone.length === 10 && <TextField
+						label="New Password"
+						type="password"
+						fullWidth
+						margin="normal"
+						value={newPassword}
+						onChange={(e) => setNewPassword(e.target.value)}
+						error={!!errors.newPassword}
+						helperText={errors.newPassword}
+						sx={{ backgroundColor: "#f9f9f9" }}
+					/>
+					}{phone.length === 10 && newPassword.length > 0 &&
+						<TextField
+							label="Confirm Password"
+							type="password"
+							fullWidth
+							margin="normal"
+							value={confirmPassword}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+							error={!!errors.confirmPassword}
+							helperText={errors.confirmPassword}
+							sx={{ backgroundColor: "#f9f9f9" }}
+						/>
+					}
+					{phone.length === 10 && newPassword.length > 0 && confirmPassword.length > 0 &&
+						<Button
+							variant="outlined"
+							fullWidth
+							disabled={otpSent && otpTimer > 0}
+							onClick={handleSendOtp}
+							sx={{ marginTop: "1rem" }}
+						>
+							{otpSent && otpTimer > 0 ? `Resend OTP in ${otpTimer}s` : "Send OTP"}
+						</Button>}
 
-				<form onSubmit={handleSubmit(handleSubmitForm)}>
-					<Grid container spacing={2}>
-						{/* Email Field */}
-						<Grid item xs={12}>
+					{otpSent && (
+						<>
 							<TextField
-								label="Email"
+								label="Enter OTP"
 								fullWidth
 								margin="normal"
-								type="email"
-								{...control.register("email")}
-								error={!!errors.email}
-								helperText={errors.email?.message}
-								variant="outlined"
+								value={otp}
+								onChange={(e) => setOtp(e.target.value)}
+								error={!!errors.otp}
+								helperText={errors.otp}
+								inputProps={{ maxLength: 4 }}
 								sx={{ backgroundColor: "#f9f9f9" }}
 							/>
-						</Grid>
+						</>
+					)}
 
-						{/* New Password Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="New Password"
-								fullWidth
-								margin="normal"
-								type="password"
-								{...control.register("newPassword")}
-								error={!!errors.newPassword}
-								helperText={errors.newPassword?.message}
-								InputProps={{
-									startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
+					<Button
+						fullWidth
+						variant="contained"
+						onClick={handleVerifyOtp}
+						disabled={otpVerified || otp.length !== 4}
+						sx={{ marginBottom: "1rem" }}
+					> Reset Password
+					</Button>
 
-						{/* Confirm Password Field */}
-						<Grid item xs={12}>
-							<TextField
-								label="Confirm Password"
-								fullWidth
-								margin="normal"
-								type="password"
-								{...control.register("confirmPassword")}
-								error={!!errors.confirmPassword}
-								helperText={errors.confirmPassword?.message}
-								InputProps={{
-									startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-								}}
-								variant="outlined"
-								sx={{ backgroundColor: "#f9f9f9" }}
-							/>
-						</Grid>
-
-						{/* Submit Button */}
-						<Grid item xs={12}>
-							<Button
-								fullWidth
-								type="submit"
-								variant="contained"
-								sx={{
-									backgroundColor: "#0066cc",
-									color: "#fff",
-									padding: "12px",
-									borderRadius: "4px",
-									textTransform: "none",
-								}}
-								disabled={loading}
-							>
-								{loading ? <CircularProgress size={24} /> : "Reset Password"}
-							</Button>
-						</Grid>
-
-						{/* Login Link */}
-						<Grid item xs={12} textAlign="center" sx={{ marginTop: "1rem" }}>
-							<Typography variant="body2">
-								Remember your password?{" "}
-								<Link href="/login" variant="body2" sx={{ color: "#0066cc", textDecoration: "none" }}>
-									Login
-								</Link>
-							</Typography>
-						</Grid>
-					</Grid>
 				</form>
-			</Container>
-		</Box>
+			</Box>
+		</Container>
 	);
 };
 
-export default ResetPassword;
+export default ResetPasswordPage;

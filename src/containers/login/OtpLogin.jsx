@@ -45,6 +45,7 @@ const OtpLogin = ({ otpLoginForm, handleFormSubmit, loading }) => {
 
     const handleOtpRequest = () => {
         setIsOtpSent(true); // Simulating OTP sent
+        setOtp("");
         setTimer(DEFAULT_OTP_TIMER); // Reset the timer to DEFAULT_OTP_TIMER seconds
         setOtpVerificationSuccess(false); // Reset OTP verification status
     };
@@ -84,7 +85,7 @@ const OtpLogin = ({ otpLoginForm, handleFormSubmit, loading }) => {
                     <Button
                         variant="outlined"
                         color="primary"
-                        sx={{ maxWidth: "50%", minWidth: '100px', padding: "8px 5%", borderRadius: "4px", marginLeft: "auto" }}
+                        sx={{ maxWidth: "50%", minWidth: '100px', padding: "4px 2.5%", borderRadius: "4px", marginLeft: "auto" }}
                         onClick={handleOtpRequest} disabled={loading || (isOtpSent && timer > 0)}
                     >
                         {loading ? <CircularProgress size={24} /> :
@@ -109,13 +110,20 @@ const OtpLogin = ({ otpLoginForm, handleFormSubmit, loading }) => {
                         onChange={(e) => setOtp(e.target.value)}
                         error={!!errors.otp}
                         helperText={errors.otp}
-                        inputProps={{ maxLength: 4 }}
                         variant="outlined"
+                        inputProps={{
+                            maxLength: 4, // Limit to 4 digits
+                            inputMode: "numeric", // Hint for numeric keypad on mobile
+                            pattern: "[0-9]*", // Numeric-only pattern
+                        }}
+                        onInput={(e) => {
+                            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+                        }}
                         sx={{ backgroundColor: "#fff" }}
                     />
                 )}
 
-                {isOtpSent && !otpVerificationSuccess && otp.length === 4 && (
+                {isOtpSent && (
                     <Button
                         type="submit"
                         fullWidth
@@ -125,7 +133,7 @@ const OtpLogin = ({ otpLoginForm, handleFormSubmit, loading }) => {
                         disabled={loading || otp.length !== 4}
                         sx={{ marginTop: "1rem" }}
                     >
-                        {loading ? <CircularProgress size={24} /> : <><VerifiedIcon sx={{ marginRight: 1 }} /> Verify OTP</>}
+                        {loading ? <CircularProgress size={24} /> : <>Verify OTP</>}
                     </Button>
                 )}
             </Box>

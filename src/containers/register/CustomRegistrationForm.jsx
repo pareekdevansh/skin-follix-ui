@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button, Box, CircularProgress, Link } from "@mui/material";
 import { FaUserAlt, FaPhoneAlt } from "react-icons/fa";
 import { IoMdLock } from "react-icons/io";
+import { Refresh } from "@mui/icons-material";
 
 const CustomRegistrationForm = ({ registrationForm, handleSubmitForm, loading }) => {
     const { firstName: _firstName, lastName: _lastName, phone: _phone } = registrationForm;
@@ -125,14 +126,15 @@ const CustomRegistrationForm = ({ registrationForm, handleSubmitForm, loading })
                     <Button
                         variant="outlined"
                         color="primary"
-                        sx={{ maxWidth: "50%", minWidth: '100px', padding: "8px 5%", borderRadius: "4px", marginLeft: "auto" }}
+                        sx={{ maxWidth: "50%", minWidth: '100px', padding: "4px 2.5%", borderRadius: "4px", marginLeft: "auto" }}
                         onClick={handleOtpRequest} disabled={loading || (isOtpSent && timer > 0)}
                     >
                         {loading ? <CircularProgress size={24} /> :
                             <Typography>
-                                {isOtpSent ? "Resend OTP" : "Send OTP"}
+                                {isOtpSent ? <><Refresh sx={{ marginRight: 1 }} /> Resend OTP</> : <> Send OTP</>}
                             </Typography>}
                     </Button>
+
                 )
                 }
 
@@ -151,13 +153,21 @@ const CustomRegistrationForm = ({ registrationForm, handleSubmitForm, loading })
                         onChange={(e) => setOtp(e.target.value)}
                         error={!!errors.otp}
                         helperText={errors.otp}
-                        inputProps={{ maxLength: 4 }} // Limit to 4 digits
                         variant="outlined"
+                        inputProps={{
+                            maxLength: 4, // Limit to 4 digits
+                            inputMode: "numeric", // Hint for numeric keypad on mobile
+                            pattern: "[0-9]*", // Numeric-only pattern
+                        }}
+                        onInput={(e) => {
+                            e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+                        }}
+
                         sx={{ backgroundColor: "#fff" }}
                     />
                 )}
                 {
-                    isOtpSent && otp.length === 4 &&
+                    isOtpSent &&
                     <Button
                         fullWidth
                         variant="contained"
@@ -168,7 +178,7 @@ const CustomRegistrationForm = ({ registrationForm, handleSubmitForm, loading })
                             borderRadius: "4px",
                         }}
                         onClick={handleVerifyOtp}
-                        disabled={loading}
+                        disabled={loading || otp.length !== 4}
                     >
                         {loading ? <CircularProgress size={24} /> : "Verify OTP & Register"}
                     </Button>}

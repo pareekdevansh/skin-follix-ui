@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Box, TextField, Button, CircularProgress } from "@mui/material";
-import { FaEye, FaEyeSlash, FaPhoneAlt } from "react-icons/fa";
-import { IoMdLock } from "react-icons/io";
+import { Box, TextField, Button, CircularProgress, IconButton } from "@mui/material";
+import PhoneIcon from '@mui/icons-material/Phone';
+import LockIcon from '@mui/icons-material/Lock';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const PasswordLogin = ({ passwordLoginForm, handleFormSubmit }) => {
     const { phone: _phone, password: _password } = passwordLoginForm;
@@ -13,11 +15,9 @@ const PasswordLogin = ({ passwordLoginForm, handleFormSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Perform validation if needed
         if (phone.length === 10 && password.length > 0) {
             handleFormSubmit({ phone, password });
         } else {
-            // Set errors if validation fails (optional)
             setErrors({
                 phoneNumber: phone.length !== 10 ? "Please enter a valid phone number" : "",
                 password: password.length === 0 ? "Password cannot be empty" : "",
@@ -42,13 +42,13 @@ const PasswordLogin = ({ passwordLoginForm, handleFormSubmit }) => {
                     helperText={errors.phoneNumber}
                     type="tel"
                     InputProps={{
-                        startAdornment: <FaPhoneAlt style={{ marginRight: 8, color: "#4e627b" }} />,
+                        startAdornment: <PhoneIcon sx={{ marginRight: 1, color: "#4e627b" }} />,
                     }}
                     variant="outlined"
                     sx={{ backgroundColor: "#fff" }}
                     inputProps={{
-                        pattern: "[0-9]*", // Allow only numbers on mobile devices (for iOS)
-                        inputMode: "numeric", // Hint to browsers for numeric keypad (especially for mobile)
+                        pattern: "[0-9]*",
+                        inputMode: "numeric",
                     }}
                     onInput={(e) => {
                         e.target.value = e.target.value.replace(/[^0-9]/g, "");
@@ -66,11 +66,11 @@ const PasswordLogin = ({ passwordLoginForm, handleFormSubmit }) => {
                         helperText={errors.password}
                         type={togglePasswordVisibility ? "text" : "password"}
                         InputProps={{
-                            startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-                            endAdornment: togglePasswordVisibility ? (
-                                <FaEyeSlash style={{ marginRight: 8, color: "#4e627b" }} onClick={handlePasswordVisibilityToggle} />
-                            ) : (
-                                <FaEye style={{ marginRight: 8, color: "#4e627b" }} onClick={handlePasswordVisibilityToggle} />
+                            startAdornment: <LockIcon sx={{ marginRight: 1, color: "#4e627b" }} />,
+                            endAdornment: (
+                                <IconButton onClick={handlePasswordVisibilityToggle} edge="end">
+                                    {togglePasswordVisibility ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
                             ),
                         }}
                         variant="outlined"
@@ -78,22 +78,20 @@ const PasswordLogin = ({ passwordLoginForm, handleFormSubmit }) => {
                     />
                 )}
 
-                {phone.length === 10 && password.length > 0 && (
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{
-                            backgroundColor: "#0066cc",
-                            color: "#fff",
-                            padding: "8px",
-                            borderRadius: "4px",
-                        }}
-                        disabled={loading}
-                    >
-                        {loading ? <CircularProgress size={24} /> : "Login"}
-                    </Button>
-                )}
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                        backgroundColor: "#0066cc",
+                        color: "#fff",
+                        padding: "8px",
+                        borderRadius: "4px",
+                    }}
+                    disabled={loading || phone.length !== 10 || password.length === 0}
+                >
+                    {loading ? <CircularProgress size={24} /> : "Login"}
+                </Button>
             </Box>
         </form>
     );

@@ -23,12 +23,12 @@ const Login = () => {
 	const [timer, setTimer] = useState(0);
 
 	const passwordLoginForm = {
-		phone: "9982716102",
+		phone: "",
 		password: "",
 	};
 
 	const otpLoginForm = {
-		phone: "9982716102",
+		phone: "",
 		otp: "",
 	}
 
