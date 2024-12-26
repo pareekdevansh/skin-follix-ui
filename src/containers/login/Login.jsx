@@ -1,71 +1,70 @@
 import React, { useState } from "react";
-import { Container, Typography, TextField, Button, Grid, Box, CircularProgress, FormControlLabel, Checkbox, Link } from "@mui/material";
-import { MdEmail } from "react-icons/md";
-import { IoMdLock } from "react-icons/io";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {
+	Container,
+	Typography,
+	Box,
+	CircularProgress,
+	Link,
+	Tabs,
+	Tab,
+	Divider,
+} from "@mui/material";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CustomLoginForm from "./CustomLoginForm";
-const validationSchema = yup.object().shape({
-	email: yup
-		.string()
-		.email("Invalid email format")
-		.required("Email is required"),
-	password: yup
-		.string()
-		.required("Password is required")
-		.min(8, "Password must be at least 8 characters long")
-		.matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-		.matches(/[a-z]/, "Password must contain at least one lowercase letter"),
-});
-
+import PasswordLogin from "./PasswordLogin";
+import OtpLogin from "./OtpLogin";
+import GoogleSignInButton from "../../components/google-sign-in/GoogleSignInButton";
 
 const Login = () => {
-	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-
-	const navigateToHome = () => {
-		navigate("/home");
-	}
-	const navigateToRegister = () => {
-		navigate("/register");
-	}
-	const navigateToResetPassword = () => {
-		navigate("/reset-password");
-	}
-
-	const { control, handleSubmit, formState: { errors } } = useForm({
-		resolver: yupResolver(validationSchema),
-	});
+	const [activeTab, setActiveTab] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+	const [timer, setTimer] = useState(0);
 
+	const passwordLoginForm = {
+		phone: "9982716102",
+		password: "",
+	};
+
+	const otpLoginForm = {
+		phone: "9982716102",
+		otp: "",
+	}
+
+	const handlePasswordLoginFormSubmit = (data) => {
+		setLoading(true);
+		setErrorMessage("");
+
+		console.log("Form submitted", data);
+	}
+
+	const handleOtpLoginFormSubmit = (data) => {
+		setLoading(true);
+		setErrorMessage("");
+		console.log("Form submitted", data);
+	}
+
+	const handleTabChange = (event, newValue) => {
+		setActiveTab(newValue);
+	};
 
 	const handleSubmitForm = (data) => {
 		setLoading(true);
 		setErrorMessage("");
 
-		const { email, password } = data;
-
+		console.log("Form submitted", data);
+		setLoading(false);
 	};
+
+
 
 	const handleGoogleSuccess = async (credentialResponse) => {
 		try {
 			console.log("Google login response:", credentialResponse);
-
-			// Send the credential to the backend via OAuth2Service
-			// const tokenResponse = await oauth2Service.exchangeAuthCodeForToken(credentialResponse.credential);
-
-			// console.log("Token response from OAuth2Service:", tokenResponse);
-
-			// Handle the backend response as needed
 			alert("Google login successful!");
 		} catch (error) {
-			console.error("OAuth2Service error:", error);
+			console.error("Google Login Error:", error);
 			setErrorMessage("Failed to authenticate with Google.");
 		}
 	};
@@ -75,25 +74,38 @@ const Login = () => {
 		setErrorMessage("Google login failed. Please try again.");
 	};
 
+	const handleResendOtp = () => {
+		setTimer(30); // 30 seconds timer for OTP resend
+	};
+
 	return (
 		<Box
 			sx={{
-				height: "100%",
+				minHeight: "100vh",
 				background: "linear-gradient(135deg, #f3f3f3, #f6f6f6)",
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
-				overflowY: "auto",
-				paddingY: "3rem",
-				paddingX: "5%"
+				paddingY: "2rem",
+				paddingX: "5%",
 			}}
 		>
-			<Container maxWidth="xs" sx={{ display: "flex", flexDirection: "column", backgroundColor: "white", padding: "2rem", borderRadius: "8px", boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)" }}>
+			<Container
+				maxWidth="xs"
+				sx={{
+					backgroundColor: "white",
+					padding: "2rem",
+					borderRadius: "8px",
+					boxShadow: "0 4px 16px rgba(0, 0, 0, 0.1)",
+					width: "100%",
+					boxSizing: "border-box",
+				}}
+			>
 				<Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: "bold", color: "#333" }}>
 					Welcome Back!
 				</Typography>
 				<Typography variant="body2" align="center" paragraph sx={{ color: "#555", fontSize: "14px" }}>
-					Enter your account details to Login.
+					Choose your login method below.
 				</Typography>
 
 				{errorMessage && (
@@ -102,19 +114,32 @@ const Login = () => {
 					</Box>
 				)}
 
-				{CustomLoginForm(handleSubmit, handleSubmitForm, control, errors, loading)}
+				<Tabs value={activeTab} onChange={handleTabChange} centered>
+					<Tab label="Phone & OTP" />
+					<Tab label="Phone & Password" />
+				</Tabs>
 
-				{/* Google Login Button */}
+				{activeTab === 1 && (
+					<PasswordLogin
+						passwordLoginForm={passwordLoginForm}
+						handleFormSubmit={handlePasswordLoginFormSubmit}
+					/>
+				)}
+
+				{activeTab === 0 && (
+					<OtpLogin
+						otpLoginForm={otpLoginForm}
+						handleFormSubmit={handleOtpLoginFormSubmit}
+					/>
+				)}
+
 				<Box sx={{ mt: 2 }}>
-					<GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH2_CLIENT_ID}>
-						<GoogleLogin
-							onSuccess={handleGoogleSuccess}
-							onError={handleGoogleError}
-						/>
-					</GoogleOAuthProvider>
+					<Divider><Typography variant="body2">OR</Typography></Divider>
+				</Box>
+				<Box sx={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
+					<GoogleSignInButton />
 				</Box>
 
-				{/* Register Link */}
 				<Box sx={{ mt: 2, textAlign: "center" }}>
 					<Typography variant="body2" sx={{ color: "#555" }}>
 						Don't have an account?{" "}

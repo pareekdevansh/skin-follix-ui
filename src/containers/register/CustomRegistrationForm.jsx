@@ -1,176 +1,186 @@
-import React, { useState } from "react";
-import { Typography, TextField, Button, Grid, Box, CircularProgress, MenuItem, Select, FormControl, InputLabel, Link } from "@mui/material";
-import { MdEmail } from "react-icons/md";
+import React, { useState, useEffect } from "react";
+import { Typography, TextField, Button, Box, CircularProgress, Link } from "@mui/material";
+import { FaUserAlt, FaPhoneAlt } from "react-icons/fa";
 import { IoMdLock } from "react-icons/io";
-import { FaUserAlt, FaPhoneAlt, FaRegCalendarAlt } from "react-icons/fa";
 
-const CustomRegistrationForm = (handleSubmit, handleSubmitForm, control, errors, loading) => {
-    return <form onSubmit={handleSubmit(handleSubmitForm)}>
-        <Grid container spacing={2}>
-            {/* First Name */}
-            <Grid item xs={12}>
+const CustomRegistrationForm = ({ registrationForm, handleSubmitForm, loading }) => {
+    const { firstName: _firstName, lastName: _lastName, phone: _phone } = registrationForm;
+
+    const [firstName, setFirstName] = useState(_firstName);
+    const [lastName, setLastName] = useState(_lastName);
+    const [phoneNumber, setPhoneNumber] = useState(_phone);
+    const [otp, setOtp] = useState("");
+    const [otpVerificationSuccess, setOtpVerificationSuccess] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [timer, setTimer] = useState(10);
+    const [isOtpSent, setIsOtpSent] = useState(false);
+
+    useEffect(() => {
+        let countdown;
+        if (isOtpSent && timer > 0) {
+            countdown = setInterval(() => {
+                setTimer((prevTime) => prevTime - 1);
+            }, 1000);
+        } else if (timer === 0) {
+            clearInterval(countdown);
+        }
+        return () => clearInterval(countdown);
+    }, [isOtpSent, timer]);
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (firstName.length < 3) newErrors.firstName = "First name must be at least 3 characters";
+        if (lastName === "") newErrors.lastName = "Please enter your last name";
+        if (phoneNumber === "") newErrors.phoneNumber = "Please enter your phone number";
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phoneNumber)) newErrors.phoneNumber = "Invalid phone number";
+        if (otp.length !== 4) newErrors.otp = "OTP must be 4 digits";
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            handleSubmitForm({ firstName, lastName, phoneNumber, otp });
+        } else {
+            console.log("Form validation failed");
+        }
+    };
+
+    const handleOtpRequest = () => {
+        setIsOtpSent(true); // Simulating OTP sent
+        setTimer(10); // Reset the timer to 40 seconds
+        setOtpVerificationSuccess(false); // Reset OTP verification status
+    };
+
+    const handleVerifyOtp = () => {
+        setOtpVerificationSuccess(true); // Simulating OTP verification success
+        // make register call to backend 
+        // if otp verification successful , login user 
+        // otherwise show error
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", maxWidth: 400 }} gap={2}>
                 <TextField
                     label="First Name"
                     fullWidth
                     margin="normal"
-                    {...control.register("firstName")}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     error={!!errors.firstName}
-                    helperText={errors.firstName?.message}
+                    helperText={errors.firstName}
                     InputProps={{
                         startAdornment: <FaUserAlt style={{ marginRight: 8, color: "#4e627b" }} />,
                     }}
                     variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }} />
-            </Grid>
+                    sx={{ backgroundColor: "#fff" }}
+                />
 
-            {/* Last Name */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Last Name"
-                    fullWidth
-                    margin="normal"
-                    {...control.register("lastName")}
-                    error={!!errors.lastName}
-                    helperText={errors.lastName?.message}
-                    InputProps={{
-                        startAdornment: <FaUserAlt style={{ marginRight: 8, color: "#4e627b" }} />,
-                    }}
-                    variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }} />
-            </Grid>
-
-            {/* Email Field */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Email"
-                    fullWidth
-                    margin="normal"
-                    type="email"
-                    {...control.register("email")}
-                    error={!!errors.email}
-                    helperText={errors.email?.message}
-                    InputProps={{
-                        startAdornment: <MdEmail style={{ marginRight: 8, color: "#4e627b" }} />,
-                    }}
-                    variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }} />
-            </Grid>
-
-            {/* Phone Number */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Phone Number"
-                    fullWidth
-                    margin="normal"
-                    {...control.register("phoneNumber")}
-                    error={!!errors.phoneNumber}
-                    helperText={errors.phoneNumber?.message}
-                    InputProps={{
-                        startAdornment: <FaPhoneAlt style={{ marginRight: 8, color: "#4e627b" }} />,
-                    }}
-                    variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }} />
-            </Grid>
-
-            {/* Date of Birth */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Date of Birth"
-                    fullWidth
-                    margin="normal"
-                    type="date"
-                    {...control.register("dob")}
-                    error={!!errors.dob}
-                    helperText={errors.dob?.message}
-                    variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }}
-                    InputLabelProps={{
-                        shrink: true,
-                    }} />
-            </Grid>
-
-            {/* Gender */}
-            <Grid item xs={12}>
-                <FormControl fullWidth margin="normal" error={!!errors.gender}>
-                    <InputLabel>Gender</InputLabel>
-                    <Select
-                        {...control.register("gender")}
-                        label="Gender"
+                {firstName.length >= 3 && (
+                    <TextField
+                        label="Last Name"
+                        fullWidth
+                        margin="normal"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        error={!!errors.lastName}
+                        helperText={errors.lastName}
+                        InputProps={{
+                            startAdornment: <FaUserAlt style={{ marginRight: 8, color: "#4e627b" }} />,
+                        }}
                         variant="outlined"
-                        sx={{ backgroundColor: "#f9f9f9" }}
+                        sx={{ backgroundColor: "#fff" }}
+                    />
+                )}
+
+                {firstName.length >= 3 && lastName !== "" && (
+                    <TextField
+                        label="Phone Number"
+                        fullWidth
+                        margin="normal"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        error={!!errors.phoneNumber}
+                        helperText={errors.phoneNumber}
+                        type="tel"
+                        InputProps={{
+                            startAdornment: <FaPhoneAlt style={{ marginRight: 8, color: "#4e627b" }} />,
+                        }}
+                        variant="outlined"
+                        sx={{ backgroundColor: "#fff" }}
+                        inputProps={{
+                            pattern: "[0-9]*", // Allow only numbers on mobile devices (for iOS)
+                            inputMode: "numeric", // Hint to browsers for numeric keypad (especially for mobile)
+                        }}
+                        onInput={(e) => {
+                            e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                        }}
+                    />
+                )}
+
+                {firstName.length >= 3 && lastName !== "" && phoneNumber.length === 10 && !otpVerificationSuccess && (
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        sx={{ maxWidth: "50%", minWidth: '100px', padding: "8px 5%", borderRadius: "4px", marginLeft: "auto" }}
+                        onClick={handleOtpRequest} disabled={loading || (isOtpSent && timer > 0)}
                     >
-                        <MenuItem value="male">Male</MenuItem>
-                        <MenuItem value="female">Female</MenuItem>
-                        <MenuItem value="other">Other</MenuItem>
-                    </Select>
-                    {errors.gender && <Typography variant="body2" color="error">{errors.gender?.message}</Typography>}
-                </FormControl>
-            </Grid>
+                        {loading ? <CircularProgress size={24} /> :
+                            <Typography>
+                                {isOtpSent ? "Resend OTP" : "Send OTP"}
+                            </Typography>}
+                    </Button>
+                )
+                }
 
-            {/* Password Field */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Password"
-                    fullWidth
-                    margin="normal"
-                    type="password"
-                    {...control.register("password")}
-                    error={!!errors.password}
-                    helperText={errors.password?.message}
-                    InputProps={{
-                        startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-                    }}
-                    variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }} />
-            </Grid>
+                {isOtpSent && !otpVerificationSuccess && timer > 0 && (
+                    <Typography variant="body2" textAlign="center" sx={{ marginTop: "10px", color: "#4e627b" }}>
+                        OTP sent. Please wait {timer} seconds to resend.
+                    </Typography>
+                )}
 
-            {/* Confirm Password Field */}
-            <Grid item xs={12}>
-                <TextField
-                    label="Confirm Password"
-                    fullWidth
-                    margin="normal"
-                    type="password"
-                    {...control.register("confirmPassword")}
-                    error={!!errors.confirmPassword}
-                    helperText={errors.confirmPassword?.message}
-                    InputProps={{
-                        startAdornment: <IoMdLock style={{ marginRight: 8, color: "#4e627b" }} />,
-                    }}
-                    variant="outlined"
-                    sx={{ backgroundColor: "#f9f9f9" }} />
-            </Grid>
-
-            {/* Submit Button */}
-            <Grid item xs={12}>
-                <Button
-                    fullWidth
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                        backgroundColor: "#0066cc",
-                        color: "#fff",
-                        padding: "12px",
-                        borderRadius: "4px",
-                        textTransform: "none",
-                    }}
-                    disabled={loading}
-                >
-                    {loading ? <CircularProgress size={24} /> : "Sign Up"}
-                </Button>
-            </Grid>
-
-            {/* Login Link */}
-            <Grid item xs={12} textAlign="center" sx={{ marginTop: "1rem" }}>
-                <Typography variant="body2">
+                {isOtpSent && !otpVerificationSuccess && (
+                    <TextField
+                        label="Enter OTP"
+                        fullWidth
+                        margin="normal"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        error={!!errors.otp}
+                        helperText={errors.otp}
+                        inputProps={{ maxLength: 4 }} // Limit to 4 digits
+                        variant="outlined"
+                        sx={{ backgroundColor: "#fff" }}
+                    />
+                )}
+                {
+                    isOtpSent && otp.length === 4 &&
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        sx={{
+                            backgroundColor: "#0066cc",
+                            color: "#fff",
+                            padding: "8px",
+                            borderRadius: "4px",
+                        }}
+                        onClick={handleVerifyOtp}
+                        disabled={loading}
+                    >
+                        {loading ? <CircularProgress size={24} /> : "Verify OTP & Register"}
+                    </Button>}
+                <Typography variant="body2" textAlign="center" sx={{ marginTop: "1rem" }}>
                     Already have an account?{" "}
-                    <Link href="/login" variant="body2" sx={{ color: "#0066cc", textDecoration: "none" }}>
+                    <Link href="/login" sx={{ color: "#0066cc", textDecoration: "none" }}>
                         Login
                     </Link>
                 </Typography>
-            </Grid>
-        </Grid>
-    </form>;
-}
+            </Box>
+        </form >
+    );
+};
 
-export default CustomRegistrationForm
+export default CustomRegistrationForm;
